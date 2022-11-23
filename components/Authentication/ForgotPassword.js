@@ -19,7 +19,12 @@ export default function ForgotPassword({ navigation }) {
         <View style={{ marginVertical: 40 }}>
           <Text style={AuthStyle.lebelText}>Mobile no</Text>
 
-          <TextInput placeholder="Mobile no" style={AuthStyle.TextInput} />
+          <TextInput
+            cursorColor="#3A7F0D"
+            keyboardType={"numeric"}
+            placeholder="Mobile no"
+            style={AuthStyle.TextInput}
+          />
 
           <Text
             style={[AuthStyle.inputFieldBaseText, { paddingLeft: "53%" }]}

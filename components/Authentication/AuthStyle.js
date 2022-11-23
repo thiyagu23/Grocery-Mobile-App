@@ -62,6 +62,7 @@ export default StyleSheet.create({
   },
   otpBox: {
     width: 50,
+    textAlign: "center",
     height: 50,
     borderRadius: 5,
     borderWidth: 2,
@@ -90,5 +91,9 @@ export default StyleSheet.create({
     alignSelf: "center",
     textAlign: "center",
     color: "#232323",
+  },
+  verifiedCard: {
+    background: "#FFFFFF",
+    borderRadius: 8,
   },
 });
