@@ -20,7 +20,9 @@ export default function PasswordSetting({ navigation }) {
           <Text style={AuthStyle.lebelText}>New password</Text>
 
           <TextInput
-            placeholder="Mobile no"
+            cursorColor="#3A7F0D"
+            secureTextEntry={true}
+            placeholder="password"
             style={[AuthStyle.TextInput, { marginBottom: 0 }]}
           />
         </View>
@@ -28,7 +30,12 @@ export default function PasswordSetting({ navigation }) {
         <View>
           <Text style={AuthStyle.lebelText}>Confirm Password </Text>
 
-          <TextInput placeholder="password" style={AuthStyle.TextInput} />
+          <TextInput
+            cursorColor="#3A7F0D"
+            secureTextEntry={true}
+            placeholder="password"
+            style={AuthStyle.TextInput}
+          />
         </View>
 
         <View>

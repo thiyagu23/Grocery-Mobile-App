@@ -73,6 +73,11 @@ export default StyleSheet.create({
     color: "#3A7F0D",
     fontSize: 16,
   },
+  iconstyle: {
+    position: "absolute",
+    right: 20,
+    bottom: 20,
+  },
   otpBoxContainer: {
     flex: 1,
     flexDirection: "row",
@@ -95,5 +100,15 @@ export default StyleSheet.create({
   verifiedCard: {
     background: "#FFFFFF",
     borderRadius: 8,
+  },
+  search: {
+    borderColor: "black",
+    width: "100%",
+    height: 45,
+    borderRadius: 5,
+    borderWidth: 2,
+
+    marginBottom: 10,
+    padding: 10,
   },
 });

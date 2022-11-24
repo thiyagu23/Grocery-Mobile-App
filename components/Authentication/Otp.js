@@ -43,6 +43,25 @@ export default function Otp({ navigation }) {
       navigation.navigate("Main");
     }, 1000);
   };
+  // const [minutes, setMinutes] = useState(1);
+  const [seconds, setSeconds] = useState(30);
+  useEffect(() => {
+    const interval = setInterval(() => {
+      if (seconds > 0) {
+        setSeconds(seconds - 1);
+      }
+      if (seconds === 0) {
+        clearInterval(interval);
+      }
+    }, 1000);
+
+    return () => {
+      clearInterval(interval);
+    };
+  }, [seconds]);
+  const resendOTP = () => {
+    setSeconds(30);
+  };
   return (
     <LinearGradient colors={["#99de81", "#F5F5F5"]} style={{ height: "100%" }}>
       <BlurImg />
@@ -61,7 +80,6 @@ export default function Otp({ navigation }) {
               .map((item, index) => {
                 return (
                   <TextInput
-                    textContentType="password"
                     ml={"4"}
                     width={"12"}
                     size={"lg"}
@@ -80,16 +98,42 @@ export default function Otp({ navigation }) {
           </View>
 
           <View style={AuthStyle.otpTimer}>
-            <Text style={AuthStyle.otpText}>00:56</Text>
-
-            <Text style={AuthStyle.otpText}>Resend OTP</Text>
+            {seconds > 0 ? (
+              <Text style={AuthStyle.otpText}>
+                Time Remaining : {seconds < 10 ? `0${seconds}` : seconds}
+              </Text>
+            ) : (
+              <Text style={{ fontWeight: "bold", fontSize: 15 }}>
+                Didn't recieve code?
+              </Text>
+            )}
+            <Pressable>
+              <Text
+                disabled={seconds > 0}
+                style={{
+                  color: seconds > 0 ? "#92CAA2" : "#3A7F0D",
+                  fontWeight: "bold",
+                  fontSize: 17,
+                }}
+                onPress={() => {
+                  resendOTP();
+                }}>
+                Resend OTP
+              </Text>
+            </Pressable>
           </View>
         </View>
         <Modal animationType="fade" transparent visible={modalVisible}>
           <View style={styles.card}>
             <Image source={require("./auth-imgs/checkmark.png")} />
             <Text
-              style={{ fontSize: 20, color: "#232323", fontWeight: "bold" }}>
+              style={{
+                fontSize: 20,
+                color: "#3A7F0D",
+                fontWeight: "bold",
+                paddingTop: 25,
+                marginBottom: 20,
+              }}>
               Successfully Verified !
             </Text>
           </View>
@@ -113,8 +157,9 @@ export default function Otp({ navigation }) {
 const styles = StyleSheet.create({
   card: {
     position: "absolute",
-    top: 300,
-    left: 70,
+    top: 260,
+    left: 65,
+
     borderRadius: 20,
     width: 252,
     height: 250,

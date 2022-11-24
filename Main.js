@@ -7,6 +7,7 @@ import Home from "./Screens/Home";
 import Save from "./Screens/Save";
 import Cart from "./Screens/Cart";
 import Profile from "./Screens/Profile";
+import LogoTitle from "./Screens/LogoTitle";
 
 const Tab = createBottomTabNavigator();
 
@@ -30,8 +31,12 @@ export default function Main() {
         },
         tabBarActiveTintColor: "#068E2C",
       })}>
-      <Tab.Screen name="Home" component={Home} />
-      <Tab.Screen name="Cart" component={Cart} />
+      <Tab.Screen
+        name="Home"
+        component={Home}
+        options={{ headerTitle: (props) => <LogoTitle {...props} /> }}
+      />
+      <Tab.Screen name="Cart" component={Cart} options={{ tabBarBadge: 3 }} />
       <Tab.Screen name="Save" component={Save} />
       <Tab.Screen name="Profile" component={Profile} />
     </Tab.Navigator>
