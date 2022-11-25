@@ -7,8 +7,14 @@ import AuthStyle from "../components/Authentication/AuthStyle";
 function LogoTitle() {
   return (
     <View style={{ flexDirection: "row" }}>
-      <Image source={require("./Data-imgs/Vector.png")} />
-      <Text style={[AuthStyle.otpText, { paddingLeft: 20 }]}>Hi Thiyagu,</Text>
+      <Image source={require("./Data-imgs/Vector-left.png")} />
+      <Image
+        style={{ left: 350 }}
+        source={require("./Data-imgs/Vector-right.png")}
+      />
+      <Text style={[AuthStyle.otpText, { paddingLeft: 5, fontSize: 20 }]}>
+        Hi User,
+      </Text>
     </View>
   );
 }

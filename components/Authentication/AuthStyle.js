@@ -107,7 +107,6 @@ export default StyleSheet.create({
     height: 45,
     borderRadius: 5,
     borderWidth: 2,
-
     marginBottom: 10,
     padding: 10,
   },

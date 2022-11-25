@@ -25,7 +25,7 @@ export default function SignUp({ navigation, name, LogOtp, Forgot }) {
   };
   return (
     <LinearGradient colors={["#99de81", "#F5F5F5"]} style={{ height: "100%" }}>
-      <View style={{ marginTop: 150 }}>
+      <SafeAreaView style={{ marginTop: 150 }}>
         <ScrollView>
           <View style={AuthStyle.container}>
             <Text style={AuthStyle.title}>{name ? name : "Sign up"}</Text>
@@ -43,7 +43,7 @@ export default function SignUp({ navigation, name, LogOtp, Forgot }) {
             <View>
               <TextInput
                 placeholder="password"
-                style={AuthStyle.Text.Input}
+                style={AuthStyle.TextInput}
                 secureTextEntry={isPasswordSecure}
                 value={password}
                 onChangeText={(text) => setPassword(text)}
@@ -92,7 +92,6 @@ export default function SignUp({ navigation, name, LogOtp, Forgot }) {
 
             <View style={AuthStyle.horizontalSection}>
               <View style={AuthStyle.horizontalLine} />
-
               <View>
                 <Text style={{ width: 40, textAlign: "center" }}>OR</Text>
               </View>
@@ -119,7 +118,7 @@ export default function SignUp({ navigation, name, LogOtp, Forgot }) {
             </View>
           </View>
         </ScrollView>
-      </View>
+      </SafeAreaView>
     </LinearGradient>
   );
 }

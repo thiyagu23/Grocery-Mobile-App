@@ -36,8 +36,21 @@ export default function Main() {
         component={Home}
         options={{ headerTitle: (props) => <LogoTitle {...props} /> }}
       />
-      <Tab.Screen name="Cart" component={Cart} options={{ tabBarBadge: 3 }} />
-      <Tab.Screen name="Save" component={Save} />
+      <Tab.Screen
+        name="Cart"
+        component={Cart}
+        options={{
+          title: "My Cart",
+          tabBarBadge: 3,
+        }}
+      />
+      <Tab.Screen
+        name="Save"
+        component={Save}
+        options={{
+          title: "Wishlist",
+        }}
+      />
       <Tab.Screen name="Profile" component={Profile} />
     </Tab.Navigator>
   );
