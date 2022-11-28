@@ -2,7 +2,7 @@ import { StyleSheet, Text, View } from "react-native";
 import React from "react";
 import InitialSplash from "./splash/InitialSplash";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
-import WalkThrough1 from "./splash/WalkThrough1";
+
 import SignUp from "./Authentication/SignUp";
 import Login from "./Authentication/Login";
 import Otp from "./Authentication/Otp";

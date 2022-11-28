@@ -67,6 +67,7 @@ const Cart = () => {
                     <Text
                       style={{
                         textDecorationLine: "line-through",
+                        color: "#5C5C5C",
                       }}>
                       {item.oldPrice}
                     </Text>

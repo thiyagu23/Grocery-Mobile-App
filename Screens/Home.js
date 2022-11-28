@@ -51,7 +51,10 @@ const Home = () => {
           </Text>
           <TouchableOpacity style={AppStyle.middelCard}>
             <View>
-              <Image source={require("./Data-imgs/apple.png")} />
+              <Image
+                style={{ height: 100, width: 100, borderRadius: 10 }}
+                source={require("./Data-imgs/apples.jpg")}
+              />
               <Text> Apple</Text>
             </View>
             <View>
@@ -79,6 +82,7 @@ const Home = () => {
                 <TouchableOpacity style={AppStyle.card}>
                   <Text style={AppStyle.cardImg}>{item.img}</Text>
                   <Text style={AppStyle.cardText}>{item.name}</Text>
+                  <Text style={AppStyle.homePrice}>$30</Text>
                 </TouchableOpacity>
               )}
             />
@@ -97,7 +101,12 @@ const Data = [
   {
     id: 1,
     name: "Apple",
-    img: <Image source={require("./Data-imgs/apple.png")} />,
+    img: (
+      <Image
+        style={{ height: 100, width: 100, borderRadius: 10 }}
+        source={require("./Data-imgs/apples.jpg")}
+      />
+    ),
   },
   {
     id: 2,

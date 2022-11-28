@@ -57,6 +57,18 @@ export default StyleSheet.create({
     justifyContent: "space-around",
     flexDirection: "row",
   },
+  homePrice: {
+    borderRadius: 50,
+    backgroundColor: "#3A7F0D",
+    width: 25,
+    height: 25,
+    color: "#FFFFFF",
+    fontWeight: "bold",
+    textAlign: "center",
+    paddingTop: 5,
+    left: 85,
+    fontSize: 12,
+  },
 
   //Cart StyleSheet
 
@@ -69,14 +81,13 @@ export default StyleSheet.create({
     height: 150,
     borderRadius: 10,
   },
-  cartImg: {},
 
   cartText: {
     alignSelf: "flex-start",
-    fontSize: 18,
     fontWeight: "bold",
     bottom: 140,
     left: 110,
+    fontSize: 18,
   },
 
   billCard: {
@@ -104,7 +115,7 @@ export default StyleSheet.create({
     justifyContent: "space-around",
     width: 130,
     left: 220,
-    bottom: 120,
+    bottom: 110,
   },
   less: {
     borderColor: "gray",
@@ -154,5 +165,64 @@ export default StyleSheet.create({
     textAlign: "center",
     bottom: 30,
     right: 25,
+  },
+  rating: {
+    flexDirection: "row",
+    borderColor: "#B8BBC6",
+    borderWidth: 0.5,
+    fontSize: 15,
+    borderRadius: 20,
+    width: 65,
+    fontWeight: "bold",
+    bottom: 100,
+    left: 130,
+    padding: 5,
+    paddingLeft: 10,
+  },
+  rightRating: {
+    color: "#FA662E",
+    bottom: 92,
+    left: 210,
+    fontSize: 16,
+    fontWeight: "500",
+  },
+  discount: {
+    backgroundColor: "#FA662E",
+    left: 10,
+    width: 70,
+    height: 30,
+    bottom: 30,
+    color: "#FFFFFF",
+    fontSize: 12,
+    paddingTop: 8,
+    textAlign: "center",
+    fontWeight: "bold",
+    borderRadius: 5,
+    borderColor: "#FFFFFF",
+    borderWidth: 1,
+  },
+  profile: {
+    flexDirection: "row",
+    justifyContent: "space-between",
+    padding: 20,
+  },
+  ProfileLogo: {
+    height: 40,
+  },
+  ProfileName: {
+    alignContent: "flex-start",
+    fontSize: 18,
+    fontWeight: "600",
+  },
+  ProfileArrow: {},
+  logoutBtn: {
+    width: "50%",
+    borderRadius: 8,
+    height: 50,
+    alignItems: "center",
+    justifyContent: "center",
+    marginTop: 40,
+    backgroundColor: "#3A7F0D",
+    margin: "25%",
   },
 });
