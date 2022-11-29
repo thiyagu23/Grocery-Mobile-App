@@ -36,7 +36,7 @@ const styles = StyleSheet.create({
   },
   img1: {
     alignSelf: "center",
-    marginTop: 200,
+    marginTop: 150,
   },
   txt: {
     fontSize: 24,
@@ -47,7 +47,7 @@ const styles = StyleSheet.create({
   },
   img2: {
     alignSelf: "center",
-    marginTop: 200,
+    top: 240,
   },
   btn: {
     position: "absolute",

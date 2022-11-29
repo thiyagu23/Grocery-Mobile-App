@@ -41,11 +41,11 @@ export default StyleSheet.create({
   },
   TextInput: {
     width: "100%",
-    height: 45,
+    height: 55,
     borderRadius: 5,
     borderWidth: 2,
     borderColor: "#92CAA2",
-    marginBottom: 10,
+    marginBottom: 20,
     padding: 10,
   },
   inputFieldBaseText: {
@@ -76,7 +76,7 @@ export default StyleSheet.create({
   iconstyle: {
     position: "absolute",
     right: 20,
-    bottom: 20,
+    bottom: 35,
   },
   otpBoxContainer: {
     flex: 1,

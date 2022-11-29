@@ -9,7 +9,7 @@ function LogoTitle() {
     <View style={{ flexDirection: "row" }}>
       <Image source={require("./Data-imgs/Vector-left.png")} />
       <Image
-        style={{ left: 350 }}
+        style={{ left: 360 }}
         source={require("./Data-imgs/Vector-right.png")}
       />
       <Text style={[AuthStyle.otpText, { paddingLeft: 5, fontSize: 20 }]}>

@@ -3,7 +3,6 @@ export default StyleSheet.create({
   container: {
     flex: 1,
     paddingHorizontal: 20,
-
     paddingBottom: 30,
   },
   search: {
@@ -15,10 +14,11 @@ export default StyleSheet.create({
     backgroundColor: "#FFFFFF",
     borderColor: "#FFFFFF",
     padding: 10,
+    width: "90%",
+    right: 5,
   },
   topCard: {
     height: 100,
-
     height: 160,
     marginTop: -15,
     borderRadius: 10,
@@ -31,14 +31,15 @@ export default StyleSheet.create({
     fontWeight: "bold",
   },
   cardImg: {
-    width: 100,
-    height: 200,
+    width: 150,
+    height: 150,
     borderRadius: 10,
+    bottom: 25,
+    right: 10,
   },
   cardText: {
     color: "#232323",
-    bottom: 20,
-
+    bottom: 10,
     fontWeight: "bold",
   },
   card: {
@@ -47,10 +48,10 @@ export default StyleSheet.create({
     justifyContent: "space-around",
     borderColor: "#838782",
     borderWidth: 1,
-    width: 120,
-    height: 150,
+    width: 115,
+    height: 130,
     borderRadius: 5,
-    margin: 7,
+    margin: 11,
   },
   middelCard: {
     flex: 1,
@@ -66,7 +67,7 @@ export default StyleSheet.create({
     fontWeight: "bold",
     textAlign: "center",
     paddingTop: 5,
-    left: 85,
+    left: 80,
     fontSize: 12,
   },
 
@@ -77,7 +78,7 @@ export default StyleSheet.create({
     backgroundColor: "#F5F5F5",
     flexDirection: "column",
     justifyContent: "space-around",
-    width: 380,
+    width: 390,
     height: 150,
     borderRadius: 10,
   },
@@ -91,7 +92,7 @@ export default StyleSheet.create({
   },
 
   billCard: {
-    width: 350,
+    width: 330,
     flexDirection: "row",
     justifyContent: "space-between",
     lineHeight: 20,
@@ -108,13 +109,14 @@ export default StyleSheet.create({
     lineHeight: 40,
     fontSize: 17,
     fontWeight: "600",
+    left: 20,
   },
 
   itemCounter: {
     flexDirection: "row",
     justifyContent: "space-around",
     width: 130,
-    left: 220,
+    left: 230,
     bottom: 110,
   },
   less: {
@@ -142,12 +144,11 @@ export default StyleSheet.create({
   counter: { fontSize: 22, fontWeight: "bold" },
   remove: {
     alignItems: "center",
-
     backgroundColor: "#cdcfcd",
     borderRadius: 5,
     width: 110,
     height: 35,
-    left: 230,
+    left: 240,
     bottom: 35,
   },
   ItemType: {
@@ -164,7 +165,7 @@ export default StyleSheet.create({
     fontWeight: "bold",
     textAlign: "center",
     bottom: 30,
-    right: 25,
+    right: 15,
   },
   rating: {
     flexDirection: "row",

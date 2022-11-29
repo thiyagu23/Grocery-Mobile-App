@@ -25,7 +25,7 @@ export default function SignUp({ navigation, name, LogOtp, Forgot }) {
   };
   return (
     <LinearGradient colors={["#99de81", "#F5F5F5"]} style={{ height: "100%" }}>
-      <SafeAreaView style={{ marginTop: 150 }}>
+      <SafeAreaView style={{ marginTop: 100 }}>
         <ScrollView>
           <View style={AuthStyle.container}>
             <Text style={AuthStyle.title}>{name ? name : "Sign up"}</Text>
@@ -35,12 +35,13 @@ export default function SignUp({ navigation, name, LogOtp, Forgot }) {
 
               <TextInput
                 cursorColor="#3A7F0D"
-                placeholder="Mobile no"
+                placeholder="+91 9876543210"
                 style={AuthStyle.TextInput}
               />
             </View>
 
             <View>
+              <Text style={AuthStyle.lebelText}>Password</Text>
               <TextInput
                 placeholder="password"
                 style={AuthStyle.TextInput}

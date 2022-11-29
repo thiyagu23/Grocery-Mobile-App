@@ -2,13 +2,13 @@ import { StyleSheet, Text, View } from "react-native";
 import React from "react";
 import InitialSplash from "./splash/InitialSplash";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
-
 import SignUp from "./Authentication/SignUp";
 import Login from "./Authentication/Login";
 import Otp from "./Authentication/Otp";
 import ForgotPassword from "./Authentication/ForgotPassword";
 import PasswordSetting from "./Authentication/PasswordSetting";
 import Main from "../Main";
+import Table from "../Screens/Table";
 
 const Stack = createNativeStackNavigator();
 
@@ -25,12 +25,16 @@ const Splash = () => {
       <Stack.Screen name="ForgotPassword" component={ForgotPassword} />
       <Stack.Screen name="PasswordSetting" component={PasswordSetting} />
       <Stack.Screen name="Main" component={Main} />
+      <Stack.Screen
+        name="Table"
+        component={Table}
+        options={{
+          title: "My Orders",
+          headerShown: true,
+        }}
+      />
     </Stack.Navigator>
   );
 };
 
 export default Splash;
-
-// <Stack.Screen name="WalkThrough1" component={WalkThrough1} />
-// <Stack.Screen name="WalkThrough2" component={WalkThrough2} />
-// <Stack.Screen name="WalkThrough3" component={WalkThrough3} />

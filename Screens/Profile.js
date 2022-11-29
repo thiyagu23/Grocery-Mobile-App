@@ -9,7 +9,11 @@ import {
 import React from "react";
 import { LinearGradient } from "expo-linear-gradient";
 import AppStyle from "./AppStyle";
-const Profile = ({ navigation, LogOtp }) => {
+const Profile = ({ navigation }) => {
+  const navigate = () => {
+    navigation.navigate("Table");
+  };
+
   return (
     <LinearGradient colors={["#99de81", "#F5F5F5"]} style={{ height: "100%" }}>
       <View style={AppStyle.container}>
@@ -24,14 +28,14 @@ const Profile = ({ navigation, LogOtp }) => {
             marginBottom: 20,
             fontWeight: "500",
           }}>
-          +91 0123456789
+          +91 9876543210
         </Text>
         <View>
           <FlatList
             contentContainerStyle={{}}
             data={Data}
             renderItem={({ item }) => (
-              <TouchableOpacity style={AppStyle.profile}>
+              <TouchableOpacity onPress={navigate} style={AppStyle.profile}>
                 <Text style={AppStyle.ProfileLogo}>{item.logo}</Text>
                 <Text style={AppStyle.ProfileName}>{item.name}</Text>
                 <Text style={AppStyle.ProfileArrow}>{item.arrow}</Text>
@@ -40,9 +44,7 @@ const Profile = ({ navigation, LogOtp }) => {
           />
           <TouchableOpacity
             style={AppStyle.logoutBtn}
-            onPress={
-              LogOtp ? () => LogOtp() : () => navigation.navigate("Login")
-            }>
+            onPress={() => navigation.navigate("Login")}>
             <Text style={{ color: "white", fontSize: 15, fontWeight: "bold" }}>
               LogOut
             </Text>
@@ -52,7 +54,6 @@ const Profile = ({ navigation, LogOtp }) => {
     </LinearGradient>
   );
 };
-
 export default Profile;
 
 const styles = StyleSheet.create({});
@@ -60,7 +61,7 @@ const styles = StyleSheet.create({});
 const Data = [
   {
     id: 1,
-    name: "My Order",
+    name: <Text>My Order</Text>,
     logo: <Image source={require("./Data-imgs/my-order.png")} />,
     arrow: <Image source={require("./Data-imgs/right-arrow.png")} />,
   },

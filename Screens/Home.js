@@ -8,20 +8,103 @@ import {
   FlatList,
   ScrollView,
   ImageBackground,
+  Alert,
 } from "react-native";
-import React from "react";
+import React, { useState } from "react";
 import { LinearGradient } from "expo-linear-gradient";
 import AppStyle from "./AppStyle";
-
+const Data = [
+  {
+    id: 1,
+    name: "Apple",
+    img: (
+      <Image
+        style={{ height: 100, width: 100, borderRadius: 10 }}
+        source={require("./Data-imgs/apples.jpg")}
+      />
+    ),
+  },
+  {
+    id: 2,
+    name: "Beetroot",
+    img: <Image source={require("./Data-imgs/Beetroot.png")} />,
+  },
+  {
+    id: 3,
+    name: "Brinjal",
+    img: <Image source={require("./Data-imgs/brinjal.png")} />,
+  },
+  {
+    id: 4,
+    name: "Carrot",
+    img: <Image source={require("./Data-imgs/carrot.png")} />,
+  },
+  {
+    id: 5,
+    name: "Grapes",
+    img: <Image source={require("./Data-imgs/grapes.png")} />,
+  },
+  {
+    id: 6,
+    name: "Green-chilli",
+    img: <Image source={require("./Data-imgs/green-chilli.png")} />,
+  },
+  {
+    id: 7,
+    name: "Lily-plant",
+    img: <Image source={require("./Data-imgs/lily-plant.png")} />,
+  },
+  {
+    id: 8,
+    name: "Orange",
+    img: <Image source={require("./Data-imgs/orange.png")} />,
+  },
+  {
+    id: 9,
+    name: "Potato",
+    img: <Image source={require("./Data-imgs/potato.png")} />,
+  },
+  {
+    id: 10,
+    name: "Pumpkin",
+    img: <Image source={require("./Data-imgs/pumpkin.png")} />,
+  },
+  {
+    id: 11,
+    name: "Spinach",
+    img: <Image source={require("./Data-imgs/spinach.png")} />,
+  },
+  {
+    id: 12,
+    name: "Tomatos",
+    img: <Image source={require("./Data-imgs/tomatoes.png")} />,
+  },
+];
 const Home = () => {
+  const [searchTerm, setSearchTerm] = useState([...Data]);
+
+  // const key = Data.filter((item) => {
+  //   if (searchTerm === Data.name) {
+  //     return item;
+  //   } else if (item.name.toLowerCase().includes(searchTerm)) {
+  //     return item;
+  //   }
+  // });
+  const searchFunction = (e) => {
+    let value = e;
+  };
   return (
     <LinearGradient colors={["#99de81", "#F5F5F5"]} style={{ height: "100%" }}>
       <ScrollView>
         <View style={AppStyle.container}>
-          <TextInput style={AppStyle.search} placeholder="Search" />
+          <TextInput
+            style={AppStyle.search}
+            placeholder="Search"
+            onChangeText={(e) => searchFunction({ e })}
+          />
 
           <Image
-            style={{ alignSelf: "flex-end", bottom: 55, right: 45 }}
+            style={{ alignSelf: "flex-end", bottom: 55, right: 35 }}
             source={require("./Data-imgs/search.png")}
           />
 
@@ -55,15 +138,46 @@ const Home = () => {
                 style={{ height: 100, width: 100, borderRadius: 10 }}
                 source={require("./Data-imgs/apples.jpg")}
               />
-              <Text> Apple</Text>
+              <Text
+                style={{
+                  fontSize: 15,
+                  fontWeight: "bold",
+                  textAlign: "center",
+                  paddingTop: 10,
+                }}>
+                {" "}
+                Apple
+              </Text>
             </View>
             <View>
-              <Image source={require("./Data-imgs/Beetroot.png")} />
-              <Text>Beetroot</Text>
+              <Image
+                style={{ height: 100, width: 100, borderRadius: 10 }}
+                source={require("./Data-imgs/Beetroot.png")}
+              />
+              <Text
+                style={{
+                  fontSize: 15,
+                  fontWeight: "bold",
+                  textAlign: "center",
+                  paddingTop: 10,
+                }}>
+                Beetroot
+              </Text>
             </View>
             <View>
-              <Image source={require("./Data-imgs/brinjal.png")} />
-              <Text>Brinjal</Text>
+              <Image
+                style={{ height: 100, width: 100, borderRadius: 10 }}
+                source={require("./Data-imgs/brinjal.png")}
+              />
+              <Text
+                style={{
+                  fontSize: 15,
+                  fontWeight: "bold",
+                  textAlign: "center",
+                  paddingTop: 10,
+                }}>
+                Brinjal
+              </Text>
             </View>
           </TouchableOpacity>
           <Text
@@ -76,7 +190,7 @@ const Home = () => {
                 justifyContent: "center",
                 alignItems: "center",
               }}
-              data={Data}
+              data={searchTerm}
               numColumns={3}
               renderItem={({ item }) => (
                 <TouchableOpacity style={AppStyle.card}>
@@ -96,71 +210,3 @@ const Home = () => {
 export default Home;
 
 const styles = StyleSheet.create({});
-
-const Data = [
-  {
-    id: 1,
-    name: "Apple",
-    img: (
-      <Image
-        style={{ height: 100, width: 100, borderRadius: 10 }}
-        source={require("./Data-imgs/apples.jpg")}
-      />
-    ),
-  },
-  {
-    id: 2,
-    name: "Beetroot",
-    img: <Image source={require("./Data-imgs/Beetroot.png")} />,
-  },
-  {
-    id: 3,
-    name: "Brinjal",
-    img: <Image source={require("./Data-imgs/brinjal.png")} />,
-  },
-  {
-    id: 4,
-    name: "Carrot",
-    img: <Image source={require("./Data-imgs/carrot.png")} />,
-  },
-  {
-    id: 6,
-    name: "Grapes",
-    img: <Image source={require("./Data-imgs/grapes.png")} />,
-  },
-  {
-    id: 7,
-    name: "Green-chilli",
-    img: <Image source={require("./Data-imgs/green-chilli.png")} />,
-  },
-  {
-    id: 8,
-    name: "Lily-plant",
-    img: <Image source={require("./Data-imgs/lily-plant.png")} />,
-  },
-  {
-    id: 9,
-    name: "Orange",
-    img: <Image source={require("./Data-imgs/orange.png")} />,
-  },
-  {
-    id: 10,
-    name: "Potato",
-    img: <Image source={require("./Data-imgs/potato.png")} />,
-  },
-  {
-    id: 11,
-    name: "Pumpkin",
-    img: <Image source={require("./Data-imgs/pumpkin.png")} />,
-  },
-  {
-    id: 12,
-    name: "Spinach",
-    img: <Image source={require("./Data-imgs/spinach.png")} />,
-  },
-  {
-    id: 13,
-    name: "Tomatos",
-    img: <Image source={require("./Data-imgs/tomatoes.png")} />,
-  },
-];

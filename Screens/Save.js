@@ -62,7 +62,7 @@ const Save = () => {
                   </Text>
                   <Text style={AppStyle.rightRating}>{item.rightRating}</Text>
                   <Text
-                    style={[AppStyle.itemPrice, { fontSize: 20, left: 18 }]}>
+                    style={[AppStyle.itemPrice, { fontSize: 20, left: 30 }]}>
                     <Text>{item.currentPrice}</Text>
                     <Text
                       style={{

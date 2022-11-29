@@ -128,7 +128,7 @@ export default function Otp({ navigation }) {
             <Image source={require("./auth-imgs/checkmark.png")} />
             <Text
               style={{
-                fontSize: 20,
+                fontSize: 15,
                 color: "#3A7F0D",
                 fontWeight: "bold",
                 paddingTop: 25,
@@ -157,12 +157,11 @@ export default function Otp({ navigation }) {
 const styles = StyleSheet.create({
   card: {
     position: "absolute",
-    top: 260,
-    left: 65,
-
+    top: 290,
+    left: 95,
     borderRadius: 20,
-    width: 252,
-    height: 250,
+    width: 200,
+    height: 200,
     alignItems: "center",
     backgroundColor: "#FFFFFF",
     justifyContent: "center",

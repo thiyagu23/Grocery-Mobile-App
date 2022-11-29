@@ -36,7 +36,10 @@ const Cart = () => {
               renderItem={({ item }) => (
                 <View style={[AppStyle.cartCard, { marginTop: 20 }]}>
                   <Text style={AppStyle.cardImg}>{item.img} </Text>
-                  <Text style={AppStyle.cartText}>{item.name}</Text>
+                  <Text
+                    style={[AppStyle.cartText, { marginTop: 40, right: 30 }]}>
+                    {item.name}
+                  </Text>
                   <Text style={AppStyle.ItemType}>{item.type}</Text>
                   <View style={AppStyle.itemCounter}>
                     <TouchableOpacity onPress={handleDecrement}>
@@ -137,7 +140,7 @@ const Data = [
     less: "-",
     counter: "3",
     add: "+",
-    currentPrice: "$30  ",
+    currentPrice: "$30   ",
     oldPrice: "$40",
   },
   {
@@ -148,7 +151,7 @@ const Data = [
     less: "-",
     counter: "2",
     add: "+",
-    currentPrice: "$15  ",
+    currentPrice: "$15   ",
     oldPrice: "$30",
   },
   {
@@ -159,7 +162,7 @@ const Data = [
     less: "-",
     counter: "3",
     add: "+",
-    currentPrice: "$25  ",
+    currentPrice: "$25   ",
     oldPrice: "$35",
   },
 ];
