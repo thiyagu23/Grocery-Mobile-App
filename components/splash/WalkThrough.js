@@ -79,11 +79,11 @@ const styles = StyleSheet.create({
     top: 100,
   },
   introTextStyle: {
-    fontSize: 23,
+    fontSize: 20,
     color: "black",
     textAlign: "center",
     paddingVertical: 30,
-    fontWeight: "500",
+    fontWeight: "400",
     width: "90%",
     lineHeight: 30,
   },

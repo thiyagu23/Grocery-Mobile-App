@@ -28,6 +28,18 @@ export default StyleSheet.create({
     marginLeft: "25%",
     color: "white",
   },
+
+  disabledLoginBtn: {
+    width: "50%",
+    borderRadius: 8,
+    height: 50,
+    alignItems: "center",
+    justifyContent: "center",
+    marginTop: 40,
+    backgroundColor: "#99de81",
+    marginLeft: "25%",
+    color: "white",
+  },
   horizontalSection: {
     flexDirection: "row",
     justifyContent: "center",

@@ -19,10 +19,64 @@ import BlurImg from "./BlurImg";
 export default function SignUp({ navigation, name, LogOtp, Forgot }) {
   const [password, setPassword] = useState("");
   const [isPasswordSecure, setIsPasswordSecure] = useState(true);
+  const [mobile, setMobile] = useState("");
+  const [mobileValidation, setMobileValidation] = useState(false);
 
   const changeIcon = () => {
     setIsPasswordSecure(!isPasswordSecure);
   };
+
+  const handleCheckMoblie = (text) => {
+    let cek = /^(?=.*[0-9]{10}).*$/;
+    setMobile(text);
+    if (cek.test(text)) {
+      setMobileValidation(false);
+    } else {
+      setMobileValidation(true);
+    }
+  };
+  const checkPasswordValidity = (value) => {
+    const isNonWhiteSpace = /^\S*$/;
+    if (!isNonWhiteSpace.test(value)) {
+      return "Password must not contain Whitespaces.";
+    }
+
+    const isContainsUppercase = /^(?=.*[A-Z]).*$/;
+    if (!isContainsUppercase.test(value)) {
+      return "Password must have at least one Uppercase Character.";
+    }
+
+    const isContainsLowercase = /^(?=.*[a-z]).*$/;
+    if (!isContainsLowercase.test(value)) {
+      return "Password must have at least one Lowercase Character.";
+    }
+
+    const isContainsNumber = /^(?=.*[0-9]).*$/;
+    if (!isContainsNumber.test(value)) {
+      return "Password must contain at least one Digit.";
+    }
+
+    const isValidLength = /^.{8,16}$/;
+    if (!isValidLength.test(value)) {
+      return "Password must be 8-16 Characters Long.";
+    }
+    // const isContainsSymbol =
+    //   /^(?=.*[~`!@#$%^&*()--+={}\[\]|\\:;"'<>,.?/_₹]).*$/;
+    // if (!isContainsSymbol.test(value)) {
+    //   return 'Password must contain at least one Special Symbol.';
+    // }
+    return null;
+  };
+
+  const handleLogin = () => {
+    const checkPassword = checkPasswordValidity(password);
+    if (!checkPassword) {
+      navigation.navigate("Otp");
+    } else {
+      alert(checkPassword);
+    }
+  };
+
   return (
     <LinearGradient colors={["#99de81", "#F5F5F5"]} style={{ height: "100%" }}>
       <SafeAreaView style={{ marginTop: 100 }}>
@@ -34,15 +88,24 @@ export default function SignUp({ navigation, name, LogOtp, Forgot }) {
               <Text style={AuthStyle.lebelText}>Mobile no</Text>
 
               <TextInput
+                onChangeText={(text) => handleCheckMoblie(text)}
+                value={mobile}
                 cursorColor="#3A7F0D"
                 placeholder="+91 9876543210"
                 style={AuthStyle.TextInput}
               />
             </View>
+            {mobileValidation ? (
+              <Text style={{ color: "red", textAlign: "right" }}>
+                Enter Valid Mobile Number
+              </Text>
+            ) : null}
 
             <View>
               <Text style={AuthStyle.lebelText}>Password</Text>
               <TextInput
+                variant="rounded"
+                marginX={10}
                 placeholder="password"
                 style={AuthStyle.TextInput}
                 secureTextEntry={isPasswordSecure}
@@ -68,15 +131,26 @@ export default function SignUp({ navigation, name, LogOtp, Forgot }) {
             </Text>
 
             <View>
-              <TouchableOpacity
-                style={AuthStyle.loginBtn}
-                onPress={
-                  LogOtp ? () => LogOtp() : () => navigation.navigate("Otp")
-                }>
-                <Text style={{ color: "#FFFFFF", fontWeight: "bold" }}>
-                  Get OTP
-                </Text>
-              </TouchableOpacity>
+              {mobile.length < 10 ||
+              password.length < 8 ||
+              setMobileValidation == true ? (
+                <TouchableOpacity
+                  disabled
+                  onPress={handleLogin}
+                  style={AuthStyle.disabledLoginBtn}>
+                  <Text style={{ color: "#FFFFFF", fontWeight: "bold" }}>
+                    Get OTP
+                  </Text>
+                </TouchableOpacity>
+              ) : (
+                <TouchableOpacity
+                  onPress={handleLogin}
+                  style={AuthStyle.loginBtn}>
+                  <Text style={{ color: "#FFFFFF", fontWeight: "bold" }}>
+                    Get OTP
+                  </Text>
+                </TouchableOpacity>
+              )}
             </View>
 
             <View style={AuthStyle.accountHave}>

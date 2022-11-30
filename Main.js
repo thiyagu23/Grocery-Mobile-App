@@ -1,5 +1,5 @@
-import { StyleSheet, Text, View } from "react-native";
-import React from "react";
+import { StyleSheet, Text, View, LogBox } from "react-native";
+import React, { useEffect } from "react";
 
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import Ionicons from "react-native-vector-icons/Ionicons";
@@ -12,6 +12,9 @@ import LogoTitle from "./Screens/LogoTitle";
 const Tab = createBottomTabNavigator();
 
 export default function Main() {
+  useEffect(() => {
+    LogBox.ignoreLogs(["VirtualizedLists should never be nested"]);
+  }, []);
   return (
     <Tab.Navigator
       screenOptions={({ route }) => ({

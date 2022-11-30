@@ -90,6 +90,20 @@ const Home = () => {
   //     return item;
   //   }
   // });
+  const searchFilterFunction = (text) => {
+    if (text.length >= 3) {
+      const filteredData = Data.filter((data) => {
+        if (data.name.toUpperCase().includes(text.toUpperCase())) {
+          return data;
+        }
+      });
+      searchTerm(filteredData);
+      setSearchTerm(text);
+    } else {
+      searchTerm(Data);
+      setSearchTerm(text);
+    }
+  };
   const searchFunction = (e) => {
     let value = e;
   };
@@ -100,7 +114,7 @@ const Home = () => {
           <TextInput
             style={AppStyle.search}
             placeholder="Search"
-            onChangeText={(e) => searchFunction({ e })}
+            onChangeText={(e) => searchFilterFunction({ e })}
           />
 
           <Image
