@@ -9,10 +9,52 @@ import {
 import React from "react";
 import { LinearGradient } from "expo-linear-gradient";
 import AppStyle from "./AppStyle";
+
+import { useSelector, useDispatch } from "react-redux";
+import { setTheme } from "../Redux/action";
 const Profile = ({ navigation }) => {
-  const navigate = () => {
-    navigation.navigate("Table");
+  const { theme } = useSelector((state) => state.themeReducer);
+
+  const dispatch = useDispatch();
+  const changeTheme = () => {
+    if (theme == "light") {
+      dispatch(setTheme("dark"));
+    } else {
+      dispatch(setTheme("light"));
+    }
   };
+  const Data = [
+    {
+      id: 1,
+      name: <Text onPress={() => navigation.navigate("Table")}>My Order</Text>,
+      logo: <Image source={require("./Data-imgs/my-order.png")} />,
+      arrow: <Image source={require("./Data-imgs/right-arrow.png")} />,
+    },
+    {
+      id: 2,
+      name: "Delivery Address",
+      logo: <Image source={require("./Data-imgs/location.png")} />,
+      arrow: <Image source={require("./Data-imgs/right-arrow.png")} />,
+    },
+    {
+      id: 3,
+      name: "Settings",
+      logo: <Image source={require("./Data-imgs/settings.png")} />,
+      arrow: <Image source={require("./Data-imgs/right-arrow.png")} />,
+    },
+    {
+      id: 4,
+      name: "Help Center",
+      logo: <Image source={require("./Data-imgs/help.png")} />,
+      arrow: <Image source={require("./Data-imgs/right-arrow.png")} />,
+    },
+    {
+      id: 5,
+      name: "Contact Us",
+      logo: <Image source={require("./Data-imgs/email.png")} />,
+      arrow: <Image source={require("./Data-imgs/right-arrow.png")} />,
+    },
+  ];
 
   return (
     <LinearGradient colors={["#99de81", "#F5F5F5"]} style={{ height: "100%" }}>
@@ -35,7 +77,7 @@ const Profile = ({ navigation }) => {
             contentContainerStyle={{}}
             data={Data}
             renderItem={({ item }) => (
-              <TouchableOpacity onPress={navigate} style={AppStyle.profile}>
+              <TouchableOpacity style={AppStyle.profile}>
                 <Text style={AppStyle.ProfileLogo}>{item.logo}</Text>
                 <Text style={AppStyle.ProfileName}>{item.name}</Text>
                 <Text style={AppStyle.ProfileArrow}>{item.arrow}</Text>

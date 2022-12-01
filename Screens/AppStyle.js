@@ -31,27 +31,26 @@ export default StyleSheet.create({
     fontWeight: "bold",
   },
   cardImg: {
-    width: 150,
-    height: 150,
-    borderRadius: 10,
-    bottom: 25,
+    width: 200,
+    height: 200,
+    borderRadius: 50,
+    bottom: 15,
     right: 10,
   },
   cardText: {
     color: "#232323",
-    bottom: 10,
+    top: 15,
     fontWeight: "bold",
   },
   card: {
-    padding: 10,
+    padding: 5,
     flexDirection: "column",
     justifyContent: "space-around",
     borderColor: "#838782",
-    borderWidth: 1,
     width: 115,
     height: 130,
-    borderRadius: 5,
-    margin: 11,
+
+    margin: 8,
   },
   middelCard: {
     flex: 1,
@@ -67,7 +66,8 @@ export default StyleSheet.create({
     fontWeight: "bold",
     textAlign: "center",
     paddingTop: 5,
-    left: 80,
+    left: 90,
+    bottom: 10,
     fontSize: 12,
   },
 
@@ -157,7 +157,7 @@ export default StyleSheet.create({
     color: "#616360",
     alignItems: "flex-start",
     bottom: 100,
-    left: 110,
+    left: 120,
   },
 
   itemPrice: {
@@ -165,7 +165,7 @@ export default StyleSheet.create({
     fontWeight: "bold",
     textAlign: "center",
     bottom: 30,
-    right: 15,
+    right: 20,
   },
   rating: {
     flexDirection: "row",

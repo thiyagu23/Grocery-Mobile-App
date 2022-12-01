@@ -15,6 +15,7 @@ import React, { useState } from "react";
 import Icon from "react-native-vector-icons/Ionicons";
 import AuthStyle from "./AuthStyle";
 import BlurImg from "./BlurImg";
+import AsyncStorage from "@react-native-async-storage/async-storage";
 
 export default function SignUp({ navigation, name, LogOtp, Forgot }) {
   const [password, setPassword] = useState("");

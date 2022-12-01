@@ -11,10 +11,77 @@ import {
 import React, { useState } from "react";
 import { LinearGradient } from "expo-linear-gradient";
 import AppStyle from "./AppStyle";
-
+const Data = [
+  {
+    id: 1,
+    name: "Apple",
+    img: (
+      <Image
+        style={{
+          height: 110,
+          width: 110,
+          borderRadius: 10,
+          top: 15,
+          right: 10,
+        }}
+        source={require("./Data-imgs/apples.jpg")}
+      />
+    ),
+    type: "Fruit",
+    less: "-",
+    counter: "3",
+    add: "+",
+    currentPrice: "$30   ",
+    oldPrice: "$40",
+  },
+  {
+    id: 2,
+    name: "Pumpkin",
+    img: (
+      <Image
+        style={{
+          height: 110,
+          width: 110,
+          borderRadius: 10,
+          top: 15,
+          right: 10,
+        }}
+        source={require("./Data-imgs/pumpkin.png")}
+      />
+    ),
+    type: "Vegetable",
+    less: "-",
+    counter: "2",
+    add: "+",
+    currentPrice: "$15   ",
+    oldPrice: "$30",
+  },
+  {
+    id: 3,
+    name: "Brinjal",
+    img: (
+      <Image
+        style={{
+          height: 110,
+          width: 110,
+          borderRadius: 10,
+          top: 15,
+          right: 10,
+        }}
+        source={require("./Data-imgs/brinjal.png")}
+      />
+    ),
+    type: "Vegetable",
+    less: "-",
+    counter: "3",
+    add: "+",
+    currentPrice: "$25   ",
+    oldPrice: "$35",
+  },
+];
 const Cart = () => {
-  const [count, setCount] = useState(1);
-  const handleIncrement = () => {
+  const [count, setCount] = useState(0);
+  const handleIncrement = (index) => {
     setCount((prevCount) => prevCount + 1);
   };
   const handleDecrement = () => {
@@ -22,6 +89,7 @@ const Cart = () => {
       setCount((prevCount) => prevCount - 1);
     }
   };
+
   return (
     <LinearGradient colors={["#99de81", "#F5F5F5"]} style={{ height: "100%" }}>
       <ScrollView>
@@ -33,11 +101,14 @@ const Cart = () => {
                 alignItems: "center",
               }}
               data={Data}
-              renderItem={({ item }) => (
+              renderItem={({ item, index }) => (
                 <View style={[AppStyle.cartCard, { marginTop: 20 }]}>
-                  <Text style={AppStyle.cardImg}>{item.img} </Text>
+                  {item.img}
                   <Text
-                    style={[AppStyle.cartText, { marginTop: 40, right: 30 }]}>
+                    style={[
+                      AppStyle.cartText,
+                      { marginTop: 80, paddingLeft: 10 },
+                    ]}>
                     {item.name}
                   </Text>
                   <Text style={AppStyle.ItemType}>{item.type}</Text>
@@ -46,7 +117,8 @@ const Cart = () => {
                       <Text style={AppStyle.less}>{item.less} </Text>
                     </TouchableOpacity>
                     <Text style={AppStyle.counter}>{count}</Text>
-                    <TouchableOpacity onPress={handleIncrement}>
+                    <TouchableOpacity
+                      onPress={() => handleIncrement(item, index)}>
                       <Text style={AppStyle.add}>{item.add}</Text>
                     </TouchableOpacity>
                   </View>
@@ -131,41 +203,6 @@ export default Cart;
 
 const styles = StyleSheet.create({});
 
-const Data = [
-  {
-    id: 1,
-    name: "Apple",
-    img: <Image source={require("./Data-imgs/apple.png")} />,
-    type: "Fruit",
-    less: "-",
-    counter: "3",
-    add: "+",
-    currentPrice: "$30   ",
-    oldPrice: "$40",
-  },
-  {
-    id: 2,
-    name: "Beetroot",
-    img: <Image source={require("./Data-imgs/Beetroot.png")} />,
-    type: "Vegtable",
-    less: "-",
-    counter: "2",
-    add: "+",
-    currentPrice: "$15   ",
-    oldPrice: "$30",
-  },
-  {
-    id: 3,
-    name: "Brinjal",
-    img: <Image source={require("./Data-imgs/brinjal.png")} />,
-    type: "Vegtable",
-    less: "-",
-    counter: "3",
-    add: "+",
-    currentPrice: "$25   ",
-    oldPrice: "$35",
-  },
-];
 const Bills = [
   {
     id: 1,

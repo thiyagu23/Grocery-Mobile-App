@@ -139,15 +139,28 @@ export default function Otp({ navigation }) {
           </View>
         </Modal>
         <View>
-          <TouchableOpacity
-            onPress={() => {
-              showModal();
-            }}
-            style={AuthStyle.loginBtn}>
-            <Text style={{ color: "white", fontWeight: "bold" }}>
-              Verify OTP
-            </Text>
-          </TouchableOpacity>
+          {otp.length < 4 ? (
+            <TouchableOpacity
+              disabled
+              onPress={() => {
+                showModal();
+              }}
+              style={AuthStyle.disabledLoginBtn}>
+              <Text style={{ color: "white", fontWeight: "bold" }}>
+                Verify OTP
+              </Text>
+            </TouchableOpacity>
+          ) : (
+            <TouchableOpacity
+              onPress={() => {
+                showModal();
+              }}
+              style={AuthStyle.loginBtn}>
+              <Text style={{ color: "white", fontWeight: "bold" }}>
+                Verify OTP
+              </Text>
+            </TouchableOpacity>
+          )}
         </View>
       </View>
     </LinearGradient>
