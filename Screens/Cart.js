@@ -33,6 +33,7 @@ const Data = [
     add: "+",
     currentPrice: "$30   ",
     oldPrice: "$40",
+    Qty: 1,
   },
   {
     id: 2,
@@ -55,6 +56,7 @@ const Data = [
     add: "+",
     currentPrice: "$15   ",
     oldPrice: "$30",
+    Qty: 1,
   },
   {
     id: 3,
@@ -77,18 +79,40 @@ const Data = [
     add: "+",
     currentPrice: "$25   ",
     oldPrice: "$35",
+    Qty: 1,
   },
 ];
 const Cart = () => {
-  const [count, setCount] = useState(0);
-  const handleIncrement = (index) => {
-    setCount((prevCount) => prevCount + 1);
+  const [count, setCount] = useState(Data);
+
+  const handleIncrement = (item, index) => {
+    // let dummy = {
+    //   type: item.type,
+    //   less: "-",
+    //   counter: item.counter,
+    //   add: "+",
+    //   currentPrice: item.currentPrice,
+    //   oldPrice: item.oldPrice,
+    //   Qty: parseInt(item.Qty) + 1,
+    // };
+
+    count[index].Qty = count[index].Qty + 1;
+    console.log(count, "test");
+    setCount([...count]);
+    // setCount((count) =>
+    //   count.map((item) => {
+    //     return { ...item, Qty: item.Qty + 1 };
+    //   }),
+    // );
   };
-  const handleDecrement = () => {
-    if (count > 0) {
-      setCount((prevCount) => prevCount - 1);
-    }
-  };
+  console.log(count, "checked");
+
+  // const handleDecrement = () => {
+
+  //   if (count > 0) {
+  //     setCount((prevCount) => prevCount - 1);
+  //   }
+  // };
 
   return (
     <LinearGradient colors={["#99de81", "#F5F5F5"]} style={{ height: "100%" }}>
@@ -100,7 +124,7 @@ const Cart = () => {
                 justifyContent: "center",
                 alignItems: "center",
               }}
-              data={Data}
+              data={count}
               renderItem={({ item, index }) => (
                 <View style={[AppStyle.cartCard, { marginTop: 20 }]}>
                   {item.img}
@@ -113,10 +137,10 @@ const Cart = () => {
                   </Text>
                   <Text style={AppStyle.ItemType}>{item.type}</Text>
                   <View style={AppStyle.itemCounter}>
-                    <TouchableOpacity onPress={handleDecrement}>
+                    <TouchableOpacity>
                       <Text style={AppStyle.less}>{item.less} </Text>
                     </TouchableOpacity>
-                    <Text style={AppStyle.counter}>{count}</Text>
+                    <Text style={AppStyle.counter}>{item.Qty}</Text>
                     <TouchableOpacity
                       onPress={() => handleIncrement(item, index)}>
                       <Text style={AppStyle.add}>{item.add}</Text>

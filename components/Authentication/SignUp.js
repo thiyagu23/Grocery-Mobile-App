@@ -22,6 +22,18 @@ export default function SignUp({ navigation, name, LogOtp, Forgot }) {
   const [isPasswordSecure, setIsPasswordSecure] = useState(true);
   const [mobile, setMobile] = useState("");
   const [mobileValidation, setMobileValidation] = useState(false);
+  const [userName, setUserName] = useState("");
+
+  console.log(userName);
+
+  // const saveValue = () => {
+  //   if (mobile) {
+  //     AsyncStorage.setItem("any_key_here", mobile )
+  //   }
+  // }
+  // const setData = async () => {
+
+  //  }
 
   const changeIcon = () => {
     setIsPasswordSecure(!isPasswordSecure);
@@ -69,10 +81,15 @@ export default function SignUp({ navigation, name, LogOtp, Forgot }) {
     return null;
   };
 
-  const handleLogin = () => {
+  const handleLogin = async () => {
     const checkPassword = checkPasswordValidity(password);
     if (!checkPassword) {
-      navigation.navigate("Otp");
+      try {
+        await AsyncStorage.setItem("UserName", userName);
+        navigation.navigate("Main");
+      } catch (error) {
+        console.log(error);
+      }
     } else {
       alert(checkPassword);
     }
@@ -84,7 +101,16 @@ export default function SignUp({ navigation, name, LogOtp, Forgot }) {
         <ScrollView>
           <View style={AuthStyle.container}>
             <Text style={AuthStyle.title}>{name ? name : "Sign up"}</Text>
+            <View>
+              <Text style={AuthStyle.lebelText}>Name</Text>
 
+              <TextInput
+                cursorColor="#3A7F0D"
+                placeholder="Enter your name"
+                style={AuthStyle.TextInput}
+                onChangeText={(value) => setUserName(value)}
+              />
+            </View>
             <View>
               <Text style={AuthStyle.lebelText}>Mobile no</Text>
 

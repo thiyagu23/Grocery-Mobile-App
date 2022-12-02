@@ -50,15 +50,17 @@ const Profile = ({ navigation }) => {
     },
     {
       id: 5,
-      name: "Contact Us",
+      name: <Text onPress={() => changeTheme()}>Contact Us</Text>,
       logo: <Image source={require("./Data-imgs/email.png")} />,
       arrow: <Image source={require("./Data-imgs/right-arrow.png")} />,
     },
   ];
 
+  // style={{ color: theme == "light" ?   "white" : "black"}}
+
   return (
     <LinearGradient colors={["#99de81", "#F5F5F5"]} style={{ height: "100%" }}>
-      <View style={AppStyle.container}>
+      <View style={[AppStyle.container]}>
         <Text style={{ fontSize: 28, padding: 15 }}>
           Hello,
           <Text style={{ fontWeight: "bold", color: "#3A7F0D" }}> User</Text>

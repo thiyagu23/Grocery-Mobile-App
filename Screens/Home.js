@@ -15,6 +15,8 @@ import {
 import React, { useState } from "react";
 import { LinearGradient } from "expo-linear-gradient";
 import AppStyle from "./AppStyle";
+import { responsiveWidth, responsiveHeight } from "../responsive";
+
 const Data = [
   {
     id: 1,
@@ -173,7 +175,11 @@ const Home = ({ navigation }) => {
   return (
     <LinearGradient colors={["#99de81", "#F5F5F5"]} style={{ height: "100%" }}>
       <ScrollView refreshControl={<RefreshControl />}>
-        <View style={AppStyle.container}>
+        <View
+          style={[
+            AppStyle.container,
+            { width: responsiveWidth(414), height: responsiveHeight(1150) },
+          ]}>
           <TextInput
             style={AppStyle.search}
             placeholder="Search"
