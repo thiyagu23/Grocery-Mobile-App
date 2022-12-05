@@ -161,8 +161,6 @@ const Home = ({ navigation }) => {
   };
 
   const clicked = (item) => {
-    console.log(item, "check");
-
     Alert.alert(
       "Add to Cart",
       `Do you want to add ${item.name} to your cart ?`,
@@ -178,7 +176,7 @@ const Home = ({ navigation }) => {
         <View
           style={[
             AppStyle.container,
-            { width: responsiveWidth(414), height: responsiveHeight(1150) },
+            // { width: responsiveWidth(414), height: responsiveHeight(1300) },
           ]}>
           <TextInput
             style={AppStyle.search}

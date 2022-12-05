@@ -203,18 +203,20 @@ export default StyleSheet.create({
   },
   profile: {
     flexDirection: "row",
-    justifyContent: "space-between",
-    padding: 20,
+    justifyContent: "flex-start",
+    padding: 15,
   },
   ProfileLogo: {
     height: 40,
+    marginRight: 40,
   },
   ProfileName: {
     alignContent: "flex-start",
+    marginRight: 50,
     fontSize: 18,
     fontWeight: "600",
   },
-  ProfileArrow: {},
+
   logoutBtn: {
     width: "50%",
     borderRadius: 8,

@@ -24,24 +24,18 @@ export default function SignUp({ navigation, name, LogOtp, Forgot }) {
   const [mobileValidation, setMobileValidation] = useState(false);
   const [userName, setUserName] = useState("");
 
-  console.log(userName);
-
-  // const saveValue = () => {
-  //   if (mobile) {
-  //     AsyncStorage.setItem("any_key_here", mobile )
-  //   }
-  // }
-  // const setData = async () => {
-
-  //  }
-
   const changeIcon = () => {
     setIsPasswordSecure(!isPasswordSecure);
   };
 
-  const handleCheckMoblie = (text) => {
-    let cek = /^(?=.*[0-9]{10}).*$/;
+  const handleCheckMoblie = async (text) => {
+    let cek = /^(?=.*[0-9]{11}).*$/;
     setMobile(text);
+    try {
+      await AsyncStorage.setItem("UserNum", mobile);
+    } catch (error) {
+      console.log(error);
+    }
     if (cek.test(text)) {
       setMobileValidation(false);
     } else {
@@ -86,7 +80,7 @@ export default function SignUp({ navigation, name, LogOtp, Forgot }) {
     if (!checkPassword) {
       try {
         await AsyncStorage.setItem("UserName", userName);
-        navigation.navigate("Main");
+        navigation.navigate("Otp");
       } catch (error) {
         console.log(error);
       }

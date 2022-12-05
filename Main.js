@@ -1,6 +1,5 @@
 import { StyleSheet, Text, View, LogBox } from "react-native";
 import React, { useEffect } from "react";
-
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import Ionicons from "react-native-vector-icons/Ionicons";
 import Home from "./Screens/Home";

@@ -95,24 +95,26 @@ const Cart = () => {
     //   oldPrice: item.oldPrice,
     //   Qty: parseInt(item.Qty) + 1,
     // };
-
-    count[index].Qty = count[index].Qty + 1;
-    console.log(count, "test");
-    setCount([...count]);
+    if (count[index].Qty < 10) {
+      count[index].Qty = count[index].Qty + 1;
+      // console.log(count, "test");
+      setCount([...count]);
+    }
     // setCount((count) =>
     //   count.map((item) => {
     //     return { ...item, Qty: item.Qty + 1 };
     //   }),
     // );
   };
-  console.log(count, "checked");
+  // console.log(count, "checked");
 
-  // const handleDecrement = () => {
-
-  //   if (count > 0) {
-  //     setCount((prevCount) => prevCount - 1);
-  //   }
-  // };
+  const handleDecrement = (item, index) => {
+    if (count[index].Qty > 0) {
+      count[index].Qty = count[index].Qty - 1;
+      // console.log(count, "test");
+      setCount([...count]);
+    }
+  };
 
   return (
     <LinearGradient colors={["#99de81", "#F5F5F5"]} style={{ height: "100%" }}>
@@ -137,7 +139,8 @@ const Cart = () => {
                   </Text>
                   <Text style={AppStyle.ItemType}>{item.type}</Text>
                   <View style={AppStyle.itemCounter}>
-                    <TouchableOpacity>
+                    <TouchableOpacity
+                      onPress={() => handleDecrement(item, index)}>
                       <Text style={AppStyle.less}>{item.less} </Text>
                     </TouchableOpacity>
                     <Text style={AppStyle.counter}>{item.Qty}</Text>

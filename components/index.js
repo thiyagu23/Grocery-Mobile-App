@@ -9,6 +9,7 @@ import ForgotPassword from "./Authentication/ForgotPassword";
 import PasswordSetting from "./Authentication/PasswordSetting";
 import Main from "../Main";
 import Table from "../Screens/Table";
+import CreateItems from "../Screens/CreateItems";
 
 const Stack = createNativeStackNavigator();
 
@@ -30,6 +31,14 @@ const Splash = () => {
         component={Table}
         options={{
           title: "My Orders",
+          headerShown: true,
+        }}
+      />
+      <Stack.Screen
+        name="CreateItems"
+        component={CreateItems}
+        options={{
+          title: "Create Item",
           headerShown: true,
         }}
       />

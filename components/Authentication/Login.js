@@ -6,7 +6,7 @@ export default function Login({ navigation }) {
   return (
     <SignUp
       name={"Login"}
-      LogOtp={() => navigation.navigate("Otp")}
+      LogOtp={() => navigation.navigate("Main")}
       Forgot={() => navigation.navigate("ForgotPassword")}
     />
   );

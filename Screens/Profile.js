@@ -6,13 +6,53 @@ import {
   Image,
   FlatList,
 } from "react-native";
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { LinearGradient } from "expo-linear-gradient";
 import AppStyle from "./AppStyle";
-
+import AsyncStorage from "@react-native-async-storage/async-storage";
 import { useSelector, useDispatch } from "react-redux";
 import { setTheme } from "../Redux/action";
+import Icon from "react-native-vector-icons/Ionicons";
+
 const Profile = ({ navigation }) => {
+  const [userNum, setUserNum] = useState("");
+  const [userName, setUserName] = useState("");
+  const [nameLogo, setNameLogo] = useState("");
+  const getData = () => {
+    try {
+      AsyncStorage.getItem("UserName").then((value) => {
+        if (value != null) {
+          setUserName(value);
+        }
+      });
+    } catch (error) {
+      console.log(error);
+    }
+    try {
+      AsyncStorage.getItem("UserName").then((value) => {
+        if (value != null) {
+          const frstInd = value.split("");
+          setNameLogo(frstInd[0]);
+        }
+      });
+    } catch (error) {
+      console.log(error);
+    }
+    try {
+      AsyncStorage.getItem("UserNum").then((value) => {
+        if (value != null) {
+          setUserNum(value);
+        }
+      });
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  useEffect(() => {
+    getData();
+  }, []);
+
   const { theme } = useSelector((state) => state.themeReducer);
 
   const dispatch = useDispatch();
@@ -26,53 +66,76 @@ const Profile = ({ navigation }) => {
   const Data = [
     {
       id: 1,
-      name: <Text onPress={() => navigation.navigate("Table")}>My Order</Text>,
-      logo: <Image source={require("./Data-imgs/my-order.png")} />,
+      name: (
+        <Text onPress={() => navigation.navigate("Table")}>
+          {"My Orders           "}
+        </Text>
+      ),
+      logo: <Icon name="albums" size={25} />,
       arrow: <Image source={require("./Data-imgs/right-arrow.png")} />,
     },
     {
       id: 2,
-      name: "Delivery Address",
-      logo: <Image source={require("./Data-imgs/location.png")} />,
+      name: (
+        <Text onPress={() => navigation.navigate("CreateItems")}>
+          {"Create Items       "}
+        </Text>
+      ),
+      logo: <Icon name="create" size={25} />,
       arrow: <Image source={require("./Data-imgs/right-arrow.png")} />,
     },
     {
       id: 3,
-      name: "Settings",
-      logo: <Image source={require("./Data-imgs/settings.png")} />,
+      name: "Delivery Address",
+      logo: <Icon name="location" size={25} />,
       arrow: <Image source={require("./Data-imgs/right-arrow.png")} />,
     },
     {
       id: 4,
-      name: "Help Center",
-      logo: <Image source={require("./Data-imgs/help.png")} />,
+      name: "Settings               ",
+      logo: <Icon name="settings" size={25} />,
       arrow: <Image source={require("./Data-imgs/right-arrow.png")} />,
     },
     {
       id: 5,
-      name: <Text onPress={() => changeTheme()}>Contact Us</Text>,
-      logo: <Image source={require("./Data-imgs/email.png")} />,
+      name: "Help Center         ",
+      logo: <Icon name="help-circle" size={25} />,
+      arrow: <Image source={require("./Data-imgs/right-arrow.png")} />,
+    },
+    {
+      id: 6,
+      name: "Contact Us          ",
+      logo: <Icon name="mail" size={25} />,
       arrow: <Image source={require("./Data-imgs/right-arrow.png")} />,
     },
   ];
-
+  // onPress={() => changeTheme()}
   // style={{ color: theme == "light" ?   "white" : "black"}}
 
   return (
     <LinearGradient colors={["#99de81", "#F5F5F5"]} style={{ height: "100%" }}>
       <View style={[AppStyle.container]}>
-        <Text style={{ fontSize: 28, padding: 15 }}>
-          Hello,
-          <Text style={{ fontWeight: "bold", color: "#3A7F0D" }}> User</Text>
-        </Text>
+        <View style={{ flexDirection: "row" }}>
+          <TouchableOpacity>
+            <Text style={styles.logo}>{nameLogo}</Text>
+          </TouchableOpacity>
+          <Text style={{ fontSize: 25, paddingTop: 30, left: 15 }}>
+            Hello,
+            <Text style={{ fontWeight: "600", color: "#3A7F0D" }}>
+              {" "}
+              {userName}
+            </Text>
+          </Text>
+        </View>
         <Text
           style={{
             fontSize: 19,
-            paddingLeft: 15,
+
+            left: 100,
             marginBottom: 20,
             fontWeight: "500",
           }}>
-          +91 9876543210
+          {`+91 ${userNum}`}
         </Text>
         <View>
           <FlatList
@@ -88,7 +151,7 @@ const Profile = ({ navigation }) => {
           />
           <TouchableOpacity
             style={AppStyle.logoutBtn}
-            onPress={() => navigation.navigate("Login")}>
+            onPress={() => navigation.navigate("SignUp")}>
             <Text style={{ color: "white", fontSize: 15, fontWeight: "bold" }}>
               LogOut
             </Text>
@@ -100,37 +163,18 @@ const Profile = ({ navigation }) => {
 };
 export default Profile;
 
-const styles = StyleSheet.create({});
-
-const Data = [
-  {
-    id: 1,
-    name: <Text>My Order</Text>,
-    logo: <Image source={require("./Data-imgs/my-order.png")} />,
-    arrow: <Image source={require("./Data-imgs/right-arrow.png")} />,
+const styles = StyleSheet.create({
+  logo: {
+    top: 20,
+    flexDirection: "row",
+    backgroundColor: "#cde7cd",
+    width: 80,
+    height: 80,
+    borderRadius: 100,
+    textAlign: "center",
+    paddingTop: 15,
+    fontSize: 35,
+    fontWeight: "bold",
+    color: "#336633",
   },
-  {
-    id: 2,
-    name: "Delivery Address",
-    logo: <Image source={require("./Data-imgs/location.png")} />,
-    arrow: <Image source={require("./Data-imgs/right-arrow.png")} />,
-  },
-  {
-    id: 3,
-    name: "Settings",
-    logo: <Image source={require("./Data-imgs/settings.png")} />,
-    arrow: <Image source={require("./Data-imgs/right-arrow.png")} />,
-  },
-  {
-    id: 4,
-    name: "Help Center",
-    logo: <Image source={require("./Data-imgs/help.png")} />,
-    arrow: <Image source={require("./Data-imgs/right-arrow.png")} />,
-  },
-  {
-    id: 5,
-    name: "Contact Us",
-    logo: <Image source={require("./Data-imgs/email.png")} />,
-    arrow: <Image source={require("./Data-imgs/right-arrow.png")} />,
-  },
-];
+});
