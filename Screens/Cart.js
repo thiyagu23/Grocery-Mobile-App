@@ -31,8 +31,8 @@ const Data = [
     less: "-",
     counter: "3",
     add: "+",
-    currentPrice: "$30   ",
-    oldPrice: "$40",
+    currentPrice: 30,
+    oldPrice: 40,
     Qty: 1,
   },
   {
@@ -54,8 +54,8 @@ const Data = [
     less: "-",
     counter: "2",
     add: "+",
-    currentPrice: "$15   ",
-    oldPrice: "$30",
+    currentPrice: 15,
+    oldPrice: 30,
     Qty: 1,
   },
   {
@@ -77,13 +77,32 @@ const Data = [
     less: "-",
     counter: "3",
     add: "+",
-    currentPrice: "$25   ",
-    oldPrice: "$35",
+    currentPrice: 25,
+    oldPrice: 35,
     Qty: 1,
+  },
+];
+const Bills = [
+  {
+    id: 1,
+    name: "Item Total",
+    Price: 65,
+  },
+  {
+    id: 2,
+    name: "Delivery Fee for 8 kms",
+    Price: "+ $10.00",
+  },
+  {
+    id: 3,
+    name: "Taxes and Charge",
+    Price: "+ $15.02",
   },
 ];
 const Cart = () => {
   const [count, setCount] = useState(Data);
+  const [totalAdd, setTotalAdd] = useState();
+  const [totalLess, setTotalLess] = useState();
 
   const handleIncrement = (item, index) => {
     // let dummy = {
@@ -97,9 +116,21 @@ const Cart = () => {
     // };
     if (count[index].Qty < 10) {
       count[index].Qty = count[index].Qty + 1;
-      // console.log(count, "test");
+
+      count[index].currentPrice =
+        count[index].currentPrice + Data[index].currentPrice;
+      console.log(Data[index].currentPrice, "test");
+      console.log(count[index].currentPrice, "check");
       setCount([...count]);
     }
+    let add = 0;
+    count.forEach((element) => {
+      add = element.currentPrice + add;
+    });
+
+    console.log(add, "addingg");
+    // console.log(temp, "checkkk");
+    setTotalAdd(add);
     // setCount((count) =>
     //   count.map((item) => {
     //     return { ...item, Qty: item.Qty + 1 };
@@ -111,9 +142,20 @@ const Cart = () => {
   const handleDecrement = (item, index) => {
     if (count[index].Qty > 0) {
       count[index].Qty = count[index].Qty - 1;
-      // console.log(count, "test");
+      count[index].currentPrice =
+        count[index].currentPrice - Data[index].currentPrice;
+
       setCount([...count]);
     }
+    let add = 0;
+    count.forEach((element) => {
+      console.log(element.currentPrice, add, "check123");
+      add = element.currentPrice + add;
+    });
+
+    console.log(add, "addingg");
+    // console.log(temp, "checkkk");
+    setTotalAdd(add);
   };
 
   return (
@@ -164,14 +206,16 @@ const Cart = () => {
                     />
                   </TouchableOpacity>
                   <Text style={AppStyle.itemPrice}>
-                    <Text style={{ margin: 20 }}>{item.currentPrice}</Text>
+                    <Text style={{ margin: 20 }}>
+                      ${`${item.currentPrice}     `}
+                    </Text>
 
                     <Text
                       style={{
                         textDecorationLine: "line-through",
                         color: "#5C5C5C",
                       }}>
-                      {item.oldPrice}
+                      ${item.oldPrice}
                     </Text>
                   </Text>
                 </View>
@@ -190,7 +234,7 @@ const Cart = () => {
             </Text>
             <FlatList
               data={Bills}
-              renderItem={({ item }) => (
+              renderItem={({ item, index }) => (
                 <View style={AppStyle.billCard}>
                   <Text style={AppStyle.cartName}>{item.name}</Text>
                   <Text style={AppStyle.cartPrice}>{item.Price}</Text>
@@ -216,7 +260,7 @@ const Cart = () => {
                   left: 275,
                   bottom: 25,
                 }}>
-                $90.02
+                ${totalAdd}
               </Text>
             </View>
           </View>
@@ -229,21 +273,3 @@ const Cart = () => {
 export default Cart;
 
 const styles = StyleSheet.create({});
-
-const Bills = [
-  {
-    id: 1,
-    name: "Item Total",
-    Price: "$65.00",
-  },
-  {
-    id: 2,
-    name: "Delivery Fee for 8 kms",
-    Price: "+ $10.00",
-  },
-  {
-    id: 3,
-    name: "Texes and Charge",
-    Price: "+ $15.02",
-  },
-];

@@ -29,7 +29,7 @@ export default function SignUp({ navigation, name, LogOtp, Forgot }) {
   };
 
   const handleCheckMoblie = async (text) => {
-    let cek = /^(?=.*[0-9]{11}).*$/;
+    let cek = /^(?=.*[0-9]{10}).*$/;
     setMobile(text);
     try {
       await AsyncStorage.setItem("UserNum", mobile);

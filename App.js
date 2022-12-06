@@ -8,12 +8,14 @@ import Main from "./Main";
 import WalkThrough from "./components/splash/WalkThrough";
 import { Provider } from "react-redux";
 import { store } from "./Redux/store";
+import Cart from "./Screens/Cart";
+import CreateItems from "./Screens/CreateItems";
 
 export default function App() {
   return (
     <Provider store={store}>
       <NavigationContainer>
-        <WalkThrough />
+        <Main />
       </NavigationContainer>
     </Provider>
   );

@@ -16,7 +16,10 @@ import AuthStyle from "../components/Authentication/AuthStyle";
 import Icon from "react-native-vector-icons/Ionicons";
 
 const CreateItems = () => {
-  const [value, setValue] = useState([]);
+  const [name, setName] = useState();
+  const [type, setType] = useState();
+  const [price, setPrice] = useState();
+
   // const items = [];
 
   // const type = [
@@ -38,8 +41,8 @@ const CreateItems = () => {
   // ];
   // items.push(type);
   // console.log(items);
-  const addClick = (value) => {
-    console.log(value);
+  const addClick = () => {
+    console.log(name, type, price);
   };
 
   return (
@@ -53,7 +56,7 @@ const CreateItems = () => {
               cursorColor="#3A7F0D"
               placeholder="eg. Apple"
               style={AuthStyle.TextInput}
-              onChangeText={(text) => setValue(text)}
+              onChangeText={(text) => setName({ name: text })}
             />
           </View>
           <View>
@@ -62,7 +65,7 @@ const CreateItems = () => {
               cursorColor="#3A7F0D"
               placeholder="eg. Fruit"
               style={AuthStyle.TextInput}
-              onChangeText={(text) => setValue(text)}
+              onChangeText={(text) => setType({ type: text })}
             />
           </View>
           <View>
@@ -72,7 +75,7 @@ const CreateItems = () => {
               cursorColor="#3A7F0D"
               placeholder="eg. $15.00"
               style={AuthStyle.TextInput}
-              onChangeText={(text) => setValue(text)}
+              onChangeText={(text) => setPrice({ price: text })}
             />
           </View>
           <View>
@@ -85,9 +88,7 @@ const CreateItems = () => {
             />
           </View>
           <View style={{ flexDirection: "row", top: 15 }}>
-            <TouchableOpacity
-              style={styles.editBtn}
-              onPress={() => addClick(value)}>
+            <TouchableOpacity style={styles.editBtn} onPress={addClick}>
               <Icon name="create-outline" size={23} color="#FFFFFF" />
               <Text style={styles.editTxt}>Add</Text>
             </TouchableOpacity>
