@@ -9,11 +9,92 @@ import {
   Pressable,
   ImageBackground,
 } from "react-native";
-import React from "react";
+import React, { useState } from "react";
+import Icon from "react-native-vector-icons/Ionicons";
 import { LinearGradient } from "expo-linear-gradient";
 import AppStyle from "./AppStyle";
 
 const Save = () => {
+  const [clickLike, setClickLike] = useState(true);
+  const Data = [
+    {
+      id: 1,
+      name: "Pumpkin",
+      img: <Image source={require("./Data-imgs/pumpkin-like.png")} />,
+      ratingImg: <Image source={require("./Data-imgs/rating.png")} />,
+      leftRating: " 4.3",
+      rightRating: "90 Ratings",
+      currentPrice: "$30       ",
+      oldPrice: "$40",
+      discount: "5% OFF",
+      likeImg: (
+        <Icon
+          name={clickLike ? "heart-outline" : "heart"}
+          color="red"
+          size={24}
+        />
+      ),
+    },
+    {
+      id: 2,
+      name: "Spinach",
+      img: <Image source={require("./Data-imgs/spinach-like.png")} />,
+      ratingImg: <Image source={require("./Data-imgs/rating.png")} />,
+      leftRating: " 4.3",
+      rightRating: "45 Ratings",
+      currentPrice: "$15       ",
+      oldPrice: "$30",
+      discount: "10% OFF",
+      likeImg: (
+        <Icon
+          name={clickLike ? "heart-outline" : "heart"}
+          color="red"
+          size={24}
+        />
+      ),
+    },
+    {
+      id: 3,
+      name: "Broccoli",
+      img: <Image source={require("./Data-imgs/broccoli-like.png")} />,
+      ratingImg: <Image source={require("./Data-imgs/rating.png")} />,
+      leftRating: " 4.3",
+      rightRating: "70 Ratings",
+      currentPrice: "$30       ",
+      oldPrice: "$40",
+      discount: "18% OFF",
+      likeImg: (
+        <Icon
+          name={clickLike ? "heart-outline" : "heart"}
+          color="red"
+          size={24}
+        />
+      ),
+    },
+    {
+      id: 4,
+      name: "Tomatoes",
+      img: <Image source={require("./Data-imgs/tomato-like.png")} />,
+      ratingImg: <Image source={require("./Data-imgs/rating.png")} />,
+      leftRating: " 4.3",
+      rightRating: "80 Ratings",
+      currentPrice: "$30       ",
+      oldPrice: "$40",
+      discount: "15% OFF",
+      likeImg: (
+        <Icon
+          name={clickLike ? "heart-outline" : "heart"}
+          color="red"
+          size={24}
+        />
+      ),
+    },
+  ];
+
+  const changeIcon = (item) => {
+    console.log(item);
+    setClickLike(!clickLike);
+  };
   return (
     <LinearGradient colors={["#99de81", "#F5F5F5"]} style={{ height: "100%" }}>
       <ScrollView>
@@ -25,7 +106,7 @@ const Save = () => {
                 alignItems: "center",
               }}
               data={Data}
-              renderItem={({ item }) => (
+              renderItem={({ item, index }) => (
                 <TouchableOpacity
                   style={[AppStyle.cartCard, { marginTop: 20, height: 180 }]}>
                   <Text
@@ -47,6 +128,7 @@ const Save = () => {
                     {item.name}
                   </Text>
                   <Text
+                    onPress={() => changeIcon(item)}
                     style={{
                       alignSelf: "flex-end",
                       bottom: 140,
@@ -60,7 +142,7 @@ const Save = () => {
                       {item.leftRating}
                     </Text>
                   </Text>
-                  <Text style={AppStyle.rightRating}>{item.rightRating}</Text>
+                  <Text style={AppStyle.rightRating}> {item.rightRating}</Text>
                   <Text
                     style={[AppStyle.itemPrice, { fontSize: 20, left: 30 }]}>
                     <Text>{item.currentPrice}</Text>
@@ -85,54 +167,3 @@ const Save = () => {
 export default Save;
 
 const styles = StyleSheet.create({});
-
-const Data = [
-  {
-    id: 1,
-    name: "Pumpkin",
-    img: <Image source={require("./Data-imgs/pumpkin-like.png")} />,
-    ratingImg: <Image source={require("./Data-imgs/rating.png")} />,
-    leftRating: " 4.3",
-    rightRating: "90 Ratings",
-    currentPrice: "$30       ",
-    oldPrice: "$40",
-    discount: "5% OFF",
-    likeImg: <Image source={require("./Data-imgs/heart.png")} />,
-  },
-  {
-    id: 2,
-    name: "Spinach",
-    img: <Image source={require("./Data-imgs/spinach-like.png")} />,
-    ratingImg: <Image source={require("./Data-imgs/rating.png")} />,
-    leftRating: " 4.3",
-    rightRating: "45 Ratings",
-    currentPrice: "$15       ",
-    oldPrice: "$30",
-    discount: "10% OFF",
-    likeImg: <Image source={require("./Data-imgs/heart.png")} />,
-  },
-  {
-    id: 3,
-    name: "Broccoli",
-    img: <Image source={require("./Data-imgs/broccoli-like.png")} />,
-    ratingImg: <Image source={require("./Data-imgs/rating.png")} />,
-    leftRating: " 4.3",
-    rightRating: "70 Ratings",
-    currentPrice: "$30       ",
-    oldPrice: "$40",
-    discount: "18% OFF",
-    likeImg: <Image source={require("./Data-imgs/heart.png")} />,
-  },
-  {
-    id: 4,
-    name: "Tomatoes",
-    img: <Image source={require("./Data-imgs/tomato-like.png")} />,
-    ratingImg: <Image source={require("./Data-imgs/rating.png")} />,
-    leftRating: " 4.3",
-    rightRating: "80 Ratings",
-    currentPrice: "$30       ",
-    oldPrice: "$40",
-    discount: "15% OFF",
-    likeImg: <Image source={require("./Data-imgs/heart.png")} />,
-  },
-];

@@ -82,27 +82,10 @@ const Data = [
     Qty: 1,
   },
 ];
-const Bills = [
-  {
-    id: 1,
-    name: "Item Total",
-    Price: 65,
-  },
-  {
-    id: 2,
-    name: "Delivery Fee for 8 kms",
-    Price: "+ $10.00",
-  },
-  {
-    id: 3,
-    name: "Taxes and Charge",
-    Price: "+ $15.02",
-  },
-];
+
 const Cart = () => {
   const [count, setCount] = useState(Data);
-  const [totalAdd, setTotalAdd] = useState();
-  const [totalLess, setTotalLess] = useState();
+  const [total, setTotal] = useState();
 
   const handleIncrement = (item, index) => {
     // let dummy = {
@@ -119,8 +102,8 @@ const Cart = () => {
 
       count[index].currentPrice =
         count[index].currentPrice + Data[index].currentPrice;
-      console.log(Data[index].currentPrice, "test");
-      console.log(count[index].currentPrice, "check");
+      // console.log(Data[index].currentPrice, "test");
+      // console.log(count[index].currentPrice, "check");
       setCount([...count]);
     }
     let add = 0;
@@ -128,9 +111,9 @@ const Cart = () => {
       add = element.currentPrice + add;
     });
 
-    console.log(add, "addingg");
+    // console.log(add, "addingg");
     // console.log(temp, "checkkk");
-    setTotalAdd(add);
+    setTotal(add);
     // setCount((count) =>
     //   count.map((item) => {
     //     return { ...item, Qty: item.Qty + 1 };
@@ -149,14 +132,17 @@ const Cart = () => {
     }
     let add = 0;
     count.forEach((element) => {
-      console.log(element.currentPrice, add, "check123");
+      // console.log(element.currentPrice, add, "check123");
       add = element.currentPrice + add;
     });
 
-    console.log(add, "addingg");
+    // console.log(add, "addingg");
     // console.log(temp, "checkkk");
-    setTotalAdd(add);
+    setTotal(add);
   };
+  let tax = 30;
+  let fees = 25;
+  let extras = tax + fees;
 
   return (
     <LinearGradient colors={["#99de81", "#F5F5F5"]} style={{ height: "100%" }}>
@@ -232,15 +218,20 @@ const Cart = () => {
               }}>
               Bill Details
             </Text>
-            <FlatList
-              data={Bills}
-              renderItem={({ item, index }) => (
-                <View style={AppStyle.billCard}>
-                  <Text style={AppStyle.cartName}>{item.name}</Text>
-                  <Text style={AppStyle.cartPrice}>{item.Price}</Text>
-                </View>
-              )}
-            />
+            <View style={AppStyle.billCard}>
+              <View>
+                <Text style={AppStyle.cartName}>Item Total</Text>
+                <Text style={AppStyle.cartName}>Delivery Fee</Text>
+                <Text style={AppStyle.cartName}>Taxes and Charges</Text>
+              </View>
+              <View>
+                <Text style={[AppStyle.cartPrice, { left: 33 }]}>
+                  ${total}.00
+                </Text>
+                <Text style={AppStyle.cartPrice}>+ $25.00</Text>
+                <Text style={AppStyle.cartPrice}>+ $30.00</Text>
+              </View>
+            </View>
             <View>
               <Text
                 style={{
@@ -248,7 +239,7 @@ const Cart = () => {
                   fontWeight: "bold",
                   padding: 10,
                   left: 10,
-                  top: 25,
+                  top: 15,
                 }}>
                 Order Total
               </Text>
@@ -257,10 +248,10 @@ const Cart = () => {
                   fontSize: 20,
                   fontWeight: "bold",
                   padding: 10,
-                  left: 275,
-                  bottom: 25,
+                  left: 280,
+                  bottom: 35,
                 }}>
-                ${totalAdd}
+                ${total + extras}.00
               </Text>
             </View>
           </View>

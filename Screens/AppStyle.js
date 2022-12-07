@@ -105,10 +105,10 @@ export default StyleSheet.create({
     left: 20,
   },
   cartPrice: {
-    lineHeight: 40,
+    lineHeight: 45,
     fontSize: 17,
     fontWeight: "600",
-    left: 20,
+    left: 30,
   },
 
   itemCounter: {

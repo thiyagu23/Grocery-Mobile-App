@@ -71,8 +71,19 @@ const Profile = ({ navigation }) => {
           {"My Orders           "}
         </Text>
       ),
-      logo: <Icon name="albums" size={25} />,
-      arrow: <Image source={require("./Data-imgs/right-arrow.png")} />,
+      logo: (
+        <Icon
+          onPress={() => navigation.navigate("Table")}
+          name="albums"
+          size={25}
+        />
+      ),
+      arrow: (
+        <Image
+          onPress={() => navigation.navigate("Table")}
+          source={require("./Data-imgs/right-arrow.png")}
+        />
+      ),
     },
     {
       id: 2,

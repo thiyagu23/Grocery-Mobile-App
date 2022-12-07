@@ -11,8 +11,10 @@ import {
   Alert,
   VirtualizedList,
   RefreshControl,
+  DrawerLayoutAndroid,
+  Button,
 } from "react-native";
-import React, { useState } from "react";
+import React, { useRef, useState } from "react";
 import { LinearGradient } from "expo-linear-gradient";
 import AppStyle from "./AppStyle";
 import { responsiveWidth, responsiveHeight } from "../responsive";
@@ -200,7 +202,12 @@ const Home = ({ navigation }) => {
                 Enjoy the special offer up to 30%
               </Text>
               <Text
-                style={{ color: "#7B7B7B", fontSize: 16, left: 20, top: -10 }}>
+                style={{
+                  color: "#7B7B7B",
+                  fontSize: 16,
+                  left: 20,
+                  top: -10,
+                }}>
                 At sep 12 - sep 20{" "}
               </Text>
               <Image
@@ -291,5 +298,3 @@ const Home = ({ navigation }) => {
 };
 
 export default Home;
-
-const styles = StyleSheet.create({});

@@ -26,12 +26,13 @@ function LogoTitle() {
 
   return (
     <View style={{ flexDirection: "row" }}>
-      <Image source={require("./Data-imgs/Vector-left.png")} />
       <Image
         style={{ left: 360 }}
         source={require("./Data-imgs/Vector-right.png")}
       />
-      <Text style={[AuthStyle.otpText, { paddingLeft: 5, fontSize: 20 }]}>
+      <Text
+        onPress={() => drawer.current.openDrawer()}
+        style={[AuthStyle.otpText, { paddingLeft: 5, fontSize: 20 }]}>
         Hi {userName},
       </Text>
     </View>
