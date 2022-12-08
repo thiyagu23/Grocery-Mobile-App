@@ -123,7 +123,7 @@ const Cart = () => {
   // console.log(count, "checked");
 
   const handleDecrement = (item, index) => {
-    if (count[index].Qty > 0) {
+    if (count[index].Qty > 1) {
       count[index].Qty = count[index].Qty - 1;
       count[index].currentPrice =
         count[index].currentPrice - Data[index].currentPrice;

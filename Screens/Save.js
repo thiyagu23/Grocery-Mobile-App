@@ -16,7 +16,7 @@ import AppStyle from "./AppStyle";
 
 const Save = () => {
   const [clickLike, setClickLike] = useState(true);
-  const Data = [
+  const [Data, setData] = useState([
     {
       id: 1,
       name: "Pumpkin",
@@ -27,13 +27,7 @@ const Save = () => {
       currentPrice: "$30       ",
       oldPrice: "$40",
       discount: "5% OFF",
-      likeImg: (
-        <Icon
-          name={clickLike ? "heart-outline" : "heart"}
-          color="red"
-          size={24}
-        />
-      ),
+      likeImg: "true",
     },
     {
       id: 2,
@@ -45,13 +39,7 @@ const Save = () => {
       currentPrice: "$15       ",
       oldPrice: "$30",
       discount: "10% OFF",
-      likeImg: (
-        <Icon
-          name={clickLike ? "heart-outline" : "heart"}
-          color="red"
-          size={24}
-        />
-      ),
+      likeImg: "true",
     },
     {
       id: 3,
@@ -63,13 +51,7 @@ const Save = () => {
       currentPrice: "$30       ",
       oldPrice: "$40",
       discount: "18% OFF",
-      likeImg: (
-        <Icon
-          name={clickLike ? "heart-outline" : "heart"}
-          color="red"
-          size={24}
-        />
-      ),
+      likeImg: "false",
     },
     {
       id: 4,
@@ -81,19 +63,13 @@ const Save = () => {
       currentPrice: "$30       ",
       oldPrice: "$40",
       discount: "15% OFF",
-      likeImg: (
-        <Icon
-          name={clickLike ? "heart-outline" : "heart"}
-          color="red"
-          size={24}
-        />
-      ),
+      likeImg: "false",
     },
-  ];
+  ]);
 
-  const changeIcon = (item) => {
-    console.log(item);
-    setClickLike(!clickLike);
+  const changeIcon = (item, index) => {
+    Data[index].likeImg = Data[index].likeImg === "true" ? "false" : "true";
+    setData([...Data]);
   };
   return (
     <LinearGradient colors={["#99de81", "#F5F5F5"]} style={{ height: "100%" }}>
@@ -128,13 +104,18 @@ const Save = () => {
                     {item.name}
                   </Text>
                   <Text
-                    onPress={() => changeIcon(item)}
+                    onPress={() => changeIcon(item, index)}
                     style={{
                       alignSelf: "flex-end",
                       bottom: 140,
                       height: 50,
                     }}>
-                    {item.likeImg}
+                    <Icon
+                      allowFontScaling={false}
+                      color="red"
+                      name={item.likeImg === "true" ? "heart" : "heart-outline"}
+                      size={28}
+                    />
                   </Text>
                   <Text style={AppStyle.rating}>
                     <Text style={{ padding: 30 }}>{item.ratingImg}</Text>

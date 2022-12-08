@@ -8,8 +8,12 @@ import Otp from "./Authentication/Otp";
 import ForgotPassword from "./Authentication/ForgotPassword";
 import PasswordSetting from "./Authentication/PasswordSetting";
 import Main from "../Main";
-import Table from "../Screens/Table";
-import CreateItems from "../Screens/CreateItems";
+import Table from "../Screens/Profiles/Table";
+import CreateItems from "../Screens/Profiles/CreateItems";
+import Address from "../Screens/Profiles/Address";
+import Settings from "../Screens/Profiles/Settings";
+import HelpCenter from "../Screens/Profiles/HelpCenter";
+import Contact from "../Screens/Profiles/Contact";
 
 const Stack = createNativeStackNavigator();
 
@@ -39,6 +43,38 @@ const Splash = () => {
         component={CreateItems}
         options={{
           title: "Create Item",
+          headerShown: true,
+        }}
+      />
+      <Stack.Screen
+        name="Address"
+        component={Address}
+        options={{
+          title: "Add Delivery Address",
+          headerShown: true,
+        }}
+      />
+      <Stack.Screen
+        name="Settings"
+        component={Settings}
+        options={{
+          title: "Settings",
+          headerShown: true,
+        }}
+      />
+      <Stack.Screen
+        name="HelpCenter"
+        component={HelpCenter}
+        options={{
+          title: "Help Center",
+          headerShown: true,
+        }}
+      />
+      <Stack.Screen
+        name="Contact"
+        component={Contact}
+        options={{
+          title: "Contact Us",
           headerShown: true,
         }}
       />

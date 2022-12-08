@@ -8,10 +8,10 @@ import {
 } from "react-native";
 import React, { useState, useEffect } from "react";
 import { LinearGradient } from "expo-linear-gradient";
-import AppStyle from "./AppStyle";
+import AppStyle from "../AppStyle";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { useSelector, useDispatch } from "react-redux";
-import { setTheme } from "../Redux/action";
+import { setTheme } from "../../Redux/action";
 import Icon from "react-native-vector-icons/Ionicons";
 
 const Profile = ({ navigation }) => {
@@ -68,7 +68,7 @@ const Profile = ({ navigation }) => {
       id: 1,
       name: (
         <Text onPress={() => navigation.navigate("Table")}>
-          {"My Orders           "}
+          {"My Orders            "}
         </Text>
       ),
       logo: (
@@ -81,7 +81,7 @@ const Profile = ({ navigation }) => {
       arrow: (
         <Image
           onPress={() => navigation.navigate("Table")}
-          source={require("./Data-imgs/right-arrow.png")}
+          source={require("../Data-imgs/right-arrow.png")}
         />
       ),
     },
@@ -92,32 +92,63 @@ const Profile = ({ navigation }) => {
           {"Create Items       "}
         </Text>
       ),
-      logo: <Icon name="create" size={25} />,
-      arrow: <Image source={require("./Data-imgs/right-arrow.png")} />,
+      logo: (
+        <Icon
+          onPress={() => navigation.navigate("CreateItems")}
+          name="create"
+          size={25}
+        />
+      ),
+      arrow: <Image source={require("../Data-imgs/right-arrow.png")} />,
     },
     {
       id: 3,
-      name: "Delivery Address",
-      logo: <Icon name="location" size={25} />,
-      arrow: <Image source={require("./Data-imgs/right-arrow.png")} />,
+      name: (
+        <Text onPress={() => navigation.navigate("Address")}>
+          {"Delivery Address"}
+        </Text>
+      ),
+      logo: (
+        <Icon
+          onPress={() => navigation.navigate("Address")}
+          name="location"
+          size={25}
+        />
+      ),
+      arrow: <Image source={require("../Data-imgs/right-arrow.png")} />,
     },
     {
       id: 4,
-      name: "Settings               ",
-      logo: <Icon name="settings" size={25} />,
-      arrow: <Image source={require("./Data-imgs/right-arrow.png")} />,
+      name: (
+        <Text onPress={() => navigation.navigate("Settings")}>
+          {"Settings               "}
+        </Text>
+      ),
+      logo: (
+        <Icon
+          onPress={() => navigation.navigate("Settings")}
+          name="settings"
+          size={25}
+        />
+      ),
+      arrow: <Image source={require("../Data-imgs/right-arrow.png")} />,
     },
-    {
-      id: 5,
-      name: "Help Center         ",
-      logo: <Icon name="help-circle" size={25} />,
-      arrow: <Image source={require("./Data-imgs/right-arrow.png")} />,
-    },
+
     {
       id: 6,
-      name: "Contact Us          ",
-      logo: <Icon name="mail" size={25} />,
-      arrow: <Image source={require("./Data-imgs/right-arrow.png")} />,
+      name: (
+        <Text onPress={() => navigation.navigate("Contact")}>
+          {"Contact Us          "}
+        </Text>
+      ),
+      logo: (
+        <Icon
+          onPress={() => navigation.navigate("Contact")}
+          name="mail"
+          size={25}
+        />
+      ),
+      arrow: <Image source={require("../Data-imgs/right-arrow.png")} />,
     },
   ];
   // onPress={() => changeTheme()}

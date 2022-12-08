@@ -16,7 +16,7 @@ const InitialSplash = ({ navigation }) => {
 
         <TouchableOpacity
           style={styles.btn}
-          onPress={() => navigation.navigate("SignUp")}>
+          onPress={() => navigation.navigate("Main")}>
           <Text style={styles.btnTxt}>Get Started</Text>
         </TouchableOpacity>
         <Image

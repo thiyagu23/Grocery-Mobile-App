@@ -12,7 +12,7 @@ import {
 } from "react-native";
 import React, { useState } from "react";
 import { LinearGradient } from "expo-linear-gradient";
-import AuthStyle from "../components/Authentication/AuthStyle";
+import AuthStyle from "../../components/Authentication/AuthStyle";
 import Icon from "react-native-vector-icons/Ionicons";
 
 const CreateItems = () => {

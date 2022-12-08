@@ -14,7 +14,7 @@ import Ionicons from "react-native-vector-icons/Ionicons";
 import Home from "./Screens/Home";
 import Save from "./Screens/Save";
 import Cart from "./Screens/Cart";
-import Profile from "./Screens/Profile";
+import Profile from "./Screens/Profiles/Profile";
 import LogoTitle from "./Screens/LogoTitle";
 import { LinearGradient } from "expo-linear-gradient";
 import AppStyle from "./Screens/AppStyle";
