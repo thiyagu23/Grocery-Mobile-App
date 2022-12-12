@@ -14,6 +14,7 @@ import Address from "../Screens/Profiles/Address";
 import Settings from "../Screens/Profiles/Settings";
 import HelpCenter from "../Screens/Profiles/HelpCenter";
 import Contact from "../Screens/Profiles/Contact";
+import Payment from "../Screens/Payment";
 
 const Stack = createNativeStackNavigator();
 
@@ -23,7 +24,7 @@ const Splash = () => {
       screenOptions={{
         headerShown: false,
       }}>
-      <Stack.Screen name="Initial Splash" component={InitialSplash} />
+      <Stack.Screen name="InitialSplash" component={InitialSplash} />
       <Stack.Screen name="SignUp" component={SignUp} />
       <Stack.Screen name="Login" component={Login} />
       <Stack.Screen name="Otp" component={Otp} />
@@ -75,6 +76,14 @@ const Splash = () => {
         component={Contact}
         options={{
           title: "Contact Us",
+          headerShown: true,
+        }}
+      />
+      <Stack.Screen
+        name="Payment"
+        component={Payment}
+        options={{
+          title: "Payment Gateway",
           headerShown: true,
         }}
       />

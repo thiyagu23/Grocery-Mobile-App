@@ -13,6 +13,7 @@ import AsyncStorage from "@react-native-async-storage/async-storage";
 import { useSelector, useDispatch } from "react-redux";
 import { setTheme } from "../../Redux/action";
 import Icon from "react-native-vector-icons/Ionicons";
+import Gradient from "../../Gradient";
 
 const Profile = ({ navigation }) => {
   const [userNum, setUserNum] = useState("");
@@ -53,104 +54,17 @@ const Profile = ({ navigation }) => {
     getData();
   }, []);
 
-  const { theme } = useSelector((state) => state.themeReducer);
+  //---Dark Mode ---
 
-  const dispatch = useDispatch();
-  const changeTheme = () => {
-    if (theme == "light") {
-      dispatch(setTheme("dark"));
-    } else {
-      dispatch(setTheme("light"));
-    }
-  };
-  const Data = [
-    {
-      id: 1,
-      name: (
-        <Text onPress={() => navigation.navigate("Table")}>
-          {"My Orders            "}
-        </Text>
-      ),
-      logo: (
-        <Icon
-          onPress={() => navigation.navigate("Table")}
-          name="albums"
-          size={25}
-        />
-      ),
-      arrow: (
-        <Image
-          onPress={() => navigation.navigate("Table")}
-          source={require("../Data-imgs/right-arrow.png")}
-        />
-      ),
-    },
-    {
-      id: 2,
-      name: (
-        <Text onPress={() => navigation.navigate("CreateItems")}>
-          {"Create Items       "}
-        </Text>
-      ),
-      logo: (
-        <Icon
-          onPress={() => navigation.navigate("CreateItems")}
-          name="create"
-          size={25}
-        />
-      ),
-      arrow: <Image source={require("../Data-imgs/right-arrow.png")} />,
-    },
-    {
-      id: 3,
-      name: (
-        <Text onPress={() => navigation.navigate("Address")}>
-          {"Delivery Address"}
-        </Text>
-      ),
-      logo: (
-        <Icon
-          onPress={() => navigation.navigate("Address")}
-          name="location"
-          size={25}
-        />
-      ),
-      arrow: <Image source={require("../Data-imgs/right-arrow.png")} />,
-    },
-    {
-      id: 4,
-      name: (
-        <Text onPress={() => navigation.navigate("Settings")}>
-          {"Settings               "}
-        </Text>
-      ),
-      logo: (
-        <Icon
-          onPress={() => navigation.navigate("Settings")}
-          name="settings"
-          size={25}
-        />
-      ),
-      arrow: <Image source={require("../Data-imgs/right-arrow.png")} />,
-    },
-
-    {
-      id: 6,
-      name: (
-        <Text onPress={() => navigation.navigate("Contact")}>
-          {"Contact Us          "}
-        </Text>
-      ),
-      logo: (
-        <Icon
-          onPress={() => navigation.navigate("Contact")}
-          name="mail"
-          size={25}
-        />
-      ),
-      arrow: <Image source={require("../Data-imgs/right-arrow.png")} />,
-    },
-  ];
+  // const { theme } = useSelector((state) => state.themeReducer);
+  // const dispatch = useDispatch();
+  // const changeTheme = () => {
+  //   if (theme == "light") {
+  //     dispatch(setTheme("dark"));
+  //   } else {
+  //     dispatch(setTheme("light"));
+  //   }
+  // };
   // onPress={() => changeTheme()}
   // style={{ color: theme == "light" ?   "white" : "black"}}
 
@@ -180,17 +94,58 @@ const Profile = ({ navigation }) => {
           {`+91 ${userNum}`}
         </Text>
         <View>
-          <FlatList
-            contentContainerStyle={{}}
-            data={Data}
-            renderItem={({ item }) => (
-              <TouchableOpacity style={AppStyle.profile}>
-                <Text style={AppStyle.ProfileLogo}>{item.logo}</Text>
-                <Text style={AppStyle.ProfileName}>{item.name}</Text>
-                <Text style={AppStyle.ProfileArrow}>{item.arrow}</Text>
-              </TouchableOpacity>
-            )}
-          />
+          <TouchableOpacity
+            style={AppStyle.profile}
+            onPress={() => navigation.navigate("Table")}>
+            <Icon style={AppStyle.ProfileLogo} name="albums" size={25} />
+            <Text style={AppStyle.ProfileName}>{"My Orders           "}</Text>
+            <Image
+              style={AppStyle.ProfileArrow}
+              source={require("../Data-imgs/right-arrow.png")}
+            />
+          </TouchableOpacity>
+          <TouchableOpacity
+            style={AppStyle.profile}
+            onPress={() => navigation.navigate("CreateItems")}>
+            <Icon style={AppStyle.ProfileLogo} name="create" size={25} />
+            <Text style={AppStyle.ProfileName}>{"Create Items       "}</Text>
+            <Image
+              style={AppStyle.ProfileArrow}
+              source={require("../Data-imgs/right-arrow.png")}
+            />
+          </TouchableOpacity>
+          <TouchableOpacity
+            style={AppStyle.profile}
+            onPress={() => navigation.navigate("Address")}>
+            <Icon style={AppStyle.ProfileLogo} name="location" size={25} />
+            <Text style={AppStyle.ProfileName}>Delivery Address</Text>
+            <Image
+              style={AppStyle.ProfileArrow}
+              source={require("../Data-imgs/right-arrow.png")}
+            />
+          </TouchableOpacity>
+          <TouchableOpacity
+            style={AppStyle.profile}
+            onPress={() => navigation.navigate("Settings")}>
+            <Icon style={AppStyle.ProfileLogo} name="settings" size={25} />
+            <Text style={AppStyle.ProfileName}>
+              {"Settings                "}
+            </Text>
+            <Image
+              style={AppStyle.ProfileArrow}
+              source={require("../Data-imgs/right-arrow.png")}
+            />
+          </TouchableOpacity>
+          <TouchableOpacity
+            style={AppStyle.profile}
+            onPress={() => navigation.navigate("Contact")}>
+            <Icon style={AppStyle.ProfileLogo} name="mail" size={25} />
+            <Text style={AppStyle.ProfileName}>{"Contact Us           "}</Text>
+            <Image
+              style={AppStyle.ProfileArrow}
+              source={require("../Data-imgs/right-arrow.png")}
+            />
+          </TouchableOpacity>
           <TouchableOpacity
             style={AppStyle.logoutBtn}
             onPress={() => navigation.navigate("SignUp")}>
@@ -220,3 +175,14 @@ const styles = StyleSheet.create({
     color: "#336633",
   },
 });
+// <FlatList
+//   contentContainerStyle={{}}
+//   data={Data}
+//   renderItem={({ item }) => (
+// <TouchableOpacity>
+//   <Text style={AppStyle.ProfileLogo}>{item.logo}</Text>
+//   <Text style={AppStyle.ProfileName}>{item.name}</Text>
+//   <Text >{item.arrow}</Text>
+// </TouchableOpacity>;
+//   )}
+// />

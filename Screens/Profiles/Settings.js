@@ -5,6 +5,7 @@ import Icon from "react-native-vector-icons/Ionicons";
 const Settings = () => {
   return (
     <LinearGradient colors={["#99de81", "#F5F5F5"]} style={{ height: "100%" }}>
+      <Text style={styles.heading}>Change Settings</Text>
       <View style={{ flexDirection: "row", top: 20 }}>
         <View>
           <Icon style={styles.icons} name="pencil" size={27} />
@@ -34,5 +35,13 @@ const styles = StyleSheet.create({
   icons: {
     paddingVertical: 14,
     marginHorizontal: 30,
+  },
+  heading: {
+    color: "#336633",
+    fontSize: 23,
+    fontWeight: "bold",
+    top: 20,
+    marginLeft: 20,
+    height: 50,
   },
 });

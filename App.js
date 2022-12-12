@@ -9,7 +9,6 @@ import WalkThrough from "./components/splash/WalkThrough";
 import { Provider } from "react-redux";
 import { store } from "./Redux/store";
 import Cart from "./Screens/Cart";
-import Drawer from "./Drawer";
 import Address from "./Screens/Profiles/Address";
 
 export default function App() {

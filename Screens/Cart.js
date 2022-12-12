@@ -83,7 +83,7 @@ const Data = [
   },
 ];
 
-const Cart = () => {
+const Cart = ({ navigation }) => {
   const [count, setCount] = useState(Data);
   const [total, setTotal] = useState();
 
@@ -144,6 +144,12 @@ const Cart = () => {
   let fees = 25;
   let extras = tax + fees;
 
+  const remove = (id) => {
+    let dlt = [...count];
+    dlt.splice(id, 1);
+    setCount(dlt);
+  };
+
   return (
     <LinearGradient colors={["#99de81", "#F5F5F5"]} style={{ height: "100%" }}>
       <ScrollView>
@@ -177,7 +183,9 @@ const Cart = () => {
                       <Text style={AppStyle.add}>{item.add}</Text>
                     </TouchableOpacity>
                   </View>
-                  <TouchableOpacity style={AppStyle.remove}>
+                  <TouchableOpacity
+                    onPress={(id) => remove(id)}
+                    style={AppStyle.remove}>
                     <Text
                       style={{
                         fontWeight: "bold",
@@ -255,6 +263,9 @@ const Cart = () => {
               </Text>
             </View>
           </View>
+          <TouchableOpacity onPress={() => navigation.navigate("Payment")}>
+            <Text style={styles.logoutBtn}>Buy Now</Text>
+          </TouchableOpacity>
         </View>
       </ScrollView>
     </LinearGradient>
@@ -263,4 +274,17 @@ const Cart = () => {
 
 export default Cart;
 
-const styles = StyleSheet.create({});
+const styles = StyleSheet.create({
+  logoutBtn: {
+    width: "100%",
+    borderRadius: 8,
+    height: 50,
+    textAlign: "center",
+    backgroundColor: "#3A7F0D",
+    alignSelf: "center",
+    fontSize: 20,
+    color: "white",
+    fontWeight: "bold",
+    paddingTop: 10,
+  },
+});

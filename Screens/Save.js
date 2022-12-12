@@ -111,7 +111,6 @@ const Save = () => {
                       height: 50,
                     }}>
                     <Icon
-                      allowFontScaling={false}
                       color="red"
                       name={item.likeImg === "true" ? "heart" : "heart-outline"}
                       size={28}

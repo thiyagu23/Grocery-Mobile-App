@@ -212,9 +212,12 @@ export default StyleSheet.create({
   },
   ProfileName: {
     alignContent: "flex-start",
-    marginRight: 50,
+    marginRight: 40,
     fontSize: 18,
     fontWeight: "600",
+  },
+  ProfileArrow: {
+    top: 5,
   },
 
   logoutBtn: {
