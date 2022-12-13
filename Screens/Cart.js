@@ -85,7 +85,7 @@ const Data = [
 
 const Cart = ({ navigation }) => {
   const [count, setCount] = useState(Data);
-  const [total, setTotal] = useState();
+  const [total, setTotal] = useState(0);
 
   const handleIncrement = (item, index) => {
     // let dummy = {
@@ -127,7 +127,6 @@ const Cart = ({ navigation }) => {
       count[index].Qty = count[index].Qty - 1;
       count[index].currentPrice =
         count[index].currentPrice - Data[index].currentPrice;
-
       setCount([...count]);
     }
     let add = 0;
@@ -135,7 +134,6 @@ const Cart = ({ navigation }) => {
       // console.log(element.currentPrice, add, "check123");
       add = element.currentPrice + add;
     });
-
     // console.log(add, "addingg");
     // console.log(temp, "checkkk");
     setTotal(add);
@@ -162,7 +160,7 @@ const Cart = ({ navigation }) => {
               }}
               data={count}
               renderItem={({ item, index }) => (
-                <View style={[AppStyle.cartCard, { marginTop: 20 }]}>
+                <View style={[AppStyle.cartCard, { marginTop: 15 }]}>
                   {item.img}
                   <Text
                     style={[
@@ -221,7 +219,7 @@ const Cart = ({ navigation }) => {
               style={{
                 fontSize: 20,
                 fontWeight: "bold",
-                padding: 15,
+                padding: 10,
                 color: "#3A7F0D",
               }}>
               Bill Details
@@ -247,7 +245,7 @@ const Cart = ({ navigation }) => {
                   fontWeight: "bold",
                   padding: 10,
                   left: 10,
-                  top: 15,
+                  // top: 15,
                 }}>
                 Order Total
               </Text>
@@ -257,13 +255,16 @@ const Cart = ({ navigation }) => {
                   fontWeight: "bold",
                   padding: 10,
                   left: 280,
-                  bottom: 35,
+                  bottom: 50,
                 }}>
                 ${total + extras}.00
               </Text>
             </View>
           </View>
-          <TouchableOpacity onPress={() => navigation.navigate("Payment")}>
+          <TouchableOpacity
+            onPress={() =>
+              navigation.navigate("Payment", { price: `$${total + extras}.00` })
+            }>
             <Text style={styles.logoutBtn}>Buy Now</Text>
           </TouchableOpacity>
         </View>
@@ -286,5 +287,6 @@ const styles = StyleSheet.create({
     color: "white",
     fontWeight: "bold",
     paddingTop: 10,
+    marginTop: -35,
   },
 });

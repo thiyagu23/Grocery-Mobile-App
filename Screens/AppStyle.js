@@ -94,18 +94,17 @@ export default StyleSheet.create({
     width: 330,
     flexDirection: "row",
     justifyContent: "space-between",
-    lineHeight: 20,
   },
 
   cartName: {
-    lineHeight: 45,
+    lineHeight: 40,
     fontSize: 18,
     fontWeight: "600",
     color: "#616360",
     left: 20,
   },
   cartPrice: {
-    lineHeight: 45,
+    lineHeight: 40,
     fontSize: 17,
     fontWeight: "600",
     left: 30,
