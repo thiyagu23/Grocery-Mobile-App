@@ -142,11 +142,11 @@ const Cart = ({ navigation }) => {
   let fees = 25;
   let extras = tax + fees;
 
-  const remove = (id) => {
-    let dlt = [...count];
-    dlt.splice(id, 1);
-    setCount(dlt);
-  };
+  // const remove = (id) => {
+  //   let dlt = [...count];
+  //   dlt.splice(id, 1);
+  //   setCount(dlt);
+  // };
 
   return (
     <LinearGradient colors={["#99de81", "#F5F5F5"]} style={{ height: "100%" }}>
@@ -182,7 +182,7 @@ const Cart = ({ navigation }) => {
                     </TouchableOpacity>
                   </View>
                   <TouchableOpacity
-                    onPress={(id) => remove(id)}
+                    // onPress={(id) => remove(id)}
                     style={AppStyle.remove}>
                     <Text
                       style={{

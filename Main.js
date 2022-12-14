@@ -133,7 +133,7 @@ export default function Main({ navigation }) {
         </View>
         <TouchableOpacity
           style={[AppStyle.logoutBtn, { top: 350, width: 150, height: 45 }]}
-          onPress={() => navigation.navigate("SignUp")}>
+          onPress={() => navigation.navigate("Login")}>
           <Text style={{ color: "white", fontSize: 15, fontWeight: "bold" }}>
             LogOut
           </Text>

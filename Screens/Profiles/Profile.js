@@ -98,22 +98,13 @@ const Profile = ({ navigation }) => {
             style={AppStyle.profile}
             onPress={() => navigation.navigate("Table")}>
             <Icon style={AppStyle.ProfileLogo} name="albums" size={25} />
-            <Text style={AppStyle.ProfileName}>{"My Orders           "}</Text>
+            <Text style={AppStyle.ProfileName}>{"My Items             "}</Text>
             <Image
               style={AppStyle.ProfileArrow}
               source={require("../Data-imgs/right-arrow.png")}
             />
           </TouchableOpacity>
-          <TouchableOpacity
-            style={AppStyle.profile}
-            onPress={() => navigation.navigate("CreateItems")}>
-            <Icon style={AppStyle.ProfileLogo} name="create" size={25} />
-            <Text style={AppStyle.ProfileName}>{"Create Items       "}</Text>
-            <Image
-              style={AppStyle.ProfileArrow}
-              source={require("../Data-imgs/right-arrow.png")}
-            />
-          </TouchableOpacity>
+
           <TouchableOpacity
             style={AppStyle.profile}
             onPress={() => navigation.navigate("Address")}>
@@ -148,7 +139,7 @@ const Profile = ({ navigation }) => {
           </TouchableOpacity>
           <TouchableOpacity
             style={AppStyle.logoutBtn}
-            onPress={() => navigation.navigate("SignUp")}>
+            onPress={() => navigation.navigate("Login")}>
             <Text style={{ color: "white", fontSize: 15, fontWeight: "bold" }}>
               LogOut
             </Text>
@@ -159,7 +150,16 @@ const Profile = ({ navigation }) => {
   );
 };
 export default Profile;
-
+// <TouchableOpacity
+//             style={AppStyle.profile}
+//             onPress={() => navigation.navigate("CreateItems")}>
+//             <Icon style={AppStyle.ProfileLogo} name="create" size={25} />
+//             <Text style={AppStyle.ProfileName}>{"Create Items       "}</Text>
+//             <Image
+//               style={AppStyle.ProfileArrow}
+//               source={require("../Data-imgs/right-arrow.png")}
+//             />
+//           </TouchableOpacity>
 const styles = StyleSheet.create({
   logo: {
     top: 20,

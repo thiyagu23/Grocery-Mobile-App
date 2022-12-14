@@ -35,7 +35,7 @@ const Splash = () => {
         name="Table"
         component={Table}
         options={{
-          title: "My Orders",
+          title: "My Items",
           headerShown: true,
         }}
       />

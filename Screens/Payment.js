@@ -1,15 +1,27 @@
-import { StyleSheet, Text, View, TouchableOpacity, Image } from "react-native";
+import {
+  StyleSheet,
+  Text,
+  View,
+  TouchableOpacity,
+  Image,
+  Modal,
+} from "react-native";
 import React, { useState } from "react";
 import { LinearGradient } from "expo-linear-gradient";
 import Icon from "react-native-vector-icons/Ionicons";
+
 const Payment = ({ navigation, route }) => {
   const [checkbox, setCheckbox] = useState(true);
+  const [modalVisible, setModalVisible] = useState(false);
   const changeIcon = () => {
     setCheckbox(!checkbox);
   };
   return (
     <LinearGradient colors={["#99de81", "#F5F5F5"]} style={{ height: "100%" }}>
       <View style={{ flex: 1 }}>
+        <Modal animationType="slide" transparent={true} visible={modalVisible}>
+          <Text>hiiii</Text>
+        </Modal>
         <TouchableOpacity style={styles.btn}>
           <View style={{ flexDirection: "row" }}>
             <Text style={styles.btnTxt}>UPI / Wallet</Text>
@@ -25,7 +37,7 @@ const Payment = ({ navigation, route }) => {
           </View>
           <Text>(PhonePe/Gpay/Paytm)</Text>
           <Icon
-            name={checkbox ? "checkmark-circle-outline" : "checkmark-circle"}
+            name="chevron-forward-outline"
             size={30}
             style={styles.icon}
             color="#3A7F0D"
@@ -42,7 +54,7 @@ const Payment = ({ navigation, route }) => {
             source={require("./Data-imgs/cards.png")}
           />
           <Icon
-            name={checkbox ? "checkmark-circle-outline" : "checkmark-circle"}
+            name="chevron-forward-outline"
             size={30}
             style={styles.icon}
             color="#3A7F0D"
@@ -51,7 +63,7 @@ const Payment = ({ navigation, route }) => {
         <TouchableOpacity style={[styles.btn, { height: 100 }]}>
           <Text style={styles.btnTxt}>Net Banking</Text>
           <Icon
-            name={checkbox ? "checkmark-circle-outline" : "checkmark-circle"}
+            name="chevron-forward-outline"
             size={30}
             style={[styles.icon, { top: 5 }]}
             color="#3A7F0D"
@@ -60,7 +72,7 @@ const Payment = ({ navigation, route }) => {
         <TouchableOpacity style={[styles.btn, { height: 100 }]}>
           <Text style={styles.btnTxt}>Cash On Delivery</Text>
           <Icon
-            name={checkbox ? "checkmark-circle-outline" : "checkmark-circle"}
+            name="chevron-forward-outline"
             size={30}
             style={[styles.icon, { top: 5 }]}
             color="#3A7F0D"
@@ -69,7 +81,7 @@ const Payment = ({ navigation, route }) => {
         <TouchableOpacity style={[styles.btn, { height: 100 }]}>
           <Text style={styles.btnTxt}>EMI (Easy Installments)</Text>
           <Icon
-            name={checkbox ? "checkmark-circle-outline" : "checkmark-circle"}
+            name="chevron-forward-outline"
             size={30}
             style={[styles.icon, { top: 5 }]}
             color="#3A7F0D"

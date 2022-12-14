@@ -17,7 +17,7 @@ import AuthStyle from "./AuthStyle";
 import BlurImg from "./BlurImg";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 
-export default function SignUp({ navigation, name, LogOtp, Forgot }) {
+export default function SignUp({ navigation, name, MainPage, Forgot, SignUp }) {
   const [password, setPassword] = useState("");
   const [isPasswordSecure, setIsPasswordSecure] = useState(true);
   const [mobile, setMobile] = useState("");
@@ -95,19 +95,22 @@ export default function SignUp({ navigation, name, LogOtp, Forgot }) {
         <ScrollView>
           <View style={AuthStyle.container}>
             <Text style={AuthStyle.title}>{name ? name : "Sign up"}</Text>
-            <View>
-              <Text style={AuthStyle.lebelText}>Name</Text>
+            {name ? (
+              ""
+            ) : (
+              <View>
+                <Text style={AuthStyle.lebelText}>Name</Text>
+                <TextInput
+                  cursorColor="#3A7F0D"
+                  placeholder="Enter your name"
+                  style={AuthStyle.TextInput}
+                  onChangeText={(value) => setUserName(value)}
+                />
+              </View>
+            )}
 
-              <TextInput
-                cursorColor="#3A7F0D"
-                placeholder="Enter your name"
-                style={AuthStyle.TextInput}
-                onChangeText={(value) => setUserName(value)}
-              />
-            </View>
             <View>
               <Text style={AuthStyle.lebelText}>Mobile no</Text>
-
               <TextInput
                 onChangeText={(text) => handleCheckMoblie(text)}
                 value={mobile}
@@ -155,33 +158,35 @@ export default function SignUp({ navigation, name, LogOtp, Forgot }) {
               {mobile.length < 10 ||
               password.length < 8 ||
               setMobileValidation == true ? (
-                <TouchableOpacity
-                  disabled
-                  onPress={handleLogin}
-                  style={AuthStyle.disabledLoginBtn}>
+                <TouchableOpacity disabled style={AuthStyle.disabledLoginBtn}>
                   <Text style={{ color: "#FFFFFF", fontWeight: "bold" }}>
-                    Get OTP
+                    {name ? "Login" : "Get OTP"}
                   </Text>
                 </TouchableOpacity>
               ) : (
                 <TouchableOpacity
-                  onPress={handleLogin}
+                  onPress={MainPage ? () => MainPage() : handleLogin}
+                  // onPress={handleLogin}
                   style={AuthStyle.loginBtn}>
                   <Text style={{ color: "#FFFFFF", fontWeight: "bold" }}>
-                    Get OTP
+                    {name ? "Login" : "Get OTP"}
                   </Text>
                 </TouchableOpacity>
               )}
             </View>
 
             <View style={AuthStyle.accountHave}>
-              <Text style={{ fontSize: 20, fontWeight: "bold" }}>
-                {name ? null : "Already have an account?"}
+              <Text style={{ fontSize: 20, fontWeight: "600" }}>
+                {name ? "Don't have an account?" : null}
                 <Text
                   style={{ color: "#3A7F0D" }}
-                  onPress={() => navigation.navigate("Login")}>
-                  {" "}
-                  {name ? null : "Login"}
+                  onPress={
+                    SignUp
+                      ? () => SignUp()
+                      : () => navigation.navigate("SignUp")
+                  }>
+                  {"  "}
+                  {name ? "Sign Up" : null}
                 </Text>
               </Text>
             </View>
