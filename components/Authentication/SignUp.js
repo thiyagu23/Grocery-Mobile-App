@@ -16,7 +16,7 @@ import Icon from "react-native-vector-icons/Ionicons";
 import AuthStyle from "./AuthStyle";
 import BlurImg from "./BlurImg";
 import AsyncStorage from "@react-native-async-storage/async-storage";
-
+import axios from "axios";
 export default function SignUp({ navigation, name, MainPage, Forgot, SignUp }) {
   const [password, setPassword] = useState("");
   const [isPasswordSecure, setIsPasswordSecure] = useState(true);
@@ -87,6 +87,36 @@ export default function SignUp({ navigation, name, MainPage, Forgot, SignUp }) {
     } else {
       alert(checkPassword);
     }
+  };
+
+  const callingApi = async () => {
+    console.log(mobile, password);
+
+    let data =
+      "userName=" +
+      mobile +
+      "&password=" +
+      password +
+      "&grant_type=password&Type=cart";
+    const result = await axios("https://fioritest.avaniko.com/login  ", {
+      method: "POST",
+      data: data,
+      headers: {
+        "Content-Type": "application/x-www-form-urlencoded",
+      },
+    });
+    await AsyncStorage.setItem("UserName", result.data.UserName);
+    await AsyncStorage.setItem("UserNum", result.data.PhoneNumber);
+    if (MainPage) {
+      MainPage();
+    } else {
+      navigation.navigate("Main");
+    }
+    console.log(result.data.PhoneNumber);
+    // .then((res) => res.json())
+    // .then((resData) => console.log(resData));
+    // result = await result.json();
+    // console.log(result);
   };
 
   return (
@@ -165,8 +195,9 @@ export default function SignUp({ navigation, name, MainPage, Forgot, SignUp }) {
                 </TouchableOpacity>
               ) : (
                 <TouchableOpacity
-                  onPress={MainPage ? () => MainPage() : handleLogin}
-                  // onPress={handleLogin}
+                  // onPress={  : handleLogin}
+                  // ? callingApi : handleLogin
+                  onPress={name ? callingApi : handleLogin}
                   style={AuthStyle.loginBtn}>
                   <Text style={{ color: "#FFFFFF", fontWeight: "bold" }}>
                     {name ? "Login" : "Get OTP"}
