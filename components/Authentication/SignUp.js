@@ -23,6 +23,7 @@ export default function SignUp({ navigation, name, MainPage, Forgot, SignUp }) {
   const [mobile, setMobile] = useState("");
   const [mobileValidation, setMobileValidation] = useState(false);
   const [userName, setUserName] = useState("");
+  const [invalid, setInvalid] = useState(true);
 
   const changeIcon = () => {
     setIsPasswordSecure(!isPasswordSecure);
@@ -104,7 +105,10 @@ export default function SignUp({ navigation, name, MainPage, Forgot, SignUp }) {
       headers: {
         "Content-Type": "application/x-www-form-urlencoded",
       },
-    });
+    })
+      // .then((res) => console.log(res.data))
+      .catch((error) => setInvalid(error.response.data.error));
+
     await AsyncStorage.setItem("UserName", result.data.UserName);
     await AsyncStorage.setItem("UserNum", result.data.PhoneNumber);
     if (MainPage) {
@@ -112,11 +116,15 @@ export default function SignUp({ navigation, name, MainPage, Forgot, SignUp }) {
     } else {
       navigation.navigate("Main");
     }
-    console.log(result.data.PhoneNumber);
-    // .then((res) => res.json())
-    // .then((resData) => console.log(resData));
+    // console.log(result.data.PhoneNumber);
+
     // result = await result.json();
-    // console.log(result);
+    // if (result.status) {
+    //   setInvalid(false);
+    // } else {
+    //   setInvalid(true);
+    // }
+    // console.log(result.);
   };
 
   return (
@@ -125,9 +133,18 @@ export default function SignUp({ navigation, name, MainPage, Forgot, SignUp }) {
         <ScrollView>
           <View style={AuthStyle.container}>
             <Text style={AuthStyle.title}>{name ? name : "Sign up"}</Text>
-            {name ? (
-              ""
-            ) : (
+            {invalid ? (
+              <Text
+                style={{
+                  color: "#e00303",
+                  textAlign: "center",
+                  bottom: 20,
+                  fontSize: 15,
+                }}>
+                {name ? invalid : null}
+              </Text>
+            ) : null}
+            {name ? null : (
               <View>
                 <Text style={AuthStyle.lebelText}>Name</Text>
                 <TextInput
@@ -138,23 +155,22 @@ export default function SignUp({ navigation, name, MainPage, Forgot, SignUp }) {
                 />
               </View>
             )}
-
             <View>
               <Text style={AuthStyle.lebelText}>Mobile no</Text>
               <TextInput
                 onChangeText={(text) => handleCheckMoblie(text)}
+                keyboardType={"numeric"}
                 value={mobile}
                 cursorColor="#3A7F0D"
-                placeholder="+91 9876543210"
+                placeholder="Mobile Number "
                 style={AuthStyle.TextInput}
               />
             </View>
             {mobileValidation ? (
-              <Text style={{ color: "red", textAlign: "right" }}>
+              <Text style={{ color: "#e00303", textAlign: "right" }}>
                 Enter Valid Mobile Number
               </Text>
             ) : null}
-
             <View>
               <Text style={AuthStyle.lebelText}>Password</Text>
               <TextInput
@@ -183,7 +199,6 @@ export default function SignUp({ navigation, name, MainPage, Forgot, SignUp }) {
               style={AuthStyle.inputFieldBaseText}>
               {name ? "Forgot Password?" : null}
             </Text>
-
             <View>
               {mobile.length < 10 ||
               password.length < 8 ||
@@ -205,7 +220,6 @@ export default function SignUp({ navigation, name, MainPage, Forgot, SignUp }) {
                 </TouchableOpacity>
               )}
             </View>
-
             <View style={AuthStyle.accountHave}>
               <Text style={{ fontSize: 20, fontWeight: "600" }}>
                 {name ? "Don't have an account?" : null}
@@ -221,7 +235,6 @@ export default function SignUp({ navigation, name, MainPage, Forgot, SignUp }) {
                 </Text>
               </Text>
             </View>
-
             <View style={AuthStyle.horizontalSection}>
               <View style={AuthStyle.horizontalLine} />
               <View>
@@ -230,7 +243,6 @@ export default function SignUp({ navigation, name, MainPage, Forgot, SignUp }) {
 
               <View style={AuthStyle.horizontalLine} />
             </View>
-
             <View style={{ marginTop: 50 }}>
               <Text
                 style={{
