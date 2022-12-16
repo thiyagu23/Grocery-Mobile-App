@@ -8,6 +8,7 @@ export default StyleSheet.create({
     textAlign: "center",
     marginBottom: 50,
   },
+  invalid: {},
   lebelText: {
     paddingBottom: 10,
     color: "#0F8B32",
