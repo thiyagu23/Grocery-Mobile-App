@@ -99,7 +99,6 @@ const Cart = ({ navigation }) => {
     // };
     if (count[index].Qty < 10) {
       count[index].Qty = count[index].Qty + 1;
-
       count[index].currentPrice =
         count[index].currentPrice + Data[index].currentPrice;
       // console.log(Data[index].currentPrice, "test");
@@ -110,7 +109,6 @@ const Cart = ({ navigation }) => {
     count.forEach((element) => {
       add = element.currentPrice + add;
     });
-
     // console.log(add, "addingg");
     // console.log(temp, "checkkk");
     setTotal(add);
@@ -121,7 +119,6 @@ const Cart = ({ navigation }) => {
     // );
   };
   // console.log(count, "checked");
-
   const handleDecrement = (item, index) => {
     if (count[index].Qty > 1) {
       count[index].Qty = count[index].Qty - 1;
@@ -141,7 +138,6 @@ const Cart = ({ navigation }) => {
   let tax = 30;
   let fees = 25;
   let extras = tax + fees;
-
   // const remove = (id) => {
   //   let dlt = [...count];
   //   dlt.splice(id, 1);

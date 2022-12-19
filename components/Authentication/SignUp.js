@@ -17,6 +17,7 @@ import AuthStyle from "./AuthStyle";
 import BlurImg from "./BlurImg";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import axios from "axios";
+import Login from "./Login";
 export default function SignUp({ navigation, name, MainPage, Forgot, SignUp }) {
   const [password, setPassword] = useState("");
   const [isPasswordSecure, setIsPasswordSecure] = useState(true);
@@ -76,21 +77,45 @@ export default function SignUp({ navigation, name, MainPage, Forgot, SignUp }) {
     return null;
   };
 
-  const handleLogin = async () => {
-    const checkPassword = checkPasswordValidity(password);
-    if (!checkPassword) {
-      try {
-        await AsyncStorage.setItem("UserName", userName);
-        navigation.navigate("Otp");
-      } catch (error) {
-        console.log(error);
-      }
-    } else {
-      alert(checkPassword);
-    }
+  const signinHandle = async () => {
+    console.log(userName, mobile, password);
+
+    let obj =
+      "phNum=" +
+      mobile +
+      "&name=" +
+      userName +
+      "&password=" +
+      password +
+      "&type=cart";
+    const results = await axios("https://fioritest.avaniko.com/User/AddUser ", {
+      method: "POST",
+      data: obj,
+      // headers: {
+      //   "Content-Type": "application/x-www-form-urlencoded",
+      // },
+    })
+      .then((res) => console.log(res.data))
+      .catch((error) => console.log(error.response.data.error));
+    // await AsyncStorage.setItem("UserName", result.data.UserName);
+    // await AsyncStorage.setItem("UserNum", result.data.PhoneNumber);
+    navigation.navigate("Otp");
   };
 
-  const callingApi = async () => {
+  // await AsyncStorage.setItem("UserName", userName);
+  // await AsyncStorage.setItem("UserNum", mobile);
+  // navigation.navigate("Otp");
+  // const checkPassword = checkPasswordValidity(password);
+  // if (!checkPassword) {
+  //   try {
+
+  //   } catch (error) {
+  //     console.log(error);
+  //   }
+  // } else {
+  //   alert(checkPassword);
+  // }
+  const loginHandle = async () => {
     console.log(mobile, password);
 
     let data =
@@ -106,7 +131,7 @@ export default function SignUp({ navigation, name, MainPage, Forgot, SignUp }) {
         "Content-Type": "application/x-www-form-urlencoded",
       },
     })
-      // .then((res) => console.log(res.data))
+      //.then((res) => console.log(res.data))
       .catch((error) => setInvalid(error.response.data.error));
 
     await AsyncStorage.setItem("UserName", result.data.UserName);
@@ -212,7 +237,7 @@ export default function SignUp({ navigation, name, MainPage, Forgot, SignUp }) {
                 <TouchableOpacity
                   // onPress={  : handleLogin}
                   // ? callingApi : handleLogin
-                  onPress={name ? callingApi : handleLogin}
+                  onPress={name ? loginHandle : signinHandle}
                   style={AuthStyle.loginBtn}>
                   <Text style={{ color: "#FFFFFF", fontWeight: "bold" }}>
                     {name ? "Login" : "Get OTP"}

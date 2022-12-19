@@ -13,6 +13,7 @@ import {
   RefreshControl,
   DrawerLayoutAndroid,
   Button,
+  TouchableWithoutFeedback,
 } from "react-native";
 import React, { useRef, useState } from "react";
 import { LinearGradient } from "expo-linear-gradient";
@@ -126,11 +127,11 @@ const Data = [
   },
   {
     id: 11,
-    name: "Spinach",
+    name: "Broccoli",
     img: (
       <Image
         style={{ height: 110, width: 110, borderRadius: 10 }}
-        source={require("./Data-imgs/apple.png")}
+        source={require("./Data-imgs/broccoli-like.png")}
       />
     ),
   },
@@ -148,6 +149,11 @@ const Data = [
 const Home = ({ navigation }) => {
   const [searchTerm, setSearchTerm] = useState([...Data]);
   const [mastersearchTerm, setmasterSearchTerm] = useState([...Data]);
+  const [addToCart, setAddToCart] = useState(true);
+
+  const addToCartClick = () => {
+    setAddToCart(!addToCart);
+  };
 
   const searchFilterFunction = (text) => {
     if (text.length >= 3) {
@@ -220,54 +226,101 @@ const Home = ({ navigation }) => {
             style={{ fontSize: 22, fontWeight: "600", paddingVertical: 15 }}>
             Recent Viewed
           </Text>
-          <View style={AppStyle.middelCard}>
-            <TouchableOpacity>
-              <Image
-                style={{ height: 100, width: 100, borderRadius: 50 }}
-                source={require("./Data-imgs/apples.jpg")}
-              />
-              <Text
-                style={{
-                  fontSize: 18,
-                  fontWeight: "600",
-                  textAlign: "center",
-                  paddingTop: 10,
-                }}>
-                {" "}
-                Apple
-              </Text>
-            </TouchableOpacity>
-            <TouchableOpacity>
-              <Image
-                style={{ height: 100, width: 100, borderRadius: 50 }}
-                source={require("./Data-imgs/orange.png")}
-              />
-              <Text
-                style={{
-                  fontSize: 18,
-                  fontWeight: "600",
-                  textAlign: "center",
-                  paddingTop: 10,
-                }}>
-                Orange
-              </Text>
-            </TouchableOpacity>
-            <TouchableOpacity>
-              <Image
-                style={{ height: 100, width: 100, borderRadius: 50 }}
-                source={require("./Data-imgs/tomatoes.png")}
-              />
-              <Text
-                style={{
-                  fontSize: 18,
-                  fontWeight: "600",
-                  textAlign: "center",
-                  paddingTop: 10,
-                }}>
-                Tomatoes
-              </Text>
-            </TouchableOpacity>
-          </View>
+          <ScrollView horizontal={true}>
+            <View style={AppStyle.middelCard}>
+              <TouchableOpacity style={AppStyle.itemsHori}>
+                <Image
+                  style={{ height: 100, width: 100, borderRadius: 50 }}
+                  source={require("./Data-imgs/apples.jpg")}
+                />
+                <Text
+                  style={{
+                    fontSize: 18,
+                    fontWeight: "600",
+                    textAlign: "center",
+                    paddingTop: 10,
+                  }}>
+                  {" "}
+                  Apples
+                </Text>
+              </TouchableOpacity>
+              <TouchableOpacity style={AppStyle.itemsHori}>
+                <Image
+                  style={{ height: 100, width: 100, borderRadius: 50 }}
+                  source={require("./Data-imgs/oranges.jpg")}
+                />
+                <Text
+                  style={{
+                    fontSize: 18,
+                    fontWeight: "600",
+                    textAlign: "center",
+                    paddingTop: 10,
+                  }}>
+                  Oranges
+                </Text>
+              </TouchableOpacity>
+              <TouchableOpacity style={AppStyle.itemsHori}>
+                <Image
+                  style={{ height: 100, width: 100, borderRadius: 50 }}
+                  source={require("./Data-imgs/tomatoess.jpg")}
+                />
+                <Text
+                  style={{
+                    fontSize: 18,
+                    fontWeight: "600",
+                    textAlign: "center",
+                    paddingTop: 10,
+                  }}>
+                  Tomatoes
+                </Text>
+              </TouchableOpacity>
+              <TouchableOpacity style={AppStyle.itemsHori}>
+                <Image
+                  style={{ height: 100, width: 100, borderRadius: 50 }}
+                  source={require("./Data-imgs/onionss.jpg")}
+                />
+                <Text
+                  style={{
+                    fontSize: 18,
+                    fontWeight: "600",
+                    textAlign: "center",
+                    paddingTop: 10,
+                  }}>
+                  Onions
+                </Text>
+              </TouchableOpacity>
+              <TouchableOpacity style={AppStyle.itemsHori}>
+                <Image
+                  style={{ height: 100, width: 100, borderRadius: 50 }}
+                  source={require("./Data-imgs/grapess.jpg")}
+                />
+                <Text
+                  style={{
+                    fontSize: 18,
+                    fontWeight: "600",
+                    textAlign: "center",
+                    paddingTop: 10,
+                  }}>
+                  Grapes
+                </Text>
+              </TouchableOpacity>
+              <TouchableOpacity style={AppStyle.itemsHori}>
+                <Image
+                  style={{ height: 100, width: 100, borderRadius: 50 }}
+                  source={require("./Data-imgs/pumpkin.png")}
+                />
+                <Text
+                  style={{
+                    fontSize: 18,
+                    fontWeight: "600",
+                    textAlign: "center",
+                    paddingTop: 10,
+                  }}>
+                  Tomatoes
+                </Text>
+              </TouchableOpacity>
+            </View>
+          </ScrollView>
           <Text
             style={{ fontSize: 22, fontWeight: "600", paddingVertical: 15 }}>
             All Groceries
@@ -281,13 +334,16 @@ const Home = ({ navigation }) => {
               data={searchTerm}
               numColumns={3}
               renderItem={({ item, index }) => (
-                <TouchableOpacity
-                  style={AppStyle.card}
-                  onPress={() => clicked(item)}>
+                <View style={AppStyle.card} onPress={() => clicked(item)}>
                   {item.img}
                   <Text style={AppStyle.cardText}>{item.name}</Text>
                   <Text style={AppStyle.homePrice}>$30</Text>
-                </TouchableOpacity>
+                  <TouchableOpacity
+                    style={AppStyle.addToCart}
+                    onPress={addToCartClick}>
+                    <Text style={AppStyle.addToCartTxt}>Add to Cart</Text>
+                  </TouchableOpacity>
+                </View>
               )}
             />
           </View>

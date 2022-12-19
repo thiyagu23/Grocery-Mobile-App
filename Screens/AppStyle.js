@@ -38,7 +38,8 @@ export default StyleSheet.create({
   },
   cardText: {
     color: "#232323",
-    top: 15,
+    alignSelf: "center",
+    top: 10,
     fontWeight: "bold",
   },
   card: {
@@ -46,9 +47,8 @@ export default StyleSheet.create({
     flexDirection: "column",
     justifyContent: "space-around",
     borderColor: "#838782",
-    width: 115,
-    height: 130,
-
+    width: 124,
+    height: 170,
     margin: 8,
   },
   middelCard: {
@@ -56,6 +56,7 @@ export default StyleSheet.create({
     justifyContent: "space-around",
     flexDirection: "row",
   },
+  itemsHori: { marginHorizontal: 10 },
   homePrice: {
     borderRadius: 50,
     backgroundColor: "#3A7F0D",
@@ -65,9 +66,25 @@ export default StyleSheet.create({
     fontWeight: "bold",
     textAlign: "center",
     paddingTop: 5,
-    left: 90,
-    bottom: 10,
+    left: 88,
+
     fontSize: 12,
+    bottom: 125,
+  },
+  addToCart: {
+    backgroundColor: "#3A7F0D",
+    borderRadius: 4,
+    width: 100,
+    height: 30,
+    justifyContent: "center",
+    alignSelf: "center",
+    left: 2,
+  },
+  addToCartTxt: {
+    fontSize: 12,
+    fontWeight: "bold",
+    color: "#FFFFFF",
+    textAlign: "center",
   },
 
   //Cart StyleSheet

@@ -177,16 +177,24 @@ export default function Main({ navigation }) {
             headerTitle: (props) => <LogoTitle {...props} />,
             headerLeft: () => (
               <TouchableOpacity onPress={() => drawer.current.openDrawer()}>
-                <Image
-                  style={{ left: 15 }}
-                  source={require("./Screens/Data-imgs/Vector-left.png")}
-                />
+                <Ionicons name="menu" size={33} style={{ paddingLeft: 15 }} />
               </TouchableOpacity>
               // <Button
               //   onPress={() => drawer.current.openDrawer()}
               //   title="Info"
               //   color="#fff"
               // />
+              //
+            ),
+            headerRight: () => (
+              <TouchableOpacity
+                onPress={() => navigation.navigate("Notification")}>
+                <Ionicons
+                  name="notifications"
+                  size={24}
+                  style={{ paddingRight: 15 }}
+                />
+              </TouchableOpacity>
             ),
           }}
         />

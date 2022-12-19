@@ -15,6 +15,7 @@ import Settings from "../Screens/Profiles/Settings";
 import HelpCenter from "../Screens/Profiles/HelpCenter";
 import Contact from "../Screens/Profiles/Contact";
 import Payment from "../Screens/Payment";
+import Notification from "../Notification";
 
 const Stack = createNativeStackNavigator();
 
@@ -84,6 +85,14 @@ const Splash = () => {
         component={Payment}
         options={{
           title: "Payment Gateway",
+          headerShown: true,
+        }}
+      />
+      <Stack.Screen
+        name="Notification"
+        component={Notification}
+        options={{
+          title: "Notifications",
           headerShown: true,
         }}
       />
