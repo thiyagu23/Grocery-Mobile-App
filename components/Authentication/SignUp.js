@@ -33,11 +33,11 @@ export default function SignUp({ navigation, name, MainPage, Forgot, SignUp }) {
   const handleCheckMoblie = async (text) => {
     let cek = /^(?=.*[0-9]{10}).*$/;
     setMobile(text);
-    try {
-      await AsyncStorage.setItem("UserNum", mobile);
-    } catch (error) {
-      console.log(error);
-    }
+    // try {
+    //   await AsyncStorage.setItem("UserNum", mobile);
+    // } catch (error) {
+    //   console.log(error);
+    // }
     if (cek.test(text)) {
       setMobileValidation(false);
     } else {
@@ -165,7 +165,8 @@ export default function SignUp({ navigation, name, MainPage, Forgot, SignUp }) {
                   textAlign: "center",
                   bottom: 20,
                   fontSize: 15,
-                }}>
+                }}
+              >
                 {name ? invalid : null}
               </Text>
             ) : null}
@@ -221,7 +222,8 @@ export default function SignUp({ navigation, name, MainPage, Forgot, SignUp }) {
                   ? () => Forgot()
                   : () => navigation.navigate("ForgotPassword")
               }
-              style={AuthStyle.inputFieldBaseText}>
+              style={AuthStyle.inputFieldBaseText}
+            >
               {name ? "Forgot Password?" : null}
             </Text>
             <View>
@@ -238,7 +240,8 @@ export default function SignUp({ navigation, name, MainPage, Forgot, SignUp }) {
                   // onPress={  : handleLogin}
                   // ? callingApi : handleLogin
                   onPress={name ? loginHandle : signinHandle}
-                  style={AuthStyle.loginBtn}>
+                  style={AuthStyle.loginBtn}
+                >
                   <Text style={{ color: "#FFFFFF", fontWeight: "bold" }}>
                     {name ? "Login" : "Get OTP"}
                   </Text>
@@ -254,7 +257,8 @@ export default function SignUp({ navigation, name, MainPage, Forgot, SignUp }) {
                     SignUp
                       ? () => SignUp()
                       : () => navigation.navigate("SignUp")
-                  }>
+                  }
+                >
                   {"  "}
                   {name ? "Sign Up" : null}
                 </Text>
@@ -276,7 +280,8 @@ export default function SignUp({ navigation, name, MainPage, Forgot, SignUp }) {
                   paddingBottom: 15,
                   fontSize: 18,
                   fontWeight: "bold",
-                }}>
+                }}
+              >
                 {name ? "Login with" : "Sign up with"}
               </Text>
 

@@ -90,13 +90,15 @@ const Profile = ({ navigation }) => {
             left: 100,
             marginBottom: 20,
             fontWeight: "500",
-          }}>
+          }}
+        >
           {`+91 ${userNum}`}
         </Text>
         <View>
           <TouchableOpacity
             style={AppStyle.profile}
-            onPress={() => navigation.navigate("Table")}>
+            onPress={() => navigation.navigate("Table")}
+          >
             <Icon style={AppStyle.ProfileLogo} name="albums" size={25} />
             <Text style={AppStyle.ProfileName}>{"My Items             "}</Text>
             <Image
@@ -107,7 +109,8 @@ const Profile = ({ navigation }) => {
 
           <TouchableOpacity
             style={AppStyle.profile}
-            onPress={() => navigation.navigate("Address")}>
+            onPress={() => navigation.navigate("Address")}
+          >
             <Icon style={AppStyle.ProfileLogo} name="location" size={25} />
             <Text style={AppStyle.ProfileName}>Delivery Address</Text>
             <Image
@@ -117,7 +120,8 @@ const Profile = ({ navigation }) => {
           </TouchableOpacity>
           <TouchableOpacity
             style={AppStyle.profile}
-            onPress={() => navigation.navigate("Settings")}>
+            onPress={() => navigation.navigate("Settings")}
+          >
             <Icon style={AppStyle.ProfileLogo} name="settings" size={25} />
             <Text style={AppStyle.ProfileName}>
               {"Settings                "}
@@ -129,7 +133,8 @@ const Profile = ({ navigation }) => {
           </TouchableOpacity>
           <TouchableOpacity
             style={AppStyle.profile}
-            onPress={() => navigation.navigate("Contact")}>
+            onPress={() => navigation.navigate("Contact")}
+          >
             <Icon style={AppStyle.ProfileLogo} name="mail" size={25} />
             <Text style={AppStyle.ProfileName}>{"Contact Us           "}</Text>
             <Image
@@ -139,7 +144,8 @@ const Profile = ({ navigation }) => {
           </TouchableOpacity>
           <TouchableOpacity
             style={AppStyle.logoutBtn}
-            onPress={() => navigation.navigate("Login")}>
+            onPress={() => navigation.navigate("Login")}
+          >
             <Text style={{ color: "white", fontSize: 15, fontWeight: "bold" }}>
               LogOut
             </Text>

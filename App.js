@@ -10,12 +10,13 @@ import { Provider } from "react-redux";
 import { store } from "./Redux/store";
 import Cart from "./Screens/Cart";
 import Address from "./Screens/Profiles/Address";
+import Home from "./Screens/Home";
 
 export default function App() {
   return (
     <Provider store={store}>
       <NavigationContainer>
-        <WalkThrough />
+        <Main />
       </NavigationContainer>
     </Provider>
   );

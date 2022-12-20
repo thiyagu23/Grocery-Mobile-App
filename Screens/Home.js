@@ -19,142 +19,39 @@ import React, { useRef, useState } from "react";
 import { LinearGradient } from "expo-linear-gradient";
 import AppStyle from "./AppStyle";
 import { responsiveWidth, responsiveHeight } from "../responsive";
+import { Data } from "./Data";
+import { useDispatch } from "react-redux";
+import Toast from "react-native-toast-message";
+import { addToCart } from "../Redux/cartSlice";
 
-const Data = [
-  {
-    id: 1,
-    name: "Apple",
-    img: (
-      <Image
-        style={{ height: 110, width: 110, borderRadius: 10 }}
-        source={require("./Data-imgs/apples.jpg")}
-      />
-    ),
-  },
-  {
-    id: 2,
-    name: "Beetroot",
-    img: (
-      <Image
-        style={{
-          height: 110,
-          width: 110,
-          borderRadius: 10,
-        }}
-        source={require("./Data-imgs/Beetroot.png")}
-      />
-    ),
-  },
-  {
-    id: 3,
-    name: "Brinjal",
-    img: (
-      <Image
-        style={{ height: 110, width: 110, borderRadius: 10 }}
-        source={require("./Data-imgs/brinjal.png")}
-      />
-    ),
-  },
-  {
-    id: 4,
-    name: "Carrot",
-    img: (
-      <Image
-        style={{ height: 110, width: 110, borderRadius: 10 }}
-        source={require("./Data-imgs/carrot.png")}
-      />
-    ),
-  },
-  {
-    id: 5,
-    name: "Grapes",
-    img: (
-      <Image
-        style={{ height: 110, width: 110, borderRadius: 10 }}
-        source={require("./Data-imgs/grapes.png")}
-      />
-    ),
-  },
-  {
-    id: 6,
-    name: "Green-chilli",
-    img: (
-      <Image
-        style={{ height: 110, width: 110, borderRadius: 10 }}
-        source={require("./Data-imgs/green-chilli.png")}
-      />
-    ),
-  },
-  {
-    id: 7,
-    name: "Lily-plant",
-    img: (
-      <Image
-        style={{ height: 110, width: 110, borderRadius: 10 }}
-        source={require("./Data-imgs/lily-plant.png")}
-      />
-    ),
-  },
-  {
-    id: 8,
-    name: "Orange",
-    img: (
-      <Image
-        style={{ height: 110, width: 110, borderRadius: 10 }}
-        source={require("./Data-imgs/orange.png")}
-      />
-    ),
-  },
-  {
-    id: 9,
-    name: "Potato",
-    img: (
-      <Image
-        style={{ height: 110, width: 110, borderRadius: 10 }}
-        source={require("./Data-imgs/potato.png")}
-      />
-    ),
-  },
-  {
-    id: 10,
-    name: "Pumpkin",
-    img: (
-      <Image
-        style={{ height: 110, width: 110, borderRadius: 10 }}
-        source={require("./Data-imgs/pumpkin.png")}
-      />
-    ),
-  },
-  {
-    id: 11,
-    name: "Broccoli",
-    img: (
-      <Image
-        style={{ height: 110, width: 110, borderRadius: 10 }}
-        source={require("./Data-imgs/broccoli-like.png")}
-      />
-    ),
-  },
-  {
-    id: 12,
-    name: "Tomatos",
-    img: (
-      <Image
-        style={{ height: 110, width: 110, borderRadius: 10 }}
-        source={require("./Data-imgs/tomatoes.png")}
-      />
-    ),
-  },
-];
 const Home = ({ navigation }) => {
   const [searchTerm, setSearchTerm] = useState([...Data]);
   const [mastersearchTerm, setmasterSearchTerm] = useState([...Data]);
-  const [addToCart, setAddToCart] = useState(true);
+  // const [addToCart, setAddToCart] = useState(true);
 
-  const addToCartClick = () => {
-    setAddToCart(!addToCart);
+  const dispatch = useDispatch();
+
+  // const addToCartClick = () => {
+  //   setAddToCart(!addToCart);
+  // };
+
+  const handleAddToCart = (item) => {
+    dispatch(addToCart(item));
+    // Alert.alert(
+    //   "Add to Cart",
+    //   `Do you want to add ${item.name} to your cart ?`,
+    //   [
+    //     { text: "Yes", onPress: () => navigation.navigate("Cart") },
+    //     { text: "No" },
+    //   ]
+    // );
+    Toast.show({
+      type: "success",
+      text1: `Hello Thanks for contacting`,
+      text2: "We will get back to you soon!!👋",
+    });
+    // console.log(rrr);
   };
-
   const searchFilterFunction = (text) => {
     if (text.length >= 3) {
       const filteredData = Data.filter((data) => {
@@ -168,16 +65,6 @@ const Home = ({ navigation }) => {
     }
   };
 
-  const clicked = (item) => {
-    Alert.alert(
-      "Add to Cart",
-      `Do you want to add ${item.name} to your cart ?`,
-      [
-        { text: "Yes", onPress: () => navigation.navigate("Cart") },
-        { text: "No" },
-      ],
-    );
-  };
   return (
     <LinearGradient colors={["#99de81", "#F5F5F5"]} style={{ height: "100%" }}>
       <ScrollView refreshControl={<RefreshControl />}>
@@ -185,7 +72,8 @@ const Home = ({ navigation }) => {
           style={[
             AppStyle.container,
             // { width: responsiveWidth(414), height: responsiveHeight(1300) },
-          ]}>
+          ]}
+        >
           <TextInput
             style={AppStyle.search}
             placeholder="Search"
@@ -203,7 +91,8 @@ const Home = ({ navigation }) => {
               style={{
                 height: "100%",
                 borderRadius: 15,
-              }}>
+              }}
+            >
               <Text style={AppStyle.title}>
                 Enjoy the special offer up to 30%
               </Text>
@@ -213,7 +102,8 @@ const Home = ({ navigation }) => {
                   fontSize: 16,
                   left: 20,
                   top: -10,
-                }}>
+                }}
+              >
                 At sep 12 - sep 20{" "}
               </Text>
               <Image
@@ -223,7 +113,8 @@ const Home = ({ navigation }) => {
             </LinearGradient>
           </TouchableOpacity>
           <Text
-            style={{ fontSize: 22, fontWeight: "600", paddingVertical: 15 }}>
+            style={{ fontSize: 22, fontWeight: "600", paddingVertical: 15 }}
+          >
             Recent Viewed
           </Text>
           <ScrollView horizontal={true}>
@@ -239,7 +130,8 @@ const Home = ({ navigation }) => {
                     fontWeight: "600",
                     textAlign: "center",
                     paddingTop: 10,
-                  }}>
+                  }}
+                >
                   {" "}
                   Apples
                 </Text>
@@ -255,7 +147,8 @@ const Home = ({ navigation }) => {
                     fontWeight: "600",
                     textAlign: "center",
                     paddingTop: 10,
-                  }}>
+                  }}
+                >
                   Oranges
                 </Text>
               </TouchableOpacity>
@@ -270,7 +163,8 @@ const Home = ({ navigation }) => {
                     fontWeight: "600",
                     textAlign: "center",
                     paddingTop: 10,
-                  }}>
+                  }}
+                >
                   Tomatoes
                 </Text>
               </TouchableOpacity>
@@ -285,7 +179,8 @@ const Home = ({ navigation }) => {
                     fontWeight: "600",
                     textAlign: "center",
                     paddingTop: 10,
-                  }}>
+                  }}
+                >
                   Onions
                 </Text>
               </TouchableOpacity>
@@ -300,7 +195,8 @@ const Home = ({ navigation }) => {
                     fontWeight: "600",
                     textAlign: "center",
                     paddingTop: 10,
-                  }}>
+                  }}
+                >
                   Grapes
                 </Text>
               </TouchableOpacity>
@@ -315,14 +211,16 @@ const Home = ({ navigation }) => {
                     fontWeight: "600",
                     textAlign: "center",
                     paddingTop: 10,
-                  }}>
-                  Tomatoes
+                  }}
+                >
+                  Pumpkin
                 </Text>
               </TouchableOpacity>
             </View>
           </ScrollView>
           <Text
-            style={{ fontSize: 22, fontWeight: "600", paddingVertical: 15 }}>
+            style={{ fontSize: 22, fontWeight: "600", paddingVertical: 15 }}
+          >
             All Groceries
           </Text>
           <View>
@@ -334,13 +232,14 @@ const Home = ({ navigation }) => {
               data={searchTerm}
               numColumns={3}
               renderItem={({ item, index }) => (
-                <View style={AppStyle.card} onPress={() => clicked(item)}>
+                <View style={AppStyle.card}>
                   {item.img}
                   <Text style={AppStyle.cardText}>{item.name}</Text>
-                  <Text style={AppStyle.homePrice}>$30</Text>
+                  <Text style={AppStyle.homePrice}>${item.price}</Text>
                   <TouchableOpacity
                     style={AppStyle.addToCart}
-                    onPress={addToCartClick}>
+                    onPress={() => handleAddToCart(item)}
+                  >
                     <Text style={AppStyle.addToCartTxt}>Add to Cart</Text>
                   </TouchableOpacity>
                 </View>

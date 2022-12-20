@@ -8,84 +8,26 @@ import {
   ScrollView,
   Pressable,
 } from "react-native";
+
 import React, { useState } from "react";
 import { LinearGradient } from "expo-linear-gradient";
 import AppStyle from "./AppStyle";
-const Data = [
-  {
-    id: 1,
-    name: "Apple",
-    img: (
-      <Image
-        style={{
-          height: 110,
-          width: 110,
-          borderRadius: 10,
-          top: 15,
-          right: 10,
-        }}
-        source={require("./Data-imgs/apples.jpg")}
-      />
-    ),
-    type: "Fruit",
-    less: "-",
-    counter: "3",
-    add: "+",
-    currentPrice: 30,
-    oldPrice: 40,
-    Qty: 1,
-  },
-  {
-    id: 2,
-    name: "Pumpkin",
-    img: (
-      <Image
-        style={{
-          height: 110,
-          width: 110,
-          borderRadius: 10,
-          top: 15,
-          right: 10,
-        }}
-        source={require("./Data-imgs/pumpkin.png")}
-      />
-    ),
-    type: "Vegetable",
-    less: "-",
-    counter: "2",
-    add: "+",
-    currentPrice: 15,
-    oldPrice: 30,
-    Qty: 1,
-  },
-  {
-    id: 3,
-    name: "Brinjal",
-    img: (
-      <Image
-        style={{
-          height: 110,
-          width: 110,
-          borderRadius: 10,
-          top: 15,
-          right: 10,
-        }}
-        source={require("./Data-imgs/brinjal.png")}
-      />
-    ),
-    type: "Vegetable",
-    less: "-",
-    counter: "3",
-    add: "+",
-    currentPrice: 25,
-    oldPrice: 35,
-    Qty: 1,
-  },
-];
+import { Data } from "./Data";
+import { useSelector, useDispatch } from "react-redux";
+import { removeFromCart } from "../Redux/cartSlice";
 
 const Cart = ({ navigation }) => {
+  const cart = useSelector((state) => state.cartReducer);
+  const dispatch = useDispatch();
+  // console.log(cart.cartItems, "added products");
   const [count, setCount] = useState(Data);
   const [total, setTotal] = useState(0);
+
+  const handlerRemove = (item) => {
+    const rrr = dispatch(removeFromCart(item));
+    console.log(rrr);
+    console.log(item);
+  };
 
   const handleIncrement = (item, index) => {
     // let dummy = {
@@ -99,15 +41,14 @@ const Cart = ({ navigation }) => {
     // };
     if (count[index].Qty < 10) {
       count[index].Qty = count[index].Qty + 1;
-      count[index].currentPrice =
-        count[index].currentPrice + Data[index].currentPrice;
+      count[index].price = count[index].price + Data[index].price;
       // console.log(Data[index].currentPrice, "test");
       // console.log(count[index].currentPrice, "check");
       setCount([...count]);
     }
     let add = 0;
     count.forEach((element) => {
-      add = element.currentPrice + add;
+      add = element.price + add;
     });
     // console.log(add, "addingg");
     // console.log(temp, "checkkk");
@@ -146,93 +87,82 @@ const Cart = ({ navigation }) => {
 
   return (
     <LinearGradient colors={["#99de81", "#F5F5F5"]} style={{ height: "100%" }}>
-      <ScrollView>
-        <View style={AppStyle.container}>
-          <View>
-            <FlatList
-              contentContainerStyle={{
-                justifyContent: "center",
-                alignItems: "center",
-              }}
-              data={count}
-              renderItem={({ item, index }) => (
-                <View style={[AppStyle.cartCard, { marginTop: 15 }]}>
-                  {item.img}
-                  <Text
-                    style={[
-                      AppStyle.cartText,
-                      { marginTop: 80, paddingLeft: 10 },
-                    ]}>
-                    {item.name}
-                  </Text>
-                  <Text style={AppStyle.ItemType}>{item.type}</Text>
-                  <View style={AppStyle.itemCounter}>
-                    <TouchableOpacity
-                      onPress={() => handleDecrement(item, index)}>
-                      <Text style={AppStyle.less}>{item.less} </Text>
-                    </TouchableOpacity>
-                    <Text style={AppStyle.counter}>{item.Qty}</Text>
-                    <TouchableOpacity
-                      onPress={() => handleIncrement(item, index)}>
-                      <Text style={AppStyle.add}>{item.add}</Text>
-                    </TouchableOpacity>
-                  </View>
-                  <TouchableOpacity
-                    // onPress={(id) => remove(id)}
-                    style={AppStyle.remove}>
+      {cart.cartItems.length === 0 ? (
+        <View
+          style={{ flex: 1, alignItems: "center", justifyContent: "center" }}
+        >
+          <Text style={styles.emptyCart}>Your Cart Is Empty!</Text>
+        </View>
+      ) : (
+        <ScrollView>
+          <View style={AppStyle.container}>
+            <View>
+              <FlatList
+                contentContainerStyle={{
+                  justifyContent: "center",
+                  alignItems: "center",
+                }}
+                data={cart.cartItems}
+                renderItem={({ item, index }) => (
+                  <View style={[AppStyle.cartCard, { marginTop: 15 }]}>
+                    <View style={{ top: 15, right: 5 }}>{item.img}</View>
                     <Text
-                      style={{
-                        fontWeight: "bold",
-                        right: 11,
-                        top: 8,
-                      }}>
-                      Remove
+                      style={[
+                        AppStyle.cartText,
+                        { marginTop: 80, paddingLeft: 10 },
+                      ]}
+                    >
+                      {item.name}
                     </Text>
-                    <Image
-                      style={{ bottom: 8, left: 32 }}
-                      source={require("./Data-imgs/remove.png")}
-                    />
-                  </TouchableOpacity>
-                  <Text style={AppStyle.itemPrice}>
-                    <Text style={{ margin: 20 }}>
-                      ${`${item.currentPrice}     `}
-                    </Text>
+                    <Text style={AppStyle.ItemType}>{item.type}</Text>
+                    <View style={AppStyle.itemCounter}>
+                      <TouchableOpacity
+                        onPress={() => handleDecrement(item, index)}
+                      >
+                        <Text style={AppStyle.less}>{item.less} </Text>
+                      </TouchableOpacity>
+                      <Text style={AppStyle.counter}>{item.cartQuantity}</Text>
+                      <TouchableOpacity
+                        onPress={() => handleIncrement(item, index)}
+                      >
+                        <Text style={AppStyle.add}>{item.add}</Text>
+                      </TouchableOpacity>
+                    </View>
+                    <TouchableOpacity
+                      onPress={() => handlerRemove(item)}
+                      style={AppStyle.remove}
+                    >
+                      <Text
+                        style={{
+                          fontWeight: "bold",
+                          right: 11,
+                          top: 8,
+                        }}
+                      >
+                        Remove
+                      </Text>
+                      <Image
+                        style={{ bottom: 8, left: 32 }}
+                        source={require("./Data-imgs/remove.png")}
+                      />
+                    </TouchableOpacity>
+                    <Text style={AppStyle.itemPrice}>
+                      <Text style={{ margin: 20 }}>
+                        ${`${item.price}     `}
+                      </Text>
 
-                    <Text
-                      style={{
-                        textDecorationLine: "line-through",
-                        color: "#5C5C5C",
-                      }}>
-                      ${item.oldPrice}
+                      <Text
+                        style={{
+                          textDecorationLine: "line-through",
+                          color: "#5C5C5C",
+                        }}
+                      >
+                        ${item.oldPrice}
+                      </Text>
                     </Text>
-                  </Text>
-                </View>
-              )}
-            />
-          </View>
-          <View>
-            <Text
-              style={{
-                fontSize: 20,
-                fontWeight: "bold",
-                padding: 10,
-                color: "#3A7F0D",
-              }}>
-              Bill Details
-            </Text>
-            <View style={AppStyle.billCard}>
-              <View>
-                <Text style={AppStyle.cartName}>Item Total</Text>
-                <Text style={AppStyle.cartName}>Delivery Fee</Text>
-                <Text style={AppStyle.cartName}>Taxes and Charges</Text>
-              </View>
-              <View>
-                <Text style={[AppStyle.cartPrice, { left: 33 }]}>
-                  ${total}.00
-                </Text>
-                <Text style={AppStyle.cartPrice}>+ $25.00</Text>
-                <Text style={AppStyle.cartPrice}>+ $30.00</Text>
-              </View>
+                  </View>
+                )}
+              />
             </View>
             <View>
               <Text
@@ -240,31 +170,62 @@ const Cart = ({ navigation }) => {
                   fontSize: 20,
                   fontWeight: "bold",
                   padding: 10,
-                  left: 10,
-                  // top: 15,
-                }}>
-                Order Total
+                  color: "#3A7F0D",
+                }}
+              >
+                Bill Details
               </Text>
-              <Text
-                style={{
-                  fontSize: 20,
-                  fontWeight: "bold",
-                  padding: 10,
-                  left: 280,
-                  bottom: 50,
-                }}>
-                ${total + extras}.00
-              </Text>
+              <View style={AppStyle.billCard}>
+                <View>
+                  <Text style={AppStyle.cartName}>Item Total</Text>
+                  <Text style={AppStyle.cartName}>Delivery Fee</Text>
+                  <Text style={AppStyle.cartName}>Taxes and Charges</Text>
+                </View>
+                <View>
+                  <Text style={[AppStyle.cartPrice, { left: 33 }]}>
+                    ${total}.00
+                  </Text>
+                  <Text style={AppStyle.cartPrice}>+ $25.00</Text>
+                  <Text style={AppStyle.cartPrice}>+ $30.00</Text>
+                </View>
+              </View>
+              <View>
+                <Text
+                  style={{
+                    fontSize: 20,
+                    fontWeight: "bold",
+                    padding: 10,
+                    left: 10,
+                    // top: 15,
+                  }}
+                >
+                  Order Total
+                </Text>
+                <Text
+                  style={{
+                    fontSize: 20,
+                    fontWeight: "bold",
+                    padding: 10,
+                    left: 280,
+                    bottom: 50,
+                  }}
+                >
+                  ${total + extras}.00
+                </Text>
+              </View>
             </View>
+            <TouchableOpacity
+              onPress={() =>
+                navigation.navigate("Payment", {
+                  price: `$${total + extras}.00`,
+                })
+              }
+            >
+              <Text style={styles.logoutBtn}>Buy Now</Text>
+            </TouchableOpacity>
           </View>
-          <TouchableOpacity
-            onPress={() =>
-              navigation.navigate("Payment", { price: `$${total + extras}.00` })
-            }>
-            <Text style={styles.logoutBtn}>Buy Now</Text>
-          </TouchableOpacity>
-        </View>
-      </ScrollView>
+        </ScrollView>
+      )}
     </LinearGradient>
   );
 };
@@ -272,6 +233,11 @@ const Cart = ({ navigation }) => {
 export default Cart;
 
 const styles = StyleSheet.create({
+  emptyCart: {
+    fontWeight: "bold",
+    fontSize: 20,
+    color: "#3A7F0D",
+  },
   logoutBtn: {
     width: "100%",
     borderRadius: 8,

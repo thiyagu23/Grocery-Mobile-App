@@ -39,7 +39,7 @@ export default StyleSheet.create({
   cardText: {
     color: "#232323",
     alignSelf: "center",
-    top: 10,
+    top: 8,
     fontWeight: "bold",
   },
   card: {
@@ -48,7 +48,7 @@ export default StyleSheet.create({
     justifyContent: "space-around",
     borderColor: "#838782",
     width: 124,
-    height: 170,
+    height: 180,
     margin: 8,
   },
   middelCard: {
@@ -67,7 +67,6 @@ export default StyleSheet.create({
     textAlign: "center",
     paddingTop: 5,
     left: 88,
-
     fontSize: 12,
     bottom: 125,
   },
@@ -78,7 +77,7 @@ export default StyleSheet.create({
     height: 30,
     justifyContent: "center",
     alignSelf: "center",
-    left: 2,
+    bottom: 7,
   },
   addToCartTxt: {
     fontSize: 12,

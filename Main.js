@@ -19,6 +19,7 @@ import LogoTitle from "./Screens/LogoTitle";
 import { LinearGradient } from "expo-linear-gradient";
 import AppStyle from "./Screens/AppStyle";
 import AsyncStorage from "@react-native-async-storage/async-storage";
+import { useSelector } from "react-redux";
 
 const Tab = createBottomTabNavigator();
 
@@ -85,7 +86,8 @@ export default function Main({ navigation }) {
             fontWeight: "500",
             left: 35,
             top: 10,
-          }}>
+          }}
+        >
           Premium User
         </Text>
         <View
@@ -133,7 +135,8 @@ export default function Main({ navigation }) {
         </View>
         <TouchableOpacity
           style={[AppStyle.logoutBtn, { top: 350, width: 150, height: 45 }]}
-          onPress={() => navigation.navigate("Login")}>
+          onPress={() => navigation.navigate("Login")}
+        >
           <Text style={{ color: "white", fontSize: 15, fontWeight: "bold" }}>
             LogOut
           </Text>
@@ -147,11 +150,13 @@ export default function Main({ navigation }) {
   useEffect(() => {
     LogBox.ignoreLogs(["VirtualizedLists should never be nested"]);
   }, []);
+  const cart = useSelector((state) => state.cartReducer);
   return (
     <DrawerLayoutAndroid
       ref={drawer}
       drawerWidth={300}
-      renderNavigationView={navigationView}>
+      renderNavigationView={navigationView}
+    >
       <Tab.Navigator
         screenOptions={({ route }) => ({
           tabBarIcon: ({ focused, color, size }) => {
@@ -169,7 +174,8 @@ export default function Main({ navigation }) {
             return <Ionicons name={iconName} size={size} color={"#068E2C"} />;
           },
           tabBarActiveTintColor: "#068E2C",
-        })}>
+        })}
+      >
         <Tab.Screen
           name="Home"
           component={Home}
@@ -188,7 +194,8 @@ export default function Main({ navigation }) {
             ),
             headerRight: () => (
               <TouchableOpacity
-                onPress={() => navigation.navigate("Notification")}>
+                onPress={() => navigation.navigate("Notification")}
+              >
                 <Ionicons
                   name="notifications"
                   size={24}
@@ -203,7 +210,7 @@ export default function Main({ navigation }) {
           component={Cart}
           options={{
             title: "My Cart",
-            tabBarBadge: 3,
+            tabBarBadge: cart.cartItems.length,
           }}
         />
         <Tab.Screen
