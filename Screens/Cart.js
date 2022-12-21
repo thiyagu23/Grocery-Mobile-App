@@ -20,6 +20,7 @@ import {
   decreaseItems,
   increaseItems,
 } from "../Redux/cartSlice";
+import LottieView from "lottie-react-native";
 
 const Cart = ({ navigation }) => {
   const cart = useSelector((state) => state.cartReducer);
@@ -96,9 +97,16 @@ const Cart = ({ navigation }) => {
     <LinearGradient colors={["#99de81", "#F5F5F5"]} style={{ height: "100%" }}>
       {cart.cartItems.length === 0 ? (
         <View
-          style={{ flex: 1, alignItems: "center", justifyContent: "center" }}>
+          style={{ flex: 1, alignItems: "center", justifyContent: "center" }}
+        >
+          <LottieView
+            source={require("./Data-imgs/lf30_editor_tetqnu4h.json")}
+            autoPlay
+            loop
+            autoSize
+            style={{ width: "100%", aspectRatio: 1, bottom: 30 }}
+          />
           <Text style={styles.emptyCart}>Your Cart Is Empty!</Text>
-          <Image source={require("./Data-imgs/caart.gif")} />
         </View>
       ) : (
         <ScrollView>
@@ -117,30 +125,35 @@ const Cart = ({ navigation }) => {
                       style={[
                         AppStyle.cartText,
                         { marginTop: 80, paddingLeft: 10 },
-                      ]}>
+                      ]}
+                    >
                       {item.name}
                     </Text>
                     <Text style={AppStyle.ItemType}>{item.type}</Text>
                     <View style={AppStyle.itemCounter}>
                       <TouchableOpacity
-                        onPress={() => handleDecrement(item, index)}>
+                        onPress={() => handleDecrement(item, index)}
+                      >
                         <Text style={AppStyle.less}>{item.less} </Text>
                       </TouchableOpacity>
                       <Text style={AppStyle.counter}>{item.cartQuantity}</Text>
                       <TouchableOpacity
-                        onPress={() => handleIncrement(item, index)}>
+                        onPress={() => handleIncrement(item, index)}
+                      >
                         <Text style={AppStyle.add}>{item.add}</Text>
                       </TouchableOpacity>
                     </View>
 
                     <TouchableOpacity
                       onPress={() => handlerRemove(item)}
-                      style={AppStyle.remove}>
+                      style={AppStyle.remove}
+                    >
                       <Text
                         style={{
                           fontWeight: "600",
                           fontSize: 15,
-                        }}>
+                        }}
+                      >
                         {"Remove "}
                         <Icon name="trash" size={18} />
                       </Text>
@@ -155,7 +168,8 @@ const Cart = ({ navigation }) => {
                         style={{
                           textDecorationLine: "line-through",
                           color: "#5C5C5C",
-                        }}>
+                        }}
+                      >
                         ${item.oldPrice}
                       </Text>
                     </Text>
@@ -170,7 +184,8 @@ const Cart = ({ navigation }) => {
                   fontWeight: "bold",
                   padding: 10,
                   color: "#3A7F0D",
-                }}>
+                }}
+              >
                 Bill Details
               </Text>
               <View style={AppStyle.billCard}>
@@ -195,7 +210,8 @@ const Cart = ({ navigation }) => {
                     padding: 10,
                     left: 10,
                     // top: 15,
-                  }}>
+                  }}
+                >
                   Order Total
                 </Text>
                 <Text
@@ -205,7 +221,8 @@ const Cart = ({ navigation }) => {
                     padding: 10,
                     left: 280,
                     bottom: 50,
-                  }}>
+                  }}
+                >
                   ${total + extras}.00
                 </Text>
               </View>
@@ -215,7 +232,8 @@ const Cart = ({ navigation }) => {
                 navigation.navigate("Payment", {
                   price: `$${total + extras}.00`,
                 })
-              }>
+              }
+            >
               <Text style={styles.logoutBtn}>Buy Now</Text>
             </TouchableOpacity>
           </View>
@@ -230,8 +248,9 @@ export default Cart;
 const styles = StyleSheet.create({
   emptyCart: {
     fontWeight: "bold",
-    fontSize: 20,
+    fontSize: 25,
     color: "#3A7F0D",
+    bottom: 100,
   },
   logoutBtn: {
     width: "100%",
