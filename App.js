@@ -11,12 +11,14 @@ import { store } from "./Redux/store";
 import Cart from "./Screens/Cart";
 import Address from "./Screens/Profiles/Address";
 import Home from "./Screens/Home";
+import { Toast } from "react-native-toast-message/lib/src/Toast";
 
 export default function App() {
   return (
     <Provider store={store}>
       <NavigationContainer>
         <Main />
+        <Toast />
       </NavigationContainer>
     </Provider>
   );

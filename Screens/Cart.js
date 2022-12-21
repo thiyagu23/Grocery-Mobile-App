@@ -14,7 +14,12 @@ import { LinearGradient } from "expo-linear-gradient";
 import AppStyle from "./AppStyle";
 import { Data } from "./Data";
 import { useSelector, useDispatch } from "react-redux";
-import { removeFromCart } from "../Redux/cartSlice";
+import Icon from "react-native-vector-icons/Ionicons";
+import {
+  removeFromCart,
+  decreaseItems,
+  increaseItems,
+} from "../Redux/cartSlice";
 
 const Cart = ({ navigation }) => {
   const cart = useSelector((state) => state.cartReducer);
@@ -24,12 +29,13 @@ const Cart = ({ navigation }) => {
   const [total, setTotal] = useState(0);
 
   const handlerRemove = (item) => {
-    const rrr = dispatch(removeFromCart(item));
-    console.log(rrr);
-    console.log(item);
+    dispatch(removeFromCart(item));
+    // console.log(item);
   };
 
   const handleIncrement = (item, index) => {
+    dispatch(increaseItems(item));
+
     // let dummy = {
     //   type: item.type,
     //   less: "-",
@@ -39,20 +45,20 @@ const Cart = ({ navigation }) => {
     //   oldPrice: item.oldPrice,
     //   Qty: parseInt(item.Qty) + 1,
     // };
-    if (count[index].Qty < 10) {
-      count[index].Qty = count[index].Qty + 1;
-      count[index].price = count[index].price + Data[index].price;
-      // console.log(Data[index].currentPrice, "test");
-      // console.log(count[index].currentPrice, "check");
-      setCount([...count]);
-    }
-    let add = 0;
-    count.forEach((element) => {
-      add = element.price + add;
-    });
+    // if (count[index].Qty < 10) {
+    //   count[index].Qty = count[index].Qty + 1;
+    //   count[index].price = count[index].price + Data[index].price;
+    // console.log(Data[index].currentPrice, "test");
+    // console.log(count[index].currentPrice, "check");
+    // setCount([...count]);
+    // }
+    // let add = 0;
+    // count.forEach((element) => {
+    //   add = element.price + add;
+    // });
     // console.log(add, "addingg");
     // console.log(temp, "checkkk");
-    setTotal(add);
+    // setTotal(add);
     // setCount((count) =>
     //   count.map((item) => {
     //     return { ...item, Qty: item.Qty + 1 };
@@ -61,20 +67,21 @@ const Cart = ({ navigation }) => {
   };
   // console.log(count, "checked");
   const handleDecrement = (item, index) => {
-    if (count[index].Qty > 1) {
-      count[index].Qty = count[index].Qty - 1;
-      count[index].currentPrice =
-        count[index].currentPrice - Data[index].currentPrice;
-      setCount([...count]);
-    }
-    let add = 0;
-    count.forEach((element) => {
-      // console.log(element.currentPrice, add, "check123");
-      add = element.currentPrice + add;
-    });
+    dispatch(decreaseItems(item));
+    // if (count[index].Qty > 1) {
+    //   count[index].Qty = count[index].Qty - 1;
+    //   count[index].currentPrice =
+    //     count[index].currentPrice - Data[index].currentPrice;
+    //   setCount([...count]);
+    // }
+    // let add = 0;
+    // count.forEach((element) => {
+    // console.log(element.currentPrice, add, "check123");
+    // add = element.currentPrice + add;
+    // });
     // console.log(add, "addingg");
     // console.log(temp, "checkkk");
-    setTotal(add);
+    // setTotal(add);
   };
   let tax = 30;
   let fees = 25;
@@ -89,9 +96,9 @@ const Cart = ({ navigation }) => {
     <LinearGradient colors={["#99de81", "#F5F5F5"]} style={{ height: "100%" }}>
       {cart.cartItems.length === 0 ? (
         <View
-          style={{ flex: 1, alignItems: "center", justifyContent: "center" }}
-        >
+          style={{ flex: 1, alignItems: "center", justifyContent: "center" }}>
           <Text style={styles.emptyCart}>Your Cart Is Empty!</Text>
+          <Image source={require("./Data-imgs/caart.gif")} />
         </View>
       ) : (
         <ScrollView>
@@ -110,53 +117,45 @@ const Cart = ({ navigation }) => {
                       style={[
                         AppStyle.cartText,
                         { marginTop: 80, paddingLeft: 10 },
-                      ]}
-                    >
+                      ]}>
                       {item.name}
                     </Text>
                     <Text style={AppStyle.ItemType}>{item.type}</Text>
                     <View style={AppStyle.itemCounter}>
                       <TouchableOpacity
-                        onPress={() => handleDecrement(item, index)}
-                      >
+                        onPress={() => handleDecrement(item, index)}>
                         <Text style={AppStyle.less}>{item.less} </Text>
                       </TouchableOpacity>
                       <Text style={AppStyle.counter}>{item.cartQuantity}</Text>
                       <TouchableOpacity
-                        onPress={() => handleIncrement(item, index)}
-                      >
+                        onPress={() => handleIncrement(item, index)}>
                         <Text style={AppStyle.add}>{item.add}</Text>
                       </TouchableOpacity>
                     </View>
+
                     <TouchableOpacity
                       onPress={() => handlerRemove(item)}
-                      style={AppStyle.remove}
-                    >
+                      style={AppStyle.remove}>
                       <Text
                         style={{
-                          fontWeight: "bold",
-                          right: 11,
-                          top: 8,
-                        }}
-                      >
-                        Remove
+                          fontWeight: "600",
+                          fontSize: 15,
+                        }}>
+                        {"Remove "}
+                        <Icon name="trash" size={18} />
                       </Text>
-                      <Image
-                        style={{ bottom: 8, left: 32 }}
-                        source={require("./Data-imgs/remove.png")}
-                      />
                     </TouchableOpacity>
+
                     <Text style={AppStyle.itemPrice}>
                       <Text style={{ margin: 20 }}>
-                        ${`${item.price}     `}
+                        ${`${item.currentPrice}     `}
                       </Text>
 
                       <Text
                         style={{
                           textDecorationLine: "line-through",
                           color: "#5C5C5C",
-                        }}
-                      >
+                        }}>
                         ${item.oldPrice}
                       </Text>
                     </Text>
@@ -171,8 +170,7 @@ const Cart = ({ navigation }) => {
                   fontWeight: "bold",
                   padding: 10,
                   color: "#3A7F0D",
-                }}
-              >
+                }}>
                 Bill Details
               </Text>
               <View style={AppStyle.billCard}>
@@ -197,8 +195,7 @@ const Cart = ({ navigation }) => {
                     padding: 10,
                     left: 10,
                     // top: 15,
-                  }}
-                >
+                  }}>
                   Order Total
                 </Text>
                 <Text
@@ -208,8 +205,7 @@ const Cart = ({ navigation }) => {
                     padding: 10,
                     left: 280,
                     bottom: 50,
-                  }}
-                >
+                  }}>
                   ${total + extras}.00
                 </Text>
               </View>
@@ -219,8 +215,7 @@ const Cart = ({ navigation }) => {
                 navigation.navigate("Payment", {
                   price: `$${total + extras}.00`,
                 })
-              }
-            >
+              }>
               <Text style={styles.logoutBtn}>Buy Now</Text>
             </TouchableOpacity>
           </View>

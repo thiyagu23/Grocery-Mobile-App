@@ -21,7 +21,7 @@ import AppStyle from "./AppStyle";
 import { responsiveWidth, responsiveHeight } from "../responsive";
 import { Data } from "./Data";
 import { useDispatch } from "react-redux";
-import Toast from "react-native-toast-message";
+
 import { addToCart } from "../Redux/cartSlice";
 
 const Home = ({ navigation }) => {
@@ -37,6 +37,7 @@ const Home = ({ navigation }) => {
 
   const handleAddToCart = (item) => {
     dispatch(addToCart(item));
+    // console.log(item);
     // Alert.alert(
     //   "Add to Cart",
     //   `Do you want to add ${item.name} to your cart ?`,
@@ -45,11 +46,7 @@ const Home = ({ navigation }) => {
     //     { text: "No" },
     //   ]
     // );
-    Toast.show({
-      type: "success",
-      text1: `Hello Thanks for contacting`,
-      text2: "We will get back to you soon!!👋",
-    });
+
     // console.log(rrr);
   };
   const searchFilterFunction = (text) => {
@@ -72,8 +69,7 @@ const Home = ({ navigation }) => {
           style={[
             AppStyle.container,
             // { width: responsiveWidth(414), height: responsiveHeight(1300) },
-          ]}
-        >
+          ]}>
           <TextInput
             style={AppStyle.search}
             placeholder="Search"
@@ -91,8 +87,7 @@ const Home = ({ navigation }) => {
               style={{
                 height: "100%",
                 borderRadius: 15,
-              }}
-            >
+              }}>
               <Text style={AppStyle.title}>
                 Enjoy the special offer up to 30%
               </Text>
@@ -102,8 +97,7 @@ const Home = ({ navigation }) => {
                   fontSize: 16,
                   left: 20,
                   top: -10,
-                }}
-              >
+                }}>
                 At sep 12 - sep 20{" "}
               </Text>
               <Image
@@ -113,8 +107,7 @@ const Home = ({ navigation }) => {
             </LinearGradient>
           </TouchableOpacity>
           <Text
-            style={{ fontSize: 22, fontWeight: "600", paddingVertical: 15 }}
-          >
+            style={{ fontSize: 22, fontWeight: "600", paddingVertical: 15 }}>
             Recent Viewed
           </Text>
           <ScrollView horizontal={true}>
@@ -130,8 +123,7 @@ const Home = ({ navigation }) => {
                     fontWeight: "600",
                     textAlign: "center",
                     paddingTop: 10,
-                  }}
-                >
+                  }}>
                   {" "}
                   Apples
                 </Text>
@@ -147,8 +139,7 @@ const Home = ({ navigation }) => {
                     fontWeight: "600",
                     textAlign: "center",
                     paddingTop: 10,
-                  }}
-                >
+                  }}>
                   Oranges
                 </Text>
               </TouchableOpacity>
@@ -163,8 +154,7 @@ const Home = ({ navigation }) => {
                     fontWeight: "600",
                     textAlign: "center",
                     paddingTop: 10,
-                  }}
-                >
+                  }}>
                   Tomatoes
                 </Text>
               </TouchableOpacity>
@@ -179,8 +169,7 @@ const Home = ({ navigation }) => {
                     fontWeight: "600",
                     textAlign: "center",
                     paddingTop: 10,
-                  }}
-                >
+                  }}>
                   Onions
                 </Text>
               </TouchableOpacity>
@@ -195,8 +184,7 @@ const Home = ({ navigation }) => {
                     fontWeight: "600",
                     textAlign: "center",
                     paddingTop: 10,
-                  }}
-                >
+                  }}>
                   Grapes
                 </Text>
               </TouchableOpacity>
@@ -211,16 +199,14 @@ const Home = ({ navigation }) => {
                     fontWeight: "600",
                     textAlign: "center",
                     paddingTop: 10,
-                  }}
-                >
+                  }}>
                   Pumpkin
                 </Text>
               </TouchableOpacity>
             </View>
           </ScrollView>
           <Text
-            style={{ fontSize: 22, fontWeight: "600", paddingVertical: 15 }}
-          >
+            style={{ fontSize: 22, fontWeight: "600", paddingVertical: 15 }}>
             All Groceries
           </Text>
           <View>
@@ -235,11 +221,10 @@ const Home = ({ navigation }) => {
                 <View style={AppStyle.card}>
                   {item.img}
                   <Text style={AppStyle.cardText}>{item.name}</Text>
-                  <Text style={AppStyle.homePrice}>${item.price}</Text>
+                  <Text style={AppStyle.homePrice}>${item.currentPrice}</Text>
                   <TouchableOpacity
                     style={AppStyle.addToCart}
-                    onPress={() => handleAddToCart(item)}
-                  >
+                    onPress={() => handleAddToCart(item)}>
                     <Text style={AppStyle.addToCartTxt}>Add to Cart</Text>
                   </TouchableOpacity>
                 </View>

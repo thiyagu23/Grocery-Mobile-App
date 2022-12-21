@@ -159,11 +159,13 @@ export default StyleSheet.create({
   remove: {
     alignItems: "center",
     backgroundColor: "#cdcfcd",
+    justifyContent: "center",
     borderRadius: 5,
     width: 110,
     height: 35,
     left: 240,
     bottom: 35,
+    zIndex: 1,
   },
   ItemType: {
     fontSize: 15,
