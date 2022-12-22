@@ -18,6 +18,9 @@ import BlurImg from "./BlurImg";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import axios from "axios";
 import Login from "./Login";
+import { useDispatch, useSelector } from "react-redux";
+import { loginUser, signUpUser } from "../../Redux/authSlice";
+
 export default function SignUp({ navigation, name, MainPage, Forgot, SignUp }) {
   const [password, setPassword] = useState("");
   const [isPasswordSecure, setIsPasswordSecure] = useState(true);
@@ -25,6 +28,11 @@ export default function SignUp({ navigation, name, MainPage, Forgot, SignUp }) {
   const [mobileValidation, setMobileValidation] = useState(false);
   const [userName, setUserName] = useState("");
   const [invalid, setInvalid] = useState(true);
+
+  const dispatch = useDispatch();
+  const loginError = useSelector((state) => state.authReducer.loginErr);
+  const user = useSelector((state) => state.authReducer);
+  const signUpError = useSelector((state) => state.authReducer.signUpErr);
 
   const changeIcon = () => {
     setIsPasswordSecure(!isPasswordSecure);
@@ -88,18 +96,29 @@ export default function SignUp({ navigation, name, MainPage, Forgot, SignUp }) {
       "&password=" +
       password +
       "&type=cart";
-    const results = await axios("https://fioritest.avaniko.com/User/AddUser ", {
-      method: "POST",
-      data: obj,
-      // headers: {
-      //   "Content-Type": "application/x-www-form-urlencoded",
-      // },
-    })
-      .then((res) => console.log(res.data))
-      .catch((error) => console.log(error.response.data.error));
+    dispatch(signUpUser(obj))
+      .unwrap()
+      .then(() => MainPage());
+    // navigation.navigate("Otp");
+
+    // if (signUpError == "User Created.") {
+    //   () => navigation.navigate("Otp");
+    // } else {
+    //   null;
+    // }
+    await AsyncStorage.setItem("UserName", userName);
+    await AsyncStorage.setItem("UserNum", mobile);
+    // const results = await axios("https://fioritest.avaniko.com/User/AddUser ", {
+    //   method: "POST",
+    //   data: obj,
+    //   // headers: {
+    //   //   "Content-Type": "application/x-www-form-urlencoded",
+    //   // },
+    // })
+    //   .then((res) => console.log(res.data))
+    //   .catch((error) => console.log(error.response.data.error));
     // await AsyncStorage.setItem("UserName", result.data.UserName);
     // await AsyncStorage.setItem("UserNum", result.data.PhoneNumber);
-    navigation.navigate("Otp");
   };
 
   // await AsyncStorage.setItem("UserName", userName);
@@ -116,7 +135,7 @@ export default function SignUp({ navigation, name, MainPage, Forgot, SignUp }) {
   //   alert(checkPassword);
   // }
   const loginHandle = async () => {
-    console.log(mobile, password);
+    // console.log(loginError);
 
     let data =
       "userName=" +
@@ -124,24 +143,32 @@ export default function SignUp({ navigation, name, MainPage, Forgot, SignUp }) {
       "&password=" +
       password +
       "&grant_type=password&Type=cart";
-    const result = await axios("https://fioritest.avaniko.com/login  ", {
-      method: "POST",
-      data: data,
-      headers: {
-        "Content-Type": "application/x-www-form-urlencoded",
-      },
-    })
-      //.then((res) => console.log(res.data))
-      .catch((error) => setInvalid(error.response.data.error));
 
-    await AsyncStorage.setItem("UserName", result.data.UserName);
-    await AsyncStorage.setItem("UserNum", result.data.PhoneNumber);
-    if (MainPage) {
-      MainPage();
-    } else {
-      navigation.navigate("Main");
-    }
-    // console.log(result.data.PhoneNumber);
+    dispatch(loginUser(data))
+      .unwrap()
+      .then(() => MainPage());
+
+    await AsyncStorage.setItem("UserName", user.userInfo.UserName);
+    await AsyncStorage.setItem("UserNum", user.userInfo.PhoneNumber);
+    // console.log(loginError.loginErr);
+
+    // const result = await axios("https://fioritest.avaniko.com/login  ", {
+    //   method: "POST",
+    //   data: data,
+    //   headers: {
+    //     "Content-Type": "application/x-www-form-urlencoded",
+    //   },
+    // })
+    //   //.then((res) => console.log(res.data))
+    //   .catch((error) => setInvalid(error.response.data.error));
+
+    //
+    // if (MainPage) {
+    //   MainPage();
+    // } else {
+    //   navigation.navigate("Main");
+    // }
+    // // console.log(result.data.PhoneNumber);
 
     // result = await result.json();
     // if (result.status) {
@@ -158,20 +185,30 @@ export default function SignUp({ navigation, name, MainPage, Forgot, SignUp }) {
         <ScrollView>
           <View style={AuthStyle.container}>
             <Text style={AuthStyle.title}>{name ? name : "Sign up"}</Text>
-            {invalid ? (
+            {loginError ? (
               <Text
                 style={{
                   color: "#e00303",
                   textAlign: "center",
                   bottom: 20,
                   fontSize: 15,
-                }}
-              >
-                {name ? invalid : null}
+                }}>
+                {name ? loginError : null}
               </Text>
             ) : null}
             {name ? null : (
               <View>
+                {signUpError ? (
+                  <Text
+                    style={{
+                      color: "#e00303",
+                      textAlign: "center",
+                      bottom: 20,
+                      fontSize: 15,
+                    }}>
+                    {name ? null : signUpError}
+                  </Text>
+                ) : null}
                 <Text style={AuthStyle.lebelText}>Name</Text>
                 <TextInput
                   cursorColor="#3A7F0D"
@@ -222,8 +259,7 @@ export default function SignUp({ navigation, name, MainPage, Forgot, SignUp }) {
                   ? () => Forgot()
                   : () => navigation.navigate("ForgotPassword")
               }
-              style={AuthStyle.inputFieldBaseText}
-            >
+              style={AuthStyle.inputFieldBaseText}>
               {name ? "Forgot Password?" : null}
             </Text>
             <View>
@@ -240,8 +276,7 @@ export default function SignUp({ navigation, name, MainPage, Forgot, SignUp }) {
                   // onPress={  : handleLogin}
                   // ? callingApi : handleLogin
                   onPress={name ? loginHandle : signinHandle}
-                  style={AuthStyle.loginBtn}
-                >
+                  style={AuthStyle.loginBtn}>
                   <Text style={{ color: "#FFFFFF", fontWeight: "bold" }}>
                     {name ? "Login" : "Get OTP"}
                   </Text>
@@ -257,8 +292,7 @@ export default function SignUp({ navigation, name, MainPage, Forgot, SignUp }) {
                     SignUp
                       ? () => SignUp()
                       : () => navigation.navigate("SignUp")
-                  }
-                >
+                  }>
                   {"  "}
                   {name ? "Sign Up" : null}
                 </Text>
@@ -280,8 +314,7 @@ export default function SignUp({ navigation, name, MainPage, Forgot, SignUp }) {
                   paddingBottom: 15,
                   fontSize: 18,
                   fontWeight: "bold",
-                }}
-              >
+                }}>
                 {name ? "Login with" : "Sign up with"}
               </Text>
 

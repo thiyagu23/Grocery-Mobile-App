@@ -98,7 +98,7 @@ const Home = ({ navigation }) => {
                   left: 20,
                   top: -10,
                 }}>
-                At sep 12 - sep 20{" "}
+                At sep 12 - sep 20{"  "}
               </Text>
               <Image
                 style={{ alignSelf: "flex-end", bottom: 70, right: 30 }}

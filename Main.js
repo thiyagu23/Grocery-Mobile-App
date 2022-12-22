@@ -86,8 +86,7 @@ export default function Main({ navigation }) {
             fontWeight: "500",
             left: 35,
             top: 10,
-          }}
-        >
+          }}>
           Premium User
         </Text>
         <View
@@ -135,8 +134,7 @@ export default function Main({ navigation }) {
         </View>
         <TouchableOpacity
           style={[AppStyle.logoutBtn, { top: 350, width: 150, height: 45 }]}
-          onPress={() => navigation.navigate("Login")}
-        >
+          onPress={() => navigation.navigate("Login")}>
           <Text style={{ color: "white", fontSize: 15, fontWeight: "bold" }}>
             LogOut
           </Text>
@@ -155,8 +153,7 @@ export default function Main({ navigation }) {
     <DrawerLayoutAndroid
       ref={drawer}
       drawerWidth={300}
-      renderNavigationView={navigationView}
-    >
+      renderNavigationView={navigationView}>
       <Tab.Navigator
         screenOptions={({ route }) => ({
           tabBarIcon: ({ focused, color, size }) => {
@@ -174,8 +171,7 @@ export default function Main({ navigation }) {
             return <Ionicons name={iconName} size={size} color={"#068E2C"} />;
           },
           tabBarActiveTintColor: "#068E2C",
-        })}
-      >
+        })}>
         <Tab.Screen
           name="Home"
           component={Home}
@@ -194,8 +190,7 @@ export default function Main({ navigation }) {
             ),
             headerRight: () => (
               <TouchableOpacity
-                onPress={() => navigation.navigate("Notification")}
-              >
+                onPress={() => navigation.navigate("Notification")}>
                 <Ionicons
                   name="notifications"
                   size={24}
@@ -210,7 +205,8 @@ export default function Main({ navigation }) {
           component={Cart}
           options={{
             title: "My Cart",
-            tabBarBadge: cart.cartItems.length,
+            tabBarBadge:
+              cart.cartItems.length === 0 ? null : cart.cartItems.length,
           }}
         />
         <Tab.Screen
