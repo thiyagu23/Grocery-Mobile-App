@@ -16,6 +16,7 @@ import HelpCenter from "../Screens/Profiles/HelpCenter";
 import Contact from "../Screens/Profiles/Contact";
 import Payment from "../Screens/Payment";
 import Notification from "../Notification";
+import PlaceOrder from "../Screens/PlaceOrder";
 
 const Stack = createNativeStackNavigator();
 
@@ -96,6 +97,7 @@ const Splash = () => {
           headerShown: true,
         }}
       />
+      <Stack.Screen name="PlaceOrder" component={PlaceOrder} />
     </Stack.Navigator>
   );
 };

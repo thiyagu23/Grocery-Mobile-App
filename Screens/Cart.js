@@ -7,6 +7,7 @@ import {
   TouchableOpacity,
   ScrollView,
   Pressable,
+  SafeAreaView,
 } from "react-native";
 
 import React, { useState, useEffect } from "react";
@@ -115,125 +116,102 @@ const Cart = ({ navigation }) => {
           <Text style={styles.emptyCart}>Your Cart Is Empty!</Text>
         </View>
       ) : (
-        <ScrollView>
-          <View style={AppStyle.container}>
-            <View>
-              <FlatList
-                contentContainerStyle={{
-                  justifyContent: "center",
-                  alignItems: "center",
-                }}
-                data={cart.cartItems}
-                renderItem={({ item, index }) => (
-                  <View style={[AppStyle.cartCard, { marginTop: 15 }]}>
-                    <View style={{ top: 15, right: 5 }}>{item.img}</View>
-                    <Text
-                      style={[
-                        AppStyle.cartText,
-                        { marginTop: 80, paddingLeft: 10 },
-                      ]}>
-                      {item.name}
-                    </Text>
-                    <Text style={AppStyle.ItemType}>{item.type}</Text>
-                    <View style={AppStyle.itemCounter}>
+        <>
+          <ScrollView>
+            <View style={AppStyle.container}>
+              <View>
+                <FlatList
+                  contentContainerStyle={{
+                    justifyContent: "center",
+                    alignItems: "center",
+                  }}
+                  data={cart.cartItems}
+                  renderItem={({ item, index }) => (
+                    <View style={[AppStyle.cartCard, { marginTop: 15 }]}>
+                      <View style={{ top: 15, right: 5 }}>{item.img}</View>
+                      <Text
+                        style={[
+                          AppStyle.cartText,
+                          { marginTop: 80, paddingLeft: 10 },
+                        ]}>
+                        {item.name}
+                      </Text>
+                      <Text style={AppStyle.ItemType}>{item.type}</Text>
+                      <View style={AppStyle.itemCounter}>
+                        <TouchableOpacity
+                          onPress={() => handleDecrement(item, index)}>
+                          <Text style={AppStyle.less}>{item.less} </Text>
+                        </TouchableOpacity>
+                        <Text style={AppStyle.counter}>
+                          {item.cartQuantity}
+                        </Text>
+                        <TouchableOpacity
+                          onPress={() => handleIncrement(item, index)}>
+                          <Text style={AppStyle.add}>{item.add}</Text>
+                        </TouchableOpacity>
+                      </View>
+
                       <TouchableOpacity
-                        onPress={() => handleDecrement(item, index)}>
-                        <Text style={AppStyle.less}>{item.less} </Text>
+                        onPress={() => handlerRemove(item)}
+                        style={AppStyle.remove}>
+                        <Text
+                          style={{
+                            fontWeight: "600",
+                            fontSize: 15,
+                          }}>
+                          {"Remove "}
+                          <Icon name="trash" size={18} />
+                        </Text>
                       </TouchableOpacity>
-                      <Text style={AppStyle.counter}>{item.cartQuantity}</Text>
-                      <TouchableOpacity
-                        onPress={() => handleIncrement(item, index)}>
-                        <Text style={AppStyle.add}>{item.add}</Text>
-                      </TouchableOpacity>
+
+                      <Text style={AppStyle.itemPrice}>
+                        <Text style={{ margin: 20 }}>
+                          ${`${item.currentPrice}     `}
+                        </Text>
+
+                        <Text
+                          style={{
+                            textDecorationLine: "line-through",
+                            color: "#5C5C5C",
+                          }}>
+                          ${item.oldPrice}
+                        </Text>
+                      </Text>
                     </View>
-
-                    <TouchableOpacity
-                      onPress={() => handlerRemove(item)}
-                      style={AppStyle.remove}>
-                      <Text
-                        style={{
-                          fontWeight: "600",
-                          fontSize: 15,
-                        }}>
-                        {"Remove "}
-                        <Icon name="trash" size={18} />
-                      </Text>
-                    </TouchableOpacity>
-
-                    <Text style={AppStyle.itemPrice}>
-                      <Text style={{ margin: 20 }}>
-                        ${`${item.currentPrice}     `}
-                      </Text>
-
-                      <Text
-                        style={{
-                          textDecorationLine: "line-through",
-                          color: "#5C5C5C",
-                        }}>
-                        ${item.oldPrice}
-                      </Text>
-                    </Text>
-                  </View>
-                )}
-              />
+                  )}
+                />
+              </View>
             </View>
-            <View>
+          </ScrollView>
+          <View style={styles.footer}>
+            <TouchableOpacity style={styles.btn1}>
+              <Text style={{ fontSize: 20, fontWeight: "bold" }}>
+                ${cart.cartTotalAmount}.00
+              </Text>
               <Text
                 style={{
-                  fontSize: 20,
-                  fontWeight: "bold",
-                  padding: 10,
                   color: "#3A7F0D",
+                  padding: 5,
+                  fontWeight: "500",
+                  fontSize: 15,
                 }}>
-                Bill Details
+                Total Price
               </Text>
-              <View style={AppStyle.billCard}>
-                <View>
-                  <Text style={AppStyle.cartName}>Item Total</Text>
-                  <Text style={AppStyle.cartName}>Delivery Fee</Text>
-                  <Text style={AppStyle.cartName}>Taxes and Charges</Text>
-                </View>
-                <View>
-                  <Text style={[AppStyle.cartPrice, { left: 33 }]}>
-                    ${cart.cartTotalAmount}.00
-                  </Text>
-                  <Text style={AppStyle.cartPrice}>+ $25.00</Text>
-                  <Text style={AppStyle.cartPrice}>+ $30.00</Text>
-                </View>
-              </View>
-              <View>
-                <Text
-                  style={{
-                    fontSize: 20,
-                    fontWeight: "bold",
-                    padding: 10,
-                    left: 10,
-                    // top: 15,
-                  }}>
-                  Order Total
-                </Text>
-                <Text
-                  style={{
-                    fontSize: 20,
-                    fontWeight: "bold",
-                    padding: 10,
-                    left: 280,
-                    bottom: 50,
-                  }}>
-                  ${cart.cartTotalAmount + extras}.00
-                </Text>
-              </View>
-            </View>
+            </TouchableOpacity>
             <TouchableOpacity
+              style={styles.btn2}
               onPress={() =>
                 navigation.navigate("Payment", {
-                  price: `$${total + extras}.00`,
+                  price: cart.cartTotalAmount,
                 })
               }>
-              <Text style={styles.logoutBtn}>Buy Now</Text>
+              <Text
+                style={{ fontSize: 17, color: "#ffffff", fontWeight: "600" }}>
+                Buy Now
+              </Text>
             </TouchableOpacity>
           </View>
-        </ScrollView>
+        </>
       )}
     </LinearGradient>
   );
@@ -248,7 +226,7 @@ const styles = StyleSheet.create({
     color: "#3A7F0D",
     bottom: 130,
   },
-  logoutBtn: {
+  placeOrder: {
     width: "100%",
     borderRadius: 8,
     height: 50,
@@ -260,5 +238,33 @@ const styles = StyleSheet.create({
     fontWeight: "bold",
     paddingTop: 10,
     marginTop: -35,
+  },
+  footer: {
+    flexDirection: "row",
+    justifyContent: "space-around",
+    height: 80,
+    borderColor: "#99de81",
+    borderTopWidth: 5,
+    borderLeftWidth: 1,
+    borderRightWidth: 1,
+    borderTopRightRadius: 20,
+    borderTopLeftRadius: 20,
+    paddingTop: 10,
+  },
+  btn1: {
+    width: "50%",
+    alignItems: "center",
+    justifyContent: "center",
+    marginRight: 10,
+  },
+  btn2: {
+    width: "50%",
+    alignItems: "center",
+    justifyContent: "center",
+    backgroundColor: "#3A7F0D",
+    height: "80%",
+    right: 10,
+    borderRadius: 10,
+    marginRight: 20,
   },
 });

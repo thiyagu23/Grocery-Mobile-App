@@ -9,6 +9,7 @@ import {
 import React, { useState } from "react";
 import { LinearGradient } from "expo-linear-gradient";
 import Icon from "react-native-vector-icons/Ionicons";
+import AppStyle from "./AppStyle";
 
 const Payment = ({ navigation, route }) => {
   const [checkbox, setCheckbox] = useState(true);
@@ -16,6 +17,9 @@ const Payment = ({ navigation, route }) => {
   const changeIcon = () => {
     setCheckbox(!checkbox);
   };
+  let tax = 30;
+  let fees = 25;
+  let extras = tax + fees;
   return (
     <LinearGradient colors={["#99de81", "#F5F5F5"]} style={{ height: "100%" }}>
       <View style={{ flex: 1 }}>
@@ -88,29 +92,58 @@ const Payment = ({ navigation, route }) => {
           />
         </TouchableOpacity>
       </View>
-      <View
-        style={{
-          width: "100%",
-          borderWidth: 0.3,
-          bottom: 10,
-          borderColor: "gray",
-        }}
-      />
-      <View style={styles.footer}>
-        <TouchableOpacity style={styles.btn1}>
-          <Text style={{ fontSize: 20, fontWeight: "bold" }}>
-            {route.params.price}
+      <View>
+        <Text
+          style={{
+            fontSize: 22,
+            fontWeight: "bold",
+            padding: 10,
+            color: "#3A7F0D",
+            left: 20,
+          }}>
+          Bill Details
+        </Text>
+        <View style={AppStyle.billCard}>
+          <View>
+            <Text style={AppStyle.cartName}>Item Total</Text>
+            <Text style={AppStyle.cartName}>Delivery Fee</Text>
+            <Text style={AppStyle.cartName}>Taxes and Charges</Text>
+          </View>
+          <View>
+            <Text style={[AppStyle.cartPrice, { left: 55 }]}>
+              ${route.params.price}.00
+            </Text>
+            <Text style={AppStyle.cartPrice}>+ $25.00</Text>
+            <Text style={AppStyle.cartPrice}>+ $30.00</Text>
+          </View>
+        </View>
+        <View>
+          <Text
+            style={{
+              fontSize: 20,
+              fontWeight: "bold",
+              padding: 10,
+              left: 30,
+              // top: 15,
+            }}>
+            Order Total
           </Text>
-          <Text style={{ color: "#3A7F0D", padding: 5 }}>
-            View Price Details
+          <Text
+            style={{
+              fontSize: 20,
+              fontWeight: "bold",
+              padding: 10,
+              left: 305,
+              bottom: 50,
+            }}>
+            {" "}
+            ${route.params.price + extras}.00
           </Text>
-        </TouchableOpacity>
-        <TouchableOpacity style={styles.btn2}>
-          <Text style={{ fontSize: 17, color: "#ffffff", fontWeight: "600" }}>
-            Place Order
-          </Text>
-        </TouchableOpacity>
+        </View>
       </View>
+      <TouchableOpacity onPress={() => navigation.navigate("PlaceOrder")}>
+        <Text style={styles.placeOrder}>Place Your Order</Text>
+      </TouchableOpacity>
     </LinearGradient>
   );
 };
@@ -149,5 +182,17 @@ const styles = StyleSheet.create({
     alignSelf: "flex-end",
     marginTop: -30,
     bottom: 10,
+  },
+  placeOrder: {
+    width: "100%",
+    height: 60,
+    textAlign: "center",
+    backgroundColor: "#3A7F0D",
+    alignSelf: "center",
+    fontSize: 20,
+    color: "white",
+    fontWeight: "bold",
+    paddingTop: 15,
+    marginTop: -25,
   },
 });

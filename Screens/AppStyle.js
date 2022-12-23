@@ -38,8 +38,9 @@ export default StyleSheet.create({
   },
   cardText: {
     color: "#232323",
-    alignSelf: "center",
-    top: 8,
+    // alignSelf: "center",
+    top: 13,
+    left: 5,
     fontWeight: "bold",
   },
   card: {
@@ -58,17 +59,28 @@ export default StyleSheet.create({
   },
   itemsHori: { marginHorizontal: 10 },
   homePrice: {
+    width: 25,
+    height: 25,
+    color: "black",
+    fontWeight: "bold",
+    textAlign: "center",
+    top: 2,
+    left: 82,
+    fontSize: 13,
+    bottom: 10,
+  },
+  wishList: {
     borderRadius: 50,
     backgroundColor: "#3A7F0D",
     width: 25,
     height: 25,
-    color: "#FFFFFF",
+    color: "#ffffff",
     fontWeight: "bold",
     textAlign: "center",
-    paddingTop: 5,
+    paddingTop: 4,
     left: 88,
-    fontSize: 12,
-    bottom: 125,
+    fontSize: 18,
+    bottom: 140,
   },
   addToCart: {
     backgroundColor: "#3A7F0D",
@@ -107,23 +119,24 @@ export default StyleSheet.create({
   },
 
   billCard: {
-    width: 330,
+    width: "75%",
     flexDirection: "row",
     justifyContent: "space-between",
+    marginLeft: 18,
   },
 
   cartName: {
-    lineHeight: 40,
+    lineHeight: 43,
     fontSize: 18,
     fontWeight: "600",
     color: "#616360",
     left: 20,
   },
   cartPrice: {
-    lineHeight: 40,
+    lineHeight: 43,
     fontSize: 17,
     fontWeight: "600",
-    left: 30,
+    left: 50,
   },
 
   itemCounter: {

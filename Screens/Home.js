@@ -21,6 +21,7 @@ import AppStyle from "./AppStyle";
 import { responsiveWidth, responsiveHeight } from "../responsive";
 import { Data } from "./Data";
 import { useDispatch } from "react-redux";
+import Icon from "react-native-vector-icons/Ionicons";
 
 import { addToCart } from "../Redux/cartSlice";
 
@@ -222,6 +223,10 @@ const Home = ({ navigation }) => {
                   {item.img}
                   <Text style={AppStyle.cardText}>{item.name}</Text>
                   <Text style={AppStyle.homePrice}>${item.currentPrice}</Text>
+                  <TouchableOpacity>
+                    <Icon style={AppStyle.wishList} name="heart-outline" />
+                  </TouchableOpacity>
+
                   <TouchableOpacity
                     style={AppStyle.addToCart}
                     onPress={() => handleAddToCart(item)}>

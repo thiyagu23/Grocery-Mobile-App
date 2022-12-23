@@ -20,6 +20,7 @@ import axios from "axios";
 import Login from "./Login";
 import { useDispatch, useSelector } from "react-redux";
 import { loginUser, signUpUser } from "../../Redux/authSlice";
+import { useEffect } from "react";
 
 export default function SignUp({ navigation, name, MainPage, Forgot, SignUp }) {
   const [password, setPassword] = useState("");
@@ -96,10 +97,9 @@ export default function SignUp({ navigation, name, MainPage, Forgot, SignUp }) {
       "&password=" +
       password +
       "&type=cart";
-    dispatch(signUpUser(obj))
-      .unwrap()
-      .then(() => MainPage());
-    // navigation.navigate("Otp");
+    dispatch(signUpUser(obj));
+
+    navigation.navigate("Otp");
 
     // if (signUpError == "User Created.") {
     //   () => navigation.navigate("Otp");
@@ -134,6 +134,7 @@ export default function SignUp({ navigation, name, MainPage, Forgot, SignUp }) {
   // } else {
   //   alert(checkPassword);
   // }
+
   const loginHandle = async () => {
     // console.log(loginError);
 
