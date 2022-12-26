@@ -45,7 +45,7 @@ const WishList = ({ navigation }) => {
           <Text style={styles.emptyCart}>Your WishList Is Empty!</Text>
         </View>
       ) : (
-        <ScrollView>
+        <ScrollView showsVerticalScrollIndicator={false}>
           <View style={AppStyle.container}>
             <View>
               <FlatList
@@ -71,7 +71,7 @@ const WishList = ({ navigation }) => {
                       style={[AppStyle.ItemType, { left: 130, bottom: 105 }]}>
                       {item.type}
                     </Text>
-                    <TouchableOpacity
+                    <View
                       // onPress={() => handlerRemove(item)}
                       style={{
                         alignSelf: "flex-end",
@@ -85,7 +85,7 @@ const WishList = ({ navigation }) => {
                         }
                         size={28}
                       />
-                    </TouchableOpacity>
+                    </View>
                     <Text style={AppStyle.rating}>
                       <Image
                         style={{ padding: 30 }}

@@ -117,7 +117,7 @@ const Cart = ({ navigation }) => {
         </View>
       ) : (
         <>
-          <ScrollView>
+          <ScrollView showsVerticalScrollIndicator={false}>
             <View style={AppStyle.container}>
               <View>
                 <FlatList
