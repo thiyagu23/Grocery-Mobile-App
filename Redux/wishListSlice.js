@@ -46,22 +46,22 @@ const wishListSlice = createSlice({
       //   console.log(state.wishListItems);
       // console.log(state.wishListItems);
     },
-    // removeFromWish(state, action) {
-    //   //
-    //   const removeItem = state.wishListItems.filter(
-    //     (wishListItem) => wishListItem.id !== action.payload.id,
-    //   );
-    //   state.wishListItems = removeItem;
-    //   Toast.show({
-    //     type: "error",
-    //     position: "bottom",
-    //     bottomOffset: 60,
-    //     visibilityTime: 2000,
-    //     text1: `${action.payload.name} Removed From Cart !!`,
-    //   });
-    //   state.wishListItems = removeItem;
-    //   // console.log(action.payload);
-    // },
+    removeFromWish(state, action) {
+      //
+      const removeItem = state.wishListItems.filter(
+        (wishListItem) => wishListItem.id !== action.payload.id,
+      );
+      state.wishListItems = removeItem;
+      Toast.show({
+        type: "error",
+        position: "bottom",
+        bottomOffset: 60,
+        visibilityTime: 2000,
+        text1: `${action.payload.name} Removed From WishList !`,
+      });
+      state.wishListItems = removeItem;
+      // console.log(action.payload);
+    },
   },
 });
 

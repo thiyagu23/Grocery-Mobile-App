@@ -17,11 +17,18 @@ import AppStyle from "./AppStyle";
 import { Data } from "./Data";
 import { useSelector, useDispatch } from "react-redux";
 import LottieView from "lottie-react-native";
+import { removeFromWish } from "../Redux/wishListSlice";
+removeFromWish;
 
 const WishList = () => {
   const [clickLike, setClickLike] = useState(true);
 
   const wishList = useSelector((state) => state.wishListReducer);
+  const dispatch = useDispatch();
+  const handlerRemove = (item) => {
+    dispatch(removeFromWish(item));
+    // console.log(item);
+  };
 
   return (
     <LinearGradient colors={["#99de81", "#F5F5F5"]} style={{ height: "100%" }}>
@@ -64,7 +71,7 @@ const WishList = () => {
                       {item.type}
                     </Text>
                     <TouchableOpacity
-                      // onPress={() => changeIcon(item, index)}
+                      onPress={() => handlerRemove(item)}
                       style={{
                         alignSelf: "flex-end",
                         bottom: 120,
