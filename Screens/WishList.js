@@ -18,17 +18,17 @@ import { Data } from "./Data";
 import { useSelector, useDispatch } from "react-redux";
 import LottieView from "lottie-react-native";
 import { removeFromWish } from "../Redux/wishListSlice";
-removeFromWish;
 
-const WishList = () => {
+const WishList = ({ navigation }) => {
   const [clickLike, setClickLike] = useState(true);
 
   const wishList = useSelector((state) => state.wishListReducer);
   const dispatch = useDispatch();
-  const handlerRemove = (item) => {
-    dispatch(removeFromWish(item));
-    // console.log(item);
-  };
+
+  // const handlerRemove = (item) => {
+  //   dispatch(removeFromWish(item));
+  //    console.log(item);
+  // };
 
   return (
     <LinearGradient colors={["#99de81", "#F5F5F5"]} style={{ height: "100%" }}>
@@ -55,7 +55,8 @@ const WishList = () => {
                 }}
                 data={wishList.wishListItems}
                 renderItem={({ item, index }) => (
-                  <View
+                  <TouchableOpacity
+                    onPress={() => navigation.navigate("Home")}
                     style={[AppStyle.cartCard, { marginTop: 20, height: 170 }]}>
                     <View style={{ top: 20 }}>{item.img}</View>
                     <Text style={AppStyle.discount}>{item.discount}</Text>
@@ -71,7 +72,7 @@ const WishList = () => {
                       {item.type}
                     </Text>
                     <TouchableOpacity
-                      onPress={() => handlerRemove(item)}
+                      // onPress={() => handlerRemove(item)}
                       style={{
                         alignSelf: "flex-end",
                         bottom: 120,
@@ -113,7 +114,7 @@ const WishList = () => {
                         ${item.oldPrice}
                       </Text>
                     </Text>
-                  </View>
+                  </TouchableOpacity>
                 )}
               />
             </View>
