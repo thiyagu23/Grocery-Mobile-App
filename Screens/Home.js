@@ -1,5 +1,6 @@
 import {
   StyleSheet,
+  Pressable,
   Text,
   View,
   TouchableOpacity,
@@ -20,36 +21,31 @@ import { LinearGradient } from "expo-linear-gradient";
 import AppStyle from "./AppStyle";
 import { responsiveWidth, responsiveHeight } from "../responsive";
 import { Data } from "./Data";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import Icon from "react-native-vector-icons/Ionicons";
-
 import { addToCart } from "../Redux/cartSlice";
+import { addToWish } from "../Redux/wishListSlice";
 
 const Home = ({ navigation }) => {
+  const wishList = useSelector((state) => state.wishListReducer);
+
   const [searchTerm, setSearchTerm] = useState([...Data]);
   const [mastersearchTerm, setmasterSearchTerm] = useState([...Data]);
-  // const [addToCart, setAddToCart] = useState(true);
+  const [wishListIcon, setWishListIcon] = useState(false);
 
   const dispatch = useDispatch();
 
-  // const addToCartClick = () => {
-  //   setAddToCart(!addToCart);
-  // };
+  const handleAddToWish = (item, index) => {
+    dispatch(addToWish(item));
+    searchTerm[index].likeImg =
+      searchTerm[index].likeImg === "true" ? "false" : "true";
+    setSearchTerm([...searchTerm]);
+  };
 
   const handleAddToCart = (item) => {
     dispatch(addToCart(item));
-    // console.log(item);
-    // Alert.alert(
-    //   "Add to Cart",
-    //   `Do you want to add ${item.name} to your cart ?`,
-    //   [
-    //     { text: "Yes", onPress: () => navigation.navigate("Cart") },
-    //     { text: "No" },
-    //   ]
-    // );
-
-    // console.log(rrr);
   };
+
   const searchFilterFunction = (text) => {
     if (text.length >= 3) {
       const filteredData = Data.filter((data) => {
@@ -65,7 +61,9 @@ const Home = ({ navigation }) => {
 
   return (
     <LinearGradient colors={["#99de81", "#F5F5F5"]} style={{ height: "100%" }}>
-      <ScrollView refreshControl={<RefreshControl />}>
+      <ScrollView
+        refreshControl={<RefreshControl />}
+        showsVerticalScrollIndicator={false}>
         <View
           style={[
             AppStyle.container,
@@ -111,7 +109,7 @@ const Home = ({ navigation }) => {
             style={{ fontSize: 22, fontWeight: "600", paddingVertical: 15 }}>
             Recent Viewed
           </Text>
-          <ScrollView horizontal={true}>
+          <ScrollView horizontal={true} showsHorizontalScrollIndicator={false}>
             <View style={AppStyle.middelCard}>
               <TouchableOpacity style={AppStyle.itemsHori}>
                 <Image
@@ -224,7 +222,13 @@ const Home = ({ navigation }) => {
                   <Text style={AppStyle.cardText}>{item.name}</Text>
                   <Text style={AppStyle.homePrice}>${item.currentPrice}</Text>
                   <TouchableOpacity>
-                    <Icon style={AppStyle.wishList} name="heart-outline" />
+                    <Icon
+                      onPress={() => handleAddToWish(item, index)}
+                      style={AppStyle.wishList}
+                      name={
+                        item.likeImg === "false" ? "heart-outline" : "heart"
+                      }
+                    />
                   </TouchableOpacity>
 
                   <TouchableOpacity

@@ -12,7 +12,7 @@ import React, { useEffect, useRef, useState } from "react";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import Ionicons from "react-native-vector-icons/Ionicons";
 import Home from "./Screens/Home";
-import Save from "./Screens/Save";
+import WishList from "./Screens/WishList";
 import Cart from "./Screens/Cart";
 import Profile from "./Screens/Profiles/Profile";
 import LogoTitle from "./Screens/LogoTitle";
@@ -27,6 +27,9 @@ export default function Main({ navigation }) {
   const [userNum, setUserNum] = useState("");
   const [userName, setUserName] = useState("");
   const [nameLogo, setNameLogo] = useState("");
+
+  const cart = useSelector((state) => state.cartReducer);
+  const wishList = useSelector((state) => state.wishListReducer);
 
   const getData = () => {
     try {
@@ -148,7 +151,7 @@ export default function Main({ navigation }) {
   useEffect(() => {
     LogBox.ignoreLogs(["VirtualizedLists should never be nested"]);
   }, []);
-  const cart = useSelector((state) => state.cartReducer);
+
   return (
     <DrawerLayoutAndroid
       ref={drawer}
@@ -161,7 +164,7 @@ export default function Main({ navigation }) {
 
             if (route.name === "Home") {
               iconName = focused ? "home" : "home-outline";
-            } else if (route.name === "Save") {
+            } else if (route.name === "WishList") {
               iconName = focused ? "heart" : "heart-outline";
             } else if (route.name === "Cart") {
               iconName = focused ? "cart" : "cart-outline";
@@ -207,13 +210,19 @@ export default function Main({ navigation }) {
             title: "My Cart",
             tabBarBadge:
               cart.cartItems.length === 0 ? null : cart.cartItems.length,
+            tabBarBadgeStyle: { backgroundColor: "green" },
           }}
         />
         <Tab.Screen
-          name="Save"
-          component={Save}
+          name="WishList"
+          component={WishList}
           options={{
             title: "Wishlist",
+            tabBarBadge:
+              wishList.wishListItems.length === 0
+                ? null
+                : wishList.wishListItems.length,
+            tabBarBadgeStyle: { backgroundColor: "red" },
           }}
         />
         <Tab.Screen name="Profile" component={Profile} />

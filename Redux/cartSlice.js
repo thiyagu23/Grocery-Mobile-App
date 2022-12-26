@@ -18,11 +18,7 @@ const cartSlice = createSlice({
       //   console.log(action.payload.id, "idd");
       if (itemIndex >= 0) {
         state.cartItems[itemIndex].cartQuantity += 1;
-        // ToastAndroid.showWithGravity(
-        //   `${action.payload.name} Incresed To Cart`,
-        //   ToastAndroid.SHORT,
-        //   ToastAndroid.CENTER,
-        // );
+        //
         Toast.show({
           type: "info",
           position: "bottom",
@@ -37,12 +33,7 @@ const cartSlice = createSlice({
       } else {
         const tempItem = { ...action.payload, cartQuantity: 1 };
         state.cartItems.push(tempItem);
-        // alert("added to cart ");
-        // ToastAndroid.showWithGravity(
-        //   `${action.payload.name} Added To Cart`,
-        //   ToastAndroid.SHORT,
-        //   ToastAndroid.CENTER,
-        // );
+
         Toast.show({
           type: "success",
           position: "bottom",

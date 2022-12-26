@@ -17,7 +17,7 @@ export default function App() {
   return (
     <Provider store={store}>
       <NavigationContainer>
-        <WalkThrough />
+        <Main />
         <Toast />
       </NavigationContainer>
     </Provider>

@@ -107,11 +107,11 @@ const Cart = ({ navigation }) => {
         <View
           style={{ flex: 1, alignItems: "center", justifyContent: "center" }}>
           <LottieView
-            source={require("./Data-imgs/lf30_editor_tetqnu4h.json")}
+            source={require("./Data-imgs/empty-cart-2.json")}
             autoPlay
             loop
             autoSize
-            style={{ width: "100%", aspectRatio: 1, bottom: 30 }}
+            style={{ width: "90%", aspectRatio: 1, bottom: 30 }}
           />
           <Text style={styles.emptyCart}>Your Cart Is Empty!</Text>
         </View>
