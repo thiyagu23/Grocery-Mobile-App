@@ -9,16 +9,19 @@ import {
   KeyboardAvoidingView,
   SafeAreaView,
   ScrollView,
+  Pressable,
+  SafeAreaViewComponent,
 } from "react-native";
 import React, { useState } from "react";
 import { LinearGradient } from "expo-linear-gradient";
 import AuthStyle from "../../components/Authentication/AuthStyle";
 import Icon from "react-native-vector-icons/Ionicons";
 
-const CreateItems = () => {
+const CreateItems = ({closeModal}) => {
   const [name, setName] = useState();
   const [type, setType] = useState();
   const [price, setPrice] = useState();
+ 
 
   // const items = [];
 
@@ -46,60 +49,78 @@ const CreateItems = () => {
   };
 
   return (
-    <LinearGradient colors={["#99de81", "#F5F5F5"]} style={{ height: "100%" }}>
-      <ScrollView>
-        <View style={styles.container}>
-          <Text style={styles.heading}>Create Items</Text>
-          <View>
-            <Text style={styles.lebelText}>Item Name</Text>
-            <TextInput
-              cursorColor="#3A7F0D"
-              placeholder="eg. Apple"
-              style={AuthStyle.TextInput}
-              onChangeText={(text) => setName({ name: text })}
-            />
-          </View>
-          <View>
-            <Text style={styles.lebelText}>Item Type</Text>
-            <TextInput
-              cursorColor="#3A7F0D"
-              placeholder="eg. Fruit"
-              style={AuthStyle.TextInput}
-              onChangeText={(text) => setType({ type: text })}
-            />
-          </View>
-          <View>
-            <Text style={styles.lebelText}>Item Price</Text>
-            <TextInput
-              keyboardType={"numeric"}
-              cursorColor="#3A7F0D"
-              placeholder="eg. $15.00"
-              style={AuthStyle.TextInput}
-              onChangeText={(text) => setPrice({ price: text })}
-            />
-          </View>
-          <View>
-            <Text style={styles.lebelText}>Item Image</Text>
-            <TextInput
-              cursorColor="#3A7F0D"
-              placeholder="Upload Image"
-              style={AuthStyle.TextInput}
-              onChangeText={(text) => setValue(text)}
-            />
-          </View>
-          <View style={{ flexDirection: "row", top: 15 }}>
-            <TouchableOpacity style={styles.editBtn} onPress={addClick}>
-              <Icon name="create-outline" size={23} color="#FFFFFF" />
-              <Text style={styles.editTxt}>Add</Text>
-            </TouchableOpacity>
-            <TouchableOpacity style={styles.deleteBtn}>
-              <Icon name="trash-outline" size={23} color="#3A7F0D" />
-              <Text style={styles.deleteTxt}>Delete</Text>
-            </TouchableOpacity>
-          </View>
-        </View>
-      </ScrollView>
-    </LinearGradient>
+   
+   <ScrollView> 
+     <View style={{backgroundColor:"#F5F5F5",opacity:0.7, height:900 }}>
+      </View>
+
+     <View style={styles.container}>
+        <LinearGradient colors={["#99de81", "#F5F5F5"]} style={{ height: "100%", borderRadius: 17 }}>
+       <TouchableOpacity onPress={closeModal}>
+         <Icon name="close" size={35} color="#3A7F0D" style={{alignSelf: "flex-end", padding:15}}/>
+       </TouchableOpacity>
+      
+      <Text style={styles.heading}>Create Items</Text>
+      <View style={{ padding:25, bottom:35 }}>
+      <View>
+      <Text style={styles.lebelText}>Item Name</Text>
+      <TextInput
+        cursorColor="#3A7F0D"
+        placeholder="eg. Apple"
+        style={AuthStyle.TextInput}
+        onChangeText={(text) => setName({ text })}
+        value={name}
+      />
+    </View>
+    <View>
+      <Text style={styles.lebelText}>Item Type</Text>
+      <TextInput
+        cursorColor="#3A7F0D"
+        placeholder="eg. Fruit"
+        style={AuthStyle.TextInput}
+        onChangeText={(text) => setType({  text })}
+        value={type}
+      />
+    </View>
+    <View>
+      <Text style={styles.lebelText}>Item Price</Text>
+      <TextInput
+        keyboardType={"numeric"}
+        cursorColor="#3A7F0D"
+        placeholder="eg. $15.00"
+        style={AuthStyle.TextInput}
+        onChangeText={(text) => setPrice({  text })}
+        value={price}
+
+      />
+    </View>
+      <View>
+        <Text style={styles.lebelText}>Item Image</Text>
+        <TextInput
+          cursorColor="#3A7F0D"
+          placeholder="Upload Image"
+          style={AuthStyle.TextInput}
+          onChangeText={(text) => setAddData(text)}
+        />
+      </View>
+      
+      <View style={{ flexDirection: "row", top: 10 }}>
+        <TouchableOpacity style={styles.editBtn} onPress={addClick}>
+          <Icon name="create-outline" size={23} color="#FFFFFF" />
+          <Text style={styles.editTxt}>Add</Text>
+        </TouchableOpacity>
+        <TouchableOpacity style={styles.deleteBtn}>
+          <Icon name="trash-outline" size={23} color="#3A7F0D" />
+          <Text style={styles.deleteTxt}>Delete</Text>
+        </TouchableOpacity>
+      </View>
+      </View>
+      </LinearGradient>   
+       
+      </View>
+      </ScrollView>  
+      
+
   );
 };
 
@@ -107,23 +128,23 @@ export default CreateItems;
 
 const styles = StyleSheet.create({
   container: {
-    marginVertical: 90,
-    marginHorizontal: 20,
+   bottom:750,
+    marginHorizontal: 25,
     borderColor: "#3A7F0D",
-    borderRadius: 10,
+    borderRadius: 20,
     borderWidth: 3,
     height: 600,
-    padding: 20,
+   
+    
+    
   },
   heading: {
-    marginBottom: 20,
     color: "#3A7F0D",
     textAlign: "center",
     fontSize: 25,
     fontWeight: "bold",
-    paddingTop: 10,
-    borderRadius: 50,
     height: 50,
+    bottom:20
   },
   lebelText: {
     paddingBottom: 5,

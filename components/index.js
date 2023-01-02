@@ -1,5 +1,5 @@
-import { StyleSheet, Text, View } from "react-native";
-import React from "react";
+import { StyleSheet, Text, View, TouchableOpacity,Pressable,   Modal, ScrollView, } from "react-native";
+import React, {useState} from "react";
 import InitialSplash from "./splash/InitialSplash";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import SignUp from "./Authentication/SignUp";
@@ -17,11 +17,21 @@ import Contact from "../Screens/Profiles/Contact";
 import Payment from "../Screens/Payment";
 import Notification from "../Notification";
 import PlaceOrder from "../Screens/PlaceOrder";
+import Icon from "react-native-vector-icons/Ionicons";
 
+ 
 const Stack = createNativeStackNavigator();
 
-const Splash = () => {
+const Splash = ({ navigation }) => {
+
+  const [modalVisible, setModalVisible] = useState(false);
+
+  const showModal = () => {
+    setModalVisible(!modalVisible)
+  };
+
   return (
+    <>
     <Stack.Navigator
       screenOptions={{
         headerShown: false,
@@ -39,6 +49,18 @@ const Splash = () => {
         options={{
           title: "My Items",
           headerShown: true,
+          headerRight: () => (
+            <TouchableOpacity
+              onPress={showModal}>
+              <Icon
+                // style={styles.createIcon}
+                name="create-outline"
+                size={34}
+                color="#3A7F0D"
+                style={{ paddingRight: 15 }}
+              />
+            </TouchableOpacity>
+          ),
         }}
       />
       <Stack.Screen
@@ -99,7 +121,20 @@ const Splash = () => {
       />
       <Stack.Screen name="PlaceOrder" component={PlaceOrder} />
     </Stack.Navigator>
+
+{
+    modalVisible && (
+      <Modal animationType="slide"
+      transparent={true} modalVisible={modalVisible}>
+      <CreateItems closeModal = {showModal}/>
+      </Modal>
+      )
+}
+
+    </>
   );
+  
 };
+
 
 export default Splash;

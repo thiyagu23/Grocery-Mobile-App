@@ -131,7 +131,7 @@ export default function Main({ navigation }) {
             <Text style={styles.paragraph}>Fruits</Text>
             <Text style={styles.paragraph}>Plants</Text>
             <TouchableOpacity onPress={() => navigation.navigate("Table")}>
-              <Text style={styles.paragraph}>My Orders</Text>
+              <Text style={styles.paragraph}>My Items</Text>
             </TouchableOpacity>
           </View>
         </View>

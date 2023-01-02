@@ -6,6 +6,7 @@ import {
   Text,
   ScrollView,
   SafeAreaView,
+
 } from "react-native";
 import React from "react";
 import { DataTable } from "react-native-paper";
@@ -15,44 +16,31 @@ import Icon from "react-native-vector-icons/Ionicons";
 export default function Table({ navigation }) {
   return (
     <LinearGradient colors={["#F5F5F5", "#F5F5F5"]} style={{ height: "100%" }}>
-      <TouchableOpacity
-        onPress={() => navigation.navigate("CreateItems")}
-        style={{
-          flexDirection: "row",
-          alignItems: "flex-end",
-          justifyContent: "flex-end",
-        }}>
-        <Icon
-          style={styles.createIcon}
-          name="create-outline"
-          size={30}
-          color="#3A7F0D"
-        />
-
-        <Text style={styles.createTxt}>Create</Text>
-      </TouchableOpacity>
       <DataTable style={styles.container}>
         <DataTable.Header style={styles.tableHeader}>
           <DataTable.Title>
             <Text style={styles.titleFont}>Items</Text>
           </DataTable.Title>
           <DataTable.Title>
-            <Text style={styles.titleFont}>Type</Text>
+            <Text style={styles.titleFont}>{"  "}Type</Text>
           </DataTable.Title>
 
           <DataTable.Title>
-            <Text style={[styles.titleFont, { left: 10 }]}>Price</Text>
+            <Text style={[styles.titleFont, { left: 10 }]}>{"  "}Price</Text>
           </DataTable.Title>
           <DataTable.Title>
-            <Text style={[styles.titleFont, { margin: 80 }]}>Edit</Text>
+            <Text style={[styles.titleFont, { margin: 80 }]}>
+              {"   "}Actions
+            </Text>
           </DataTable.Title>
         </DataTable.Header>
 
         <DataTable.Row style={styles.tableRow}>
           <FlatList
+            showsVerticalScrollIndicator={false}
             data={myOrders}
             renderItem={({ item }) => (
-              <TouchableOpacity>
+              <View>
                 <View style={styles.tabelCell}>
                   <DataTable.Cell>
                     <Text style={styles.itemsFont}>{item.name}</Text>
@@ -60,15 +48,20 @@ export default function Table({ navigation }) {
                   <DataTable.Cell>
                     <Text style={styles.itemsFont}>{item.type}</Text>
                   </DataTable.Cell>
-
                   <DataTable.Cell>
                     <Text style={styles.itemsFont}>{item.price}</Text>
                   </DataTable.Cell>
                   <DataTable.Cell>
-                    <Icon name="pencil" size={23} />
+                    <TouchableOpacity>
+                      <Icon name="pencil" size={23} />
+                    </TouchableOpacity>
+                    {"       "}
+                    <TouchableOpacity>
+                      <Icon name="trash" size={23} />
+                    </TouchableOpacity>
                   </DataTable.Cell>
                 </View>
-              </TouchableOpacity>
+              </View>
             )}
           />
         </DataTable.Row>
@@ -108,7 +101,6 @@ const styles = StyleSheet.create({
     backgroundColor: "#3A7F0D",
     width: "100%",
     paddingLeft: 40,
-
     color: "white",
     alignItems: "center",
     justifyContent: "space-around",
@@ -124,9 +116,8 @@ const styles = StyleSheet.create({
     alignItems: "center",
     justifyContent: "space-around",
     height: 70,
-    borderBottomRightRadius: 10,
-    borderBottomLeftRadius: 10,
-    bottom: 60,
+    // borderBottomRightRadius: 10,
+    // borderBottomLeftRadius: 10,
   },
 
   tableRow: {
@@ -135,7 +126,7 @@ const styles = StyleSheet.create({
     height: "100%",
     fontSize: 20,
     width: "100%",
-    marginBottom: 60,
+    // marginBottom: 20,
   },
 
   tabelCell: {
