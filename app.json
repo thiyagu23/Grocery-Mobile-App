@@ -1,21 +1,23 @@
 {
   "expo": {
-    "name": "GroceryProject",
-    "slug": "GroceryProject",
+    "name": "Grocery App",
+    "slug": "grocery-app",
+    "description": "This is a grocery application",
     "version": "1.0.0",
     "orientation": "portrait",
-    "icon": "./assets/icon.png",
+    "icon": "./assets/app-icon.jpg",
     "userInterfaceStyle": "light",
     "splash": {
-      "image": "./assets/splash.jpg",
-
+      "image": "./assets/splash.png",
       "resizeMode": "contain",
       "backgroundColor": "#ffffff"
     },
     "updates": {
       "fallbackToCacheTimeout": 0
     },
-    "assetBundlePatterns": ["**/*"],
+    "assetBundlePatterns": [
+      "**/*"
+    ],
     "ios": {
       "supportsTablet": true
     },
